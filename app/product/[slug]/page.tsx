@@ -1,0 +1,13 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ProductDetailActions } from "@/components/product-detail-actions";
+import { ProductCard } from "@/components/product-card";
+import { discountOf, formatVND, products } from "@/lib/data";
+
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = products.find(item => item.id === slug);
+  if (!product) notFound();
+  const discount = discountOf(product);
+  return <main className="page-shell"><div className="container"><div className="breadcrumbs"><Link href="/">Trang chủ</Link> / <Link href={`/search?category=${encodeURIComponent(product.category)}`}>{product.category}</Link> / {product.name}</div><section className="product-detail"><div className="product-gallery"><div className="thumbs">{[1,2,3,4].map(item => <button key={item}><img src={product.image} alt=""/></button>)}</div><div className="main-product-image"><img src={product.image} alt={product.name}/></div></div><div className="detail-copy"><span className="detail-brand">{product.brand.toUpperCase()} · {product.official ? "VIOLET MALL" : "VERIFIED SELLER"}</span><h1>{product.name}</h1><div className="detail-stats"><span>★ {product.rating}</span><span>{product.sold.toLocaleString("vi-VN")} đã bán</span><span>125 đánh giá</span></div><div className="detail-price"><strong>{formatVND(product.price)}</strong>{product.originalPrice && <del>{formatVND(product.originalPrice)}</del>}</div>{discount > 0 && <div className="saving">Tiết kiệm {discount}% trong chương trình hiện tại</div>}<div className="voucher-box"><strong>Voucher dành cho sản phẩm</strong><div className="voucher-row"><span>GIẢM 100K</span><span>FREESHIP</span><span>VIOLET+</span></div></div><div className="delivery-box"><strong>Giao đến TP. Hồ Chí Minh</strong><p>{product.fastDelivery ? "Có thể nhận từ ngày mai · Miễn phí giao nhanh" : "Dự kiến 2–4 ngày · Theo chính sách của shop"}</p></div><ProductDetailActions product={product}/><div className="seller-box"><div><strong>{product.seller}</strong><span>★ 4.9 · 98% phản hồi tích cực · Phản hồi trong 15 phút</span></div><a href="#store">Xem cửa hàng →</a></div><div className="protection-box"><span>✓ Thanh toán an toàn</span><span>✓ Chính sách đổi trả rõ ràng</span><span>✓ Violet Buyer Protection</span></div></div></section><section className="section"><div className="section-head"><div><span className="eyebrow">YOU MAY ALSO LIKE</span><h2>Sản phẩm tương tự</h2></div></div><div className="product-grid">{products.filter(item => item.id !== product.id).slice(0,4).map(item => <ProductCard key={item.id} product={item}/>)}</div></section></div></main>;
+}
