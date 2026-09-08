@@ -1,81 +1,55 @@
 # Violet Marketplace
 
-Modern multi-category ecommerce marketplace prototype built with Next.js App Router and TypeScript.
+Static multi-category ecommerce marketplace prototype built with **HTML, CSS and vanilla JavaScript**. The project has no build step and is designed to deploy directly to GitHub Pages.
 
-The product is intentionally separated into three surfaces that share one design language:
+## Pages
 
-- **Buyer Marketplace** — discovery, search, product detail, cart and checkout
-- **Seller Center** — revenue, orders, inventory and operational tasks
-- **Marketplace Admin** — marketplace health, seller KYC, moderation, campaign and risk operations
-
-## Product direction
-
-Violet is not a visual clone of Shopee. The design goal is **the same commerce power with lower cognitive load**: strong search, trustworthy seller context, controlled promotion hierarchy, clear multi-seller cart behavior and a distraction-free checkout.
-
-Core visual direction: **Premium Consumer Tech × Editorial Commerce × Friendly Marketplace**.
-
-## Stack
-
-- Next.js App Router
-- TypeScript
-- React
-- CSS design tokens
-- Mock commerce data for prototype flows
-- localStorage cart state
+- `index.html` — Buyer marketplace homepage
+- `search.html` — Search / product listing
+- `product.html?id=...` — Product detail
+- `cart.html` — Multi-seller cart
+- `checkout.html` — Checkout
+- `order-success.html` — Order confirmation
+- `seller.html` — Seller Center dashboard
+- `admin.html` — Marketplace Admin dashboard
 
 ## Run locally
 
+You can open `index.html` directly, but a small static server is recommended:
+
 ```bash
-npm install
-npm run dev
+python3 -m http.server 8080
 ```
 
-Open `http://localhost:3000`.
+Then open `http://localhost:8080`.
 
-## Main routes
+## GitHub Pages
 
-- `/` — Buyer homepage
-- `/search` — Search / PLP
-- `/product/[slug]` — Product detail
-- `/cart` — Multi-seller cart
-- `/checkout` — Checkout
-- `/seller` — Seller Center
-- `/admin` — Marketplace Admin
+The repository includes `.github/workflows/pages.yml`. Every push to `main` publishes the repository root as a GitHub Pages site.
 
-## Current prototype scope
+Expected URL:
 
-Implemented:
+`https://ngh1aa.github.io/VioletMarketplace/`
 
-- Search-first marketplace homepage
-- Category discovery
-- Flash Deals
-- Violet Mall
-- Recommendation feed
-- Search results and category filtering
-- Product detail with seller trust, voucher and delivery context
-- Multi-seller cart
-- Checkout and order-success state
-- Seller operations dashboard
-- Marketplace admin dashboard
-- Responsive layouts
+If Pages has never been enabled for the repository, open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions** once.
 
-Simulated / not connected to a backend yet:
+## Architecture
 
-- Authentication
-- Product and inventory API
-- Payment capture
-- Voucher validation
-- Fulfilment
-- Chat
-- Seller KYC workflow
-- Fraud detection
-- Returns / dispute processing
-- Personalization engine
+```text
+VioletMarketplace/
+├── index.html
+├── search.html
+├── product.html
+├── cart.html
+├── checkout.html
+├── order-success.html
+├── seller.html
+├── admin.html
+├── styles.css
+├── data.js
+├── app.js
+├── .nojekyll
+└── .github/workflows/pages.yml
+```
 
-## Next milestones
-
-1. Complete account, orders, wishlist, voucher wallet and storefront pages
-2. Add richer seller modules: product management, inventory, campaigns and analytics
-3. Add richer admin modules: moderation, CMS, reports and risk queues
-4. Replace mock data with backend services
-5. Add automated UX and accessibility checks
+Commerce data is mocked in `data.js`. Cart state is saved to `localStorage`, so the buyer flow works entirely in the browser with no backend.

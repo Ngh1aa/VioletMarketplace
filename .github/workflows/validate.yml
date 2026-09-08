@@ -1,0 +1,33 @@
+name: Validate static site
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check data.js
+          node --check app.js
+
+      - name: Validate required static files
+        run: |
+          test -f index.html
+          test -f search.html
+          test -f product.html
+          test -f cart.html
+          test -f checkout.html
+          test -f order-success.html
+          test -f seller.html
+          test -f admin.html
+          test -f styles.css
+          test -f data.js
+          test -f app.js
+          test ! -e package.json
+          test ! -e tsconfig.json
