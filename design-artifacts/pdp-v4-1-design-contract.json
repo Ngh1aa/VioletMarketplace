@@ -1,0 +1,72 @@
+{
+  "id": "violet-pdp-v4-1-media-dominant-recovery",
+  "status": "PHASE_1_PASSED",
+  "project_mode": "interactive_prototype",
+  "scope": "desktop_only_product_detail_with_regression",
+  "primary_viewport": "1440x1000",
+  "pressure_viewports": ["1280x900", "1600x1000"],
+  "user_goal": "Make a fragrance product page feel product-led, luxurious and trustworthy, with roughly 70 percent visual evidence and 30 percent text in primary surfaces.",
+  "visual_signature": "A fragrance object studied like an archival gallery piece: warm paper, quiet aubergine ink, large deliberate photography, small factual annotations and a restrained buying desk.",
+  "composition": {
+    "primary_frame": {
+      "media_share_target": 0.7,
+      "information_share_target": 0.3,
+      "desktop_grid": "8.4fr 3.6fr",
+      "media_behavior": "normal document flow gallery; never sticky",
+      "buying_desk_behavior": "may be sticky only inside the bounded primary-frame parent; must stop before story section",
+      "minimum_media_roles": 4
+    },
+    "gallery_roles": [
+      "01 full-bottle hero",
+      "02 cap / atomizer / shoulder detail",
+      "03 label / glass / liquid detail",
+      "04 olfactive material or ritual image",
+      "05 optional packaging / context image when source truth permits"
+    ],
+    "story_frame": "image-led editorial band with concise scent copy plus notes/house proof; visual area should remain >= 60 percent where a supporting image exists",
+    "related_frame": "three restrained cards with consistent aspect ratio; related media must never be taller or visually louder than the main PDP gallery"
+  },
+  "content_rules": {
+    "breadcrumb": "Violet / Fragrances / <House> / <Product>",
+    "single_size": "render as factual format text, never a selectable control",
+    "trial_cta": "Add to discovery trio",
+    "trial_microcopy": "Build a trio of 3 scents to compare.",
+    "full_bottle_cta": "Add 50 ml bottle",
+    "prototype_truth": "keep honest but move to a low-disruption utility disclosure; do not place stock-count/prototype language beside the price as if it were retail inventory",
+    "language": "English-first within V4 PDP until a deliberate site-wide localization phase; do not mix a Vietnamese long description into an otherwise English product composition"
+  },
+  "media_rules": {
+    "product_identity": "Do not present visibly different bottle designs as if they were the same fictional SKU.",
+    "same_source_crops": "Deliberate crops of the same verified product image may create cap, glass, label and shoulder studies when each crop has a distinct role.",
+    "atmosphere": "Supporting botanical/material imagery must be labelled/positioned as olfactive or material context rather than another packshot of the SKU.",
+    "stock_restriction": "No branded third-party bottle may masquerade as a fictional Violet maison product.",
+    "delivery": "all primary media must decode before visual evidence is captured",
+    "focal_gate": "actual crop must be inspected at every declared desktop viewport"
+  },
+  "interaction_rules": {
+    "trio": "trial CTA updates localStorage and visible state without claiming fulfillment",
+    "cart": "full-bottle CTA keeps existing browser-local cart behavior",
+    "sticky": "only the compact buying desk may be sticky; sticky box must remain geometrically contained by its parent and cannot intersect story/related sections"
+  },
+  "qa_gates": {
+    "scroll_states": ["top", "mid_gallery", "story_start", "related_start", "bottom"],
+    "required_screenshots_per_primary_viewport": 5,
+    "geometric_overlap": "zero intersections between sticky/fixed PDP surfaces and story/related content at every captured scroll state",
+    "media_role_count": ">= 4 primary gallery roles",
+    "broken_media": 0,
+    "horizontal_overflow": 0,
+    "console_or_page_errors": 0,
+    "p0": 0,
+    "p1": 0,
+    "human_visual_veto": "required after latest material change"
+  },
+  "do_not": [
+    "do not solve the overlap with z-index masking",
+    "do not keep one giant image and add decorative text around it",
+    "do not use unrelated perfume bottle photography as alternate views of Violette 03",
+    "do not make the prototype disclaimer the strongest copy near purchase",
+    "do not call a stitched full-page screenshot sufficient proof for sticky-scroll behavior"
+  ],
+  "blocked": 0,
+  "unaccounted": 0
+}
