@@ -1,70 +1,94 @@
 window.VIOLET_DATA = {
   categories: [
-    { id: 'electronics', name: 'Điện tử', icon: '⌁' },
-    { id: 'fashion', name: 'Thời trang', icon: '◫' },
-    { id: 'beauty', name: 'Làm đẹp', icon: '✦' },
-    { id: 'home', name: 'Nhà cửa', icon: '⌂' },
-    { id: 'sports', name: 'Thể thao', icon: '◌' },
-    { id: 'lifestyle', name: 'Đời sống', icon: '◇' },
-    { id: 'books', name: 'Sách', icon: '▤' },
-    { id: 'premium', name: 'Premium', icon: '◆' }
+    { id: 'floral', name: 'Floral', icon: '✿' },
+    { id: 'woody', name: 'Woods', icon: '⌁' },
+    { id: 'amber', name: 'Amber', icon: '◒' },
+    { id: 'fresh', name: 'Fresh', icon: '◇' },
+    { id: 'musk', name: 'Skin Musk', icon: '○' },
+    { id: 'discovery', name: 'Discovery', icon: '◫' },
+    { id: 'home-fragrance', name: 'Home Scent', icon: '⌂' },
+    { id: 'gifts', name: 'Gift Edit', icon: '✦' }
   ],
   products: [
     {
-      id: 'aurora-headphones', name: 'Aurora Pro ANC Headphones', category: 'electronics', brand: 'Auralis', seller: 'Auralis Official', official: true,
-      price: 3290000, oldPrice: 3990000, rating: 4.9, sold: 2180, stock: 42, fast: true,
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85',
-      description: 'Tai nghe chống ồn chủ động với thiết kế tối giản, âm thanh chi tiết và thời lượng pin đến 40 giờ.',
-      specs: ['Chống ồn chủ động Adaptive ANC', 'Bluetooth 5.4', 'Pin tối đa 40 giờ', 'Bảo hành chính hãng 24 tháng']
+      id: 'violette-03', name: 'Violette 03', category: 'floral', family: 'Powdery Floral', brand: 'Maison Aster', seller: 'Maison Aster · Paris', official: true,
+      concentration: 'Eau de Parfum', size: '50 ml', price: 3890000, oldPrice: null, rating: 4.9, sold: 428, stock: 18, fast: true,
+      image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=88',
+      description: 'Một violet mềm như phấn trên nền iris lạnh, sandalwood kem và chút vanilla khô. Thanh lịch, gần da và có độ lưu hương vừa đủ cho cả ngày.',
+      notes: { top: 'Bergamot · Violet leaf', heart: 'Iris · Violet petals', base: 'Sandalwood · Vanilla skin musk' },
+      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: violet, iris, sandalwood', 'Phong cách: quiet luxury · powdery floral', 'Được tuyển chọn bởi Violet Parfumerie']
     },
     {
-      id: 'luna-phone', name: 'Luna X1 5G 256GB', category: 'electronics', brand: 'Luna', seller: 'Luna Official Store', official: true,
-      price: 14990000, oldPrice: 16990000, rating: 4.8, sold: 964, stock: 18, fast: true,
-      image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85',
-      description: 'Smartphone 5G cao cấp với màn hình OLED, camera AI và bộ nhớ 256GB.',
-      specs: ['OLED 120Hz', 'Camera AI 50MP', '256GB storage', 'Sạc nhanh 65W']
+      id: 'velours-ambre', name: 'Velours Ambre', category: 'amber', family: 'Warm Amber', brand: 'Atelier Nocturne', seller: 'Atelier Nocturne · Grasse', official: true,
+      concentration: 'Extrait de Parfum', size: '50 ml', price: 4650000, oldPrice: 4950000, rating: 4.9, sold: 316, stock: 12, fast: false,
+      image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1000&q=88',
+      description: 'Amber ấm, resinous nhưng không nặng. Saffron khô mở đầu trước khi chuyển sang labdanum, tonka và gỗ cashmere phủ trên da.',
+      notes: { top: 'Saffron · Pink pepper', heart: 'Labdanum · Benzoin', base: 'Tonka · Cashmere wood' },
+      specs: ['Extrait de Parfum · 50 ml', 'Hương chủ đạo: saffron, amber, tonka', 'Phong cách: warm · sensual · evening', 'Batch nhỏ từ nhà hương độc lập']
     },
     {
-      id: 'atelier-bag', name: 'Atelier Soft Leather Bag', category: 'fashion', brand: 'Atelier', seller: 'Atelier Flagship', official: true,
-      price: 2490000, oldPrice: 2990000, rating: 4.9, sold: 741, stock: 30, fast: false,
-      image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85',
-      description: 'Túi da mềm phom tối giản, phù hợp đi làm và sử dụng hằng ngày.',
-      specs: ['Da mềm cao cấp', 'Khoá nam châm', 'Ngăn laptop 13 inch', 'Dây đeo có thể điều chỉnh']
+      id: 'iris-haze', name: 'Iris Haze', category: 'floral', family: 'Iris Floral', brand: 'Élan Studio', seller: 'Élan Studio · Seoul', official: true,
+      concentration: 'Eau de Parfum', size: '50 ml', price: 3280000, oldPrice: null, rating: 4.8, sold: 251, stock: 21, fast: true,
+      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1000&q=88',
+      description: 'Iris sạch và sáng trên nền trà trắng, musk mềm và cedar. Một lựa chọn tinh gọn cho người thích fragrance thanh, ít ngọt và hiện đại.',
+      notes: { top: 'White tea · Pear skin', heart: 'Iris · Orris butter', base: 'Cedar · Soft musk' },
+      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: iris, tea, cedar', 'Phong cách: airy · minimal · intimate', 'Bao bì tối giản có thể tái chế']
     },
     {
-      id: 'silk-shirt', name: 'Silk Blend Relaxed Shirt', category: 'fashion', brand: 'Mori', seller: 'Mori Studio', official: false,
-      price: 890000, oldPrice: 1190000, rating: 4.7, sold: 1380, stock: 65, fast: true,
-      image: 'https://images.unsplash.com/photo-1605763240000-7e93b172d754?auto=format&fit=crop&w=900&q=85',
-      description: 'Áo sơ mi silk-blend phom relaxed, bề mặt mịn và dễ phối cho nhiều ngữ cảnh.',
-      specs: ['Silk blend', 'Relaxed fit', '4 màu', 'Size XS–XL']
+      id: 'santal-veil', name: 'Santal Veil', category: 'woody', family: 'Creamy Woods', brand: 'Orphée', seller: 'Orphée Fragrance House', official: true,
+      concentration: 'Eau de Parfum', size: '75 ml', price: 3590000, oldPrice: null, rating: 4.9, sold: 509, stock: 27, fast: false,
+      image: 'https://images.unsplash.com/photo-1619994403073-2cec844b8e63?auto=format&fit=crop&w=1000&q=88',
+      description: 'Sandalwood mịn, fig leaf xanh và một lớp musk sạch. Không quá smoky, không quá ngọt — chỉ ấm, gọn và có chiều sâu.',
+      notes: { top: 'Fig leaf · Cardamom', heart: 'Sandalwood · Orris', base: 'White musk · Cedar' },
+      specs: ['Eau de Parfum · 75 ml', 'Hương chủ đạo: sandalwood, fig, musk', 'Phong cách: woody · creamy · unisex', 'Violet authenticity checked']
     },
     {
-      id: 'serum-violet', name: 'Violet Repair Serum 30ml', category: 'beauty', brand: 'Nuvé', seller: 'Nuvé Official', official: true,
-      price: 620000, oldPrice: 760000, rating: 4.9, sold: 4321, stock: 110, fast: true,
-      image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=85',
-      description: 'Serum phục hồi tập trung cấp ẩm, làm dịu và củng cố hàng rào bảo vệ da.',
-      specs: ['30ml', 'Niacinamide', 'Ceramide complex', 'Không hương liệu']
+      id: 'neroli-rain', name: 'Neroli Rain', category: 'fresh', family: 'Citrus Aromatic', brand: 'Lumière 17', seller: 'Lumière 17 · Côte d’Azur', official: true,
+      concentration: 'Eau de Parfum', size: '50 ml', price: 2980000, oldPrice: null, rating: 4.8, sold: 402, stock: 33, fast: true,
+      image: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=88',
+      description: 'Neroli lấp lánh, petitgrain xanh và mineral musk tạo cảm giác như ánh nắng sau cơn mưa. Sạch, tươi nhưng vẫn có chất boutique.',
+      notes: { top: 'Neroli · Lemon zest', heart: 'Petitgrain · Orange blossom', base: 'Mineral musk · Blond woods' },
+      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: neroli, petitgrain, musk', 'Phong cách: bright · green · effortless', 'Phù hợp khí hậu ấm']
     },
     {
-      id: 'lamp-orbit', name: 'Orbit Ambient Table Lamp', category: 'home', brand: 'Formhaus', seller: 'Formhaus Living', official: false,
-      price: 1290000, oldPrice: 1590000, rating: 4.8, sold: 687, stock: 24, fast: false,
-      image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85',
-      description: 'Đèn bàn ánh sáng dịu với thiết kế điêu khắc, phù hợp phòng ngủ và góc làm việc.',
-      specs: ['3 mức ánh sáng', 'LED ấm', 'Thân nhôm', 'Bảo hành 12 tháng']
+      id: 'peau-de-lune', name: 'Peau de Lune', category: 'musk', family: 'Skin Musk', brand: 'Nacre', seller: 'Nacre Parfums · Tokyo', official: true,
+      concentration: 'Eau de Parfum', size: '50 ml', price: 3420000, oldPrice: null, rating: 4.9, sold: 187, stock: 14, fast: false,
+      image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=82&sat=-18',
+      description: 'Một skin scent kín đáo với ambrette, steamed rice accord và clean woods. Mùi hương ở gần da, tinh tế và rất riêng tư.',
+      notes: { top: 'Ambrette · Pear skin', heart: 'Steamed rice · Iris', base: 'Clean woods · White musk' },
+      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: ambrette, rice, musk', 'Phong cách: intimate · soft · understated', 'Ideal for layering']
     },
     {
-      id: 'runner-one', name: 'Runner One Everyday Sneakers', category: 'sports', brand: 'Noma', seller: 'Noma Sports', official: true,
-      price: 1790000, oldPrice: 2190000, rating: 4.8, sold: 1524, stock: 57, fast: true,
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85',
-      description: 'Sneaker nhẹ, đệm êm và thoáng khí cho di chuyển hằng ngày.',
-      specs: ['Foam midsole', 'Mesh upper', 'Size 36–45', 'Trọng lượng 265g']
+      id: 'nuit-de-figue', name: 'Nuit de Figue', category: 'woody', family: 'Green Woody', brand: 'Maison Aster', seller: 'Maison Aster · Paris', official: true,
+      concentration: 'Eau de Parfum', size: '50 ml', price: 3750000, oldPrice: 4050000, rating: 4.8, sold: 293, stock: 16, fast: false,
+      image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1000&q=82&sat=-12',
+      description: 'Fig sap xanh, cedar khô và một chút black tea. Tối, yên tĩnh và có cấu trúc — phù hợp cho những ngày muốn một mùi hương có cá tính nhưng không phô trương.',
+      notes: { top: 'Fig leaf · Black tea', heart: 'Fig pulp · Cedar', base: 'Vetiver · Dry amber' },
+      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: fig, tea, cedar', 'Phong cách: green · woody · contemplative', 'Curated Violet exclusive edit']
     },
     {
-      id: 'camera-mini', name: 'Mini Creator Camera 4K', category: 'electronics', brand: 'Nova', seller: 'Nova Camera', official: false,
-      price: 5890000, oldPrice: 6490000, rating: 4.7, sold: 352, stock: 12, fast: false,
-      image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=900&q=85',
-      description: 'Camera nhỏ gọn quay 4K dành cho creator, du lịch và vlog hằng ngày.',
-      specs: ['4K 60fps', 'Chống rung điện tử', 'Màn hình xoay', 'USB-C']
+      id: 'violet-discovery-set', name: 'Violet Discovery Wardrobe', category: 'discovery', family: 'Discovery Set', brand: 'Violet Parfumerie', seller: 'Violet Parfumerie', official: true,
+      concentration: 'Discovery Set', size: '6 × 2 ml', price: 890000, oldPrice: null, rating: 4.9, sold: 731, stock: 48, fast: true,
+      image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1000&q=82&sat=-10',
+      description: 'Sáu mùi hương đại diện cho sáu mood khác nhau: floral, amber, woods, fresh, skin musk và green. Cách nhẹ nhàng nhất để tìm signature scent trước khi chọn full bottle.',
+      notes: { top: '6 scent stories', heart: '2 ml each', base: 'Curated across Violet houses' },
+      specs: ['6 × 2 ml', 'Có voucher áp dụng khi mua full bottle', 'Bao gồm scent cards hướng dẫn thử mùi', 'Đóng gói quà complimentary']
+    },
+    {
+      id: 'velvet-room-candle', name: 'Velvet Room Candle', category: 'home-fragrance', family: 'Home Fragrance', brand: 'Atelier Nocturne', seller: 'Atelier Nocturne · Grasse', official: true,
+      concentration: 'Scented Candle', size: '220 g', price: 1850000, oldPrice: null, rating: 4.8, sold: 154, stock: 24, fast: false,
+      image: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1000&q=82&sat=-30',
+      description: 'Tobacco leaf, iris dust và amber tạo nên một căn phòng ấm, tối và mềm như nhung. Một home scent dành cho buổi tối chậm.',
+      notes: { top: 'Iris dust', heart: 'Tobacco leaf', base: 'Amber · Cedar' },
+      specs: ['220 g · khoảng 50 giờ cháy', 'Wax blend', 'Cotton wick', 'Gift-ready Violet wrapping']
+    },
+    {
+      id: 'signature-gift-trio', name: 'Signature Gift Trio', category: 'gifts', family: 'Gift Set', brand: 'Violet Parfumerie', seller: 'Violet Parfumerie', official: true,
+      concentration: 'Gift Set', size: '3 × 10 ml', price: 2350000, oldPrice: null, rating: 4.9, sold: 226, stock: 19, fast: true,
+      image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1000&q=80&sat=-5',
+      description: 'Ba travel spray theo ba mood: luminous floral, warm amber và quiet woods. Đi kèm hộp quà violet-lilac và scent card cá nhân hóa.',
+      notes: { top: 'Floral edit', heart: 'Amber edit', base: 'Woody edit' },
+      specs: ['3 × 10 ml travel sprays', 'Complimentary gift wrap', 'Personal message card', 'Curated by Violet Parfumerie']
     }
   ]
 };

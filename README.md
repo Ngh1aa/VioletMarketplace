@@ -1,21 +1,30 @@
-# Violet Marketplace
+# Violet Parfumerie
 
-Static multi-category ecommerce marketplace prototype built with **HTML, CSS and vanilla JavaScript**. The project has no build step and is designed to deploy directly to GitHub Pages.
+**Violet Parfumerie** is a static luxury fragrance marketplace prototype built with **HTML, CSS and vanilla JavaScript**. It focuses on curated niche perfume houses, olfactive discovery, discovery sets and a quieter premium commerce experience rather than a noisy multi-category marketplace.
+
+## Product direction
+
+- Curated fragrance marketplace, not a general-purpose marketplace
+- Luxury visual language: warm pastel violet, dusty rose, aubergine, ivory and restrained champagne accents
+- Editorial typography and product-first layouts
+- Discovery by **olfactive family / notes / mood**, not electronics-fashion category patterns
+- Marketplace trust reframed around authenticity, provenance and curated fragrance houses
+- Existing cart, checkout, seller center and admin flows are preserved
+
+See [`DESIGN-DIRECTION.md`](DESIGN-DIRECTION.md) for the current visual and UX rationale.
 
 ## Pages
 
-- `index.html` — Buyer marketplace homepage
-- `search.html` — Search / product listing
-- `product.html?id=...` — Product detail
-- `cart.html` — Multi-seller cart
-- `checkout.html` — Checkout
-- `order-success.html` — Order confirmation
-- `seller.html` — Seller Center dashboard
-- `admin.html` — Marketplace Admin dashboard
+- `index.html` — Violet Parfumerie buyer homepage
+- `search.html` — fragrance library / product listing
+- `product.html?id=...` — fragrance detail with note pyramid
+- `cart.html` — fragrance bag grouped by maison
+- `checkout.html` — quiet checkout
+- `order-success.html` — order confirmation
+- `seller.html` — Fragrance House Center
+- `admin.html` — marketplace curation / authenticity operations
 
 ## Run locally
-
-You can open `index.html` directly, but a small static server is recommended:
 
 ```bash
 python3 -m http.server 8080
@@ -25,13 +34,11 @@ Then open `http://localhost:8080`.
 
 ## GitHub Pages
 
-The repository includes `.github/workflows/pages.yml`. Every push to `main` publishes the repository root as a GitHub Pages site.
+Every push to `main` is deployed through `.github/workflows/pages.yml`.
 
 Expected URL:
 
 `https://ngh1aa.github.io/VioletMarketplace/`
-
-If Pages has never been enabled for the repository, open **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions** once.
 
 ## Architecture
 
@@ -45,11 +52,13 @@ VioletMarketplace/
 ├── order-success.html
 ├── seller.html
 ├── admin.html
-├── styles.css
-├── data.js
-├── app.js
+├── styles.css              # foundation / legacy shared layout
+├── perfume-luxury.css      # Violet Parfumerie visual layer
+├── data.js                  # mocked fragrance catalog
+├── app.js                   # marketplace buyer behavior
+├── DESIGN-DIRECTION.md
 ├── .nojekyll
-└── .github/workflows/pages.yml
+└── .github/workflows/
 ```
 
-Commerce data is mocked in `data.js`. Cart state is saved to `localStorage`, so the buyer flow works entirely in the browser with no backend.
+Commerce data is mocked in `data.js`. Cart state is stored in `localStorage`, so the buyer flow works entirely in the browser with no backend.

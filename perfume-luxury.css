@@ -1,0 +1,522 @@
+:root {
+  --violet-50: #fbf7ff;
+  --violet-100: #f4eafa;
+  --violet-200: #e7d4f1;
+  --violet-300: #cfb2df;
+  --violet-400: #b68dc9;
+  --violet-500: #9a6cae;
+  --violet-600: #81548f;
+  --violet-700: #684171;
+  --violet-800: #4f3158;
+  --violet-950: #251829;
+  --ink: #251e27;
+  --muted: #746a74;
+  --line: #eadfe9;
+  --surface: #fffdfb;
+  --soft: #faf5f8;
+  --rose: #ad5978;
+  --gold: #b79262;
+  --shadow: 0 24px 70px rgba(77, 43, 82, .11);
+  --container: 1280px;
+}
+
+body {
+  background: #fffdfb;
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body::selection { background: #dcc2e6; color: #251829; }
+
+.brand,
+.hero h1,
+.section-head h2,
+.page-hero h1,
+.detail-info h1,
+.scent-concierge h2,
+.promo-card strong {
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+.container { width: min(var(--container), calc(100% - 40px)); }
+
+.topbar {
+  background: #251829;
+  color: #e7dce7;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  letter-spacing: .025em;
+}
+
+.topbar-inner { height: 32px; font-size: 11px; }
+.top-links { gap: 24px; }
+.top-links a { color: #cbbfcb; }
+.top-links a:hover { color: #fff; }
+
+.site-header {
+  background: rgba(255, 253, 251, .94);
+  border-bottom-color: #eee4eb;
+  backdrop-filter: blur(18px) saturate(1.05);
+}
+
+.header-main {
+  grid-template-columns: 210px minmax(260px, 1fr) auto;
+  height: 88px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -.04em;
+}
+
+.brand span { color: #9f6db1; }
+.brand small {
+  margin-left: 6px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #8e7f8d;
+}
+
+.search-form {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #cfc2ce;
+  border-radius: 0;
+}
+.search-form:focus-within {
+  background: transparent;
+  border-color: #684171;
+  box-shadow: none;
+}
+.search-form input { padding: 13px 2px; font-size: 13px; }
+.search-form button {
+  padding: 0 4px 0 18px;
+  color: #4f3158;
+  background: transparent;
+  border-radius: 0;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.search-suggestions { border-radius: 4px; background: #fffdfb; }
+.suggestion { border-radius: 2px; }
+.suggestion > span { display: grid; }
+.suggestion > span small { margin-top: 2px; color: var(--muted); font-size: 10px; }
+
+.icon-link {
+  min-width: 46px;
+  border-radius: 999px;
+  border-color: #dcd0da;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.cart-count { background: #684171; }
+
+.nav-row { border-top-color: #f2eaf0; }
+.nav-inner {
+  justify-content:center;
+  gap: 34px;
+  height: 46px;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.perfume-hero { padding: 20px 0 8px; }
+.perfume-hero .hero-grid {
+  grid-template-columns: minmax(0, 1.65fr) minmax(310px, .72fr);
+  gap: 12px;
+}
+
+.perfume-hero .hero-main {
+  min-height: 570px;
+  padding: clamp(36px, 5vw, 74px);
+  border-radius: 2px;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(54, 32, 61, .95) 0%, rgba(71, 42, 82, .88) 41%, rgba(126, 87, 137, .48) 68%, rgba(218, 190, 220, .16) 100%),
+    url("https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1600&q=88") center 42% / cover no-repeat;
+  color: #fff;
+}
+.perfume-hero .hero-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(25,12,29,.22));
+}
+.perfume-hero .hero-main::after {
+  width: 280px;
+  height: 280px;
+  right: 7%;
+  top: 9%;
+  border: 1px solid rgba(255,255,255,.19);
+  border-radius: 50%;
+}
+.perfume-hero .eyebrow { font-size: 10px; letter-spacing: .18em; }
+.perfume-hero h1 {
+  max-width: 760px;
+  margin: 20px 0 18px;
+  font-size: clamp(54px, 6.8vw, 96px);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.055em;
+}
+.perfume-hero h1 em { color: #ead4ef; font-weight: 400; }
+.perfume-hero p {
+  max-width: 600px;
+  color: #eee5ee;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.hero-actions { margin-top: 30px; }
+.hero .btn-primary,
+.btn-primary {
+  background: #4f3158;
+  color: #fff;
+}
+.hero .btn-primary {
+  background: #fff9f5;
+  color: #351f3a;
+}
+.btn {
+  min-height: 46px;
+  border-radius: 2px;
+  padding-inline: 22px;
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: .04em;
+}
+.btn-secondary { background: #efe3f3; color: #4f3158; }
+.hero .btn-secondary {
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+}
+.hero-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 34px;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 12px;
+  font-style: italic;
+  color: #d9c9dc;
+}
+.hero-notes span + span::before { content: "·"; margin-right: 18px; color: #b994c3; }
+
+.perfume-hero .hero-side { gap: 12px; }
+.promo-card {
+  min-height: 279px;
+  padding: 32px;
+  border-radius: 2px;
+}
+.promo-card.editorial {
+  border-color: #e3d4e2;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(200,164,214,.38), transparent 34%),
+    linear-gradient(145deg,#f4eaf5 0%,#f7e9ef 50%,#f1dfd5 100%);
+}
+.promo-card.dark {
+  border-color: #2d2030;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(169,125,183,.25), transparent 30%),
+    #241927;
+}
+.promo-card strong {
+  font-size: clamp(30px, 3vw, 43px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+.promo-card small { max-width: 280px; line-height: 1.55; }
+
+.scent-shortcuts { padding: 14px 0 28px; }
+.quick-grid { gap: 0; border-top: 1px solid #eadfe9; border-bottom: 1px solid #eadfe9; }
+.quick-item {
+  padding: 19px 8px 17px;
+  border: 0;
+  border-right: 1px solid #eadfe9;
+  border-radius: 0;
+  background: transparent;
+}
+.quick-item:last-child { border-right: 0; }
+.quick-item:hover { transform: none; box-shadow: none; background: #faf5f8; }
+.quick-icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: transparent;
+  color: #81548f;
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+.quick-item span { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+
+.section { padding: 62px 0; }
+.section.soft {
+  background: linear-gradient(180deg, #fcf8fb 0%, #f9f2f6 100%);
+}
+.section-head { align-items: flex-end; margin-bottom: 28px; }
+.section-head > div { max-width: 760px; }
+.section-kicker,
+.edition-mark {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #8c617f;
+  font-size: 9px;
+  font-weight: 780;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.section-kicker.light { color: #d6b9dc; }
+.section-head h2,
+.scent-concierge h2 {
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+.section-head p { max-width: 690px; margin-top: 10px; font-size: 13px; line-height: 1.7; }
+.text-link { color: #684171; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+
+.category-grid { grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e5d9e2; border: 1px solid #e5d9e2; }
+.category-card {
+  min-height: 160px;
+  padding: 26px 22px;
+  border: 0;
+  border-radius: 0;
+  background: #fffdfb;
+  text-align: left;
+}
+.category-card .quick-icon {
+  width: auto;
+  height: auto;
+  margin: 0 0 24px;
+  justify-content: start;
+  font-size: 22px;
+}
+.category-card strong {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+.category-card > span { display: block; margin-top: 6px; color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+.category-card:hover { background: #f8eff7; }
+
+.product-grid { gap: 18px; }
+.product-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.product-card:hover { transform: none; box-shadow: none; border: 0; }
+.product-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: #f2eaef;
+  overflow: hidden;
+}
+.product-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(66,44,67,.06);
+}
+.product-media img { transition: transform .55s cubic-bezier(.2,.7,.2,1), filter .4s; }
+.product-card:hover img { transform: scale(1.035); filter: saturate(.96) contrast(1.02); }
+.product-body { padding: 14px 2px 4px; }
+.product-brand { min-height: 20px; justify-content: space-between; }
+.house-name { color: #7d6e7c; font-size: 9px; font-weight: 760; letter-spacing: .13em; text-transform: uppercase; }
+.product-title {
+  height: auto;
+  margin: 5px 0 3px;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+.product-scent-line { color: #857983; font-size: 10px; }
+.product-meta { margin-top: 8px; justify-content: space-between; color: #8c808a; font-size: 10px; }
+.price-row { margin-top: 12px; border-top: 1px solid #e8dde5; padding-top: 11px; }
+.price { color: #39283e; font-size: 15px; font-weight: 700; }
+.old-price { margin-top: 2px; font-size: 10px; }
+.product-arrow { color: #896492; font-size: 15px; }
+.badge { border-radius: 999px; font-size: 8px; letter-spacing: .06em; text-transform: uppercase; }
+.badge-sale { top: 10px; left: 10px; background: rgba(54,31,59,.9); }
+.badge-official { background: #eee0f2; color: #62406b; }
+.badge-fast { padding: 3px 7px; background: #f3e6ed; color: #9b5873; }
+
+.perfume-house-edit {
+  padding: clamp(28px, 4vw, 54px);
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(202,159,213,.18), transparent 28%),
+    linear-gradient(135deg,#231726 0%,#352139 56%,#4a2e50 100%);
+}
+.perfume-house-edit .product-body { color: #f8f0f7; }
+.perfume-house-edit .house-name,
+.perfume-house-edit .product-scent-line,
+.perfume-house-edit .product-meta { color: #cdbdcd; }
+.perfume-house-edit .price { color: #fff; }
+.perfume-house-edit .price-row { border-color: rgba(255,255,255,.18); }
+.light-link { color: #ead7ed; }
+
+.scent-concierge {
+  display: grid;
+  grid-template-columns: minmax(0,1.2fr) minmax(260px,.8fr);
+  gap: 46px;
+  align-items: end;
+  padding: clamp(38px, 6vw, 78px);
+  background:
+    radial-gradient(circle at 85% 15%, rgba(255,226,211,.24), transparent 24%),
+    linear-gradient(125deg,#513058 0%,#7f5989 48%,#b887a8 100%);
+  color: #fff;
+}
+.scent-concierge h2 { margin: 6px 0 12px; }
+.scent-concierge p { max-width: 700px; color: #f0e5ef; font-size: 13px; line-height: 1.7; }
+.concierge-actions { display: grid; gap: 16px; justify-items: start; }
+.btn-ivory { background: #fff9f3; color: #4d3154; }
+
+.trust-strip {
+  gap: 0;
+  border: 0;
+  border-top: 1px solid #ded2dc;
+  border-bottom: 1px solid #ded2dc;
+  border-radius: 0;
+  background: transparent;
+}
+.trust-item { min-height: 150px; padding: 24px 26px; border-right: 1px solid #ded2dc; background: transparent; }
+.trust-item:last-child { border-right: 0; }
+.trust-item strong { font-family: "Iowan Old Style", Georgia, serif; font-size: 18px; font-weight: 400; }
+.trust-item span { display: block; margin-top: 7px; line-height: 1.6; }
+
+.site-footer {
+  margin-top: 0;
+  padding-top: 64px;
+  background: #201523;
+}
+.footer-brand { color: #fff; }
+.footer-grid p,.footer-grid a { color: #bcaebe; }
+.footer-grid h4 { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+.footer-bottom { border-color: #3a293d; }
+
+.fragrance-library-hero { max-width: 920px; padding: 58px 0 30px; }
+.fragrance-library-hero h1 { margin-top: 8px; font-size: clamp(46px, 6vw, 78px); font-weight: 400; letter-spacing: -.05em; }
+.fragrance-library-hero > p { max-width: 650px; line-height: 1.7; }
+.plp { grid-template-columns: 220px 1fr; gap: 42px; }
+.filter-panel {
+  padding: 0 20px 0 0;
+  border: 0;
+  border-radius: 0;
+  border-right: 1px solid #e4d9e1;
+}
+.filter-group { padding: 18px 0; }
+.filter-options { gap: 11px; }
+.check { color: #6f6470; font-size: 11px; }
+.sort { border-radius: 0; background: transparent; }
+.chip { border-radius: 999px; background: #f5eaf6; }
+
+.product-detail { grid-template-columns: minmax(0,1.08fr) minmax(360px,.82fr); gap: clamp(34px, 6vw, 86px); padding-top: 46px; }
+.perfume-detail-media { position: sticky; top: 150px; height: max-content; border-radius: 0; aspect-ratio: 4/5; }
+.perfume-detail-media img { object-fit: cover; }
+.image-caption { position: absolute; left: 14px; bottom: 12px; padding: 7px 9px; background: rgba(255,253,251,.88); color: #5e4d60; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+.detail-info { padding-top: 20px; }
+.detail-info h1 { margin: 18px 0 8px; font-size: clamp(48px, 5vw, 72px); font-weight: 400; letter-spacing: -.05em; }
+.detail-rating { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.detail-price { color: #3f2945; font-size: 22px; font-weight: 650; }
+.detail-intro { margin: 24px 0; color: #5e555f; font-family: "Iowan Old Style", Georgia, serif; font-size: 17px; line-height: 1.7; }
+.note-pyramid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid #e3d8e1; border-bottom: 1px solid #e3d8e1; }
+.note-pyramid > div { min-height: 104px; padding: 17px 14px; border-right: 1px solid #e3d8e1; }
+.note-pyramid > div:first-child { padding-left: 0; }
+.note-pyramid > div:last-child { border-right: 0; }
+.note-pyramid span { display: block; margin-bottom: 8px; color: #9b8395; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+.note-pyramid strong { font-family: "Iowan Old Style", Georgia, serif; font-size: 14px; font-weight: 400; line-height: 1.45; }
+.offer-box,.seller-box,.summary-card,.checkout-block,.cart-shop {
+  border-radius: 2px;
+  border-color: #e4d9e1;
+}
+.offer-box { background: #f8f0f6; }
+.seller-box { background: #fffdfb; }
+.benefits { border-radius: 0; border-color: #e4d9e1; }
+.benefits div { border-color: #e4d9e1; }
+.spec-list { border-color: #e4d9e1; }
+
+.summary-card { background: #fffafc; }
+.checkout-block { background: #fffdfb; }
+.field input,.field select { border-radius: 2px; background: #fffdfb; }
+.qty-btn { border-radius: 50%; }
+
+.dashboard { background: #faf6f9; }
+.dash-sidebar { background: #241827; }
+.dash-nav a { border-radius: 2px; }
+.kpi,.panel { border-radius: 2px; }
+.fake-chart .bar { background: linear-gradient(#c39bcf,#684171); }
+
+.toast { border-radius: 2px; background: #2d1b31; }
+
+@media (max-width: 980px) {
+  .perfume-hero .hero-grid { grid-template-columns: 1fr; }
+  .perfume-hero .hero-side { grid-template-columns: 1fr 1fr; }
+  .promo-card { min-height: 240px; }
+  .category-grid { grid-template-columns: repeat(4,1fr); }
+  .product-grid { grid-template-columns: repeat(3,1fr); }
+  .scent-concierge { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .container { width: min(var(--container), calc(100% - 28px)); }
+  .header-main { grid-template-columns: 1fr auto; }
+  .brand { font-size: 27px; }
+  .brand small { display: none; }
+  .perfume-hero .hero-main { min-height: 520px; padding: 34px 26px; background-position: 58% center; }
+  .perfume-hero .hero-main::before { background: linear-gradient(90deg,rgba(41,23,46,.93),rgba(66,39,73,.65) 68%,rgba(66,39,73,.18)); }
+  .perfume-hero h1 { font-size: clamp(54px, 15vw, 74px); }
+  .perfume-hero .hero-side { grid-template-columns: 1fr; }
+  .hero-notes span + span::before { margin-right: 8px; }
+  .quick-grid { border: 0; }
+  .quick-item { min-width: 106px; border: 1px solid #eadfe9; border-left: 0; }
+  .category-grid { grid-template-columns: repeat(2,1fr); }
+  .product-grid { grid-template-columns: repeat(2,1fr); gap: 20px 10px; }
+  .product-title { font-size: 18px; }
+  .section { padding: 48px 0; }
+  .section-head { align-items: flex-start; }
+  .edition-mark { display: none; }
+  .perfume-house-edit { margin-inline: -6px; padding: 32px 18px; }
+  .scent-concierge { padding: 40px 28px; }
+  .trust-strip { grid-template-columns: 1fr 1fr; }
+  .trust-item { min-height: 130px; }
+  .product-detail { grid-template-columns: 1fr; padding-top: 20px; }
+  .perfume-detail-media { position: relative; top: auto; }
+  .note-pyramid { grid-template-columns: 1fr; }
+  .note-pyramid > div { min-height: auto; padding: 13px 0; border-right: 0; border-bottom: 1px solid #e3d8e1; }
+  .note-pyramid > div:last-child { border-bottom: 0; }
+  .detail-actions { background: #fffdfb; }
+}
+
+@media (max-width: 430px) {
+  .perfume-hero .hero-main { min-height: 490px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-notes { gap: 6px 9px; }
+  .hero-notes span + span::before { display:none; }
+  .category-grid { grid-template-columns: 1fr 1fr; }
+  .category-card { min-height: 138px; padding: 20px 16px; }
+  .category-card strong { font-size: 18px; }
+  .product-title { font-size: 17px; }
+  .product-meta { display: grid; gap: 2px; }
+  .trust-strip { grid-template-columns: 1fr; }
+  .trust-item { min-height: auto; border-right: 0; border-bottom: 1px solid #ded2dc; }
+  .trust-item:last-child { border-bottom: 0; }
+}
