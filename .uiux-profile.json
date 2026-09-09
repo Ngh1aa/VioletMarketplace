@@ -1,0 +1,35 @@
+{
+  "project": {
+    "name": "Violet Parfumerie",
+    "type": "luxury fragrance marketplace",
+    "mode": "interactive_prototype",
+    "primary_goal": "Create a distinctive, calm, luxury fragrance discovery and commerce experience that feels curated rather than crowded."
+  },
+  "source_of_truth": [
+    "DESIGN-DIRECTION.md",
+    "docs/uiux/Operating-Profile.md",
+    "docs/uiux/Skill-Version-Lock.md",
+    "design-artifacts/scent-portrait-contract.json",
+    "design-artifacts/scent-portrait-skill-trace.json"
+  ],
+  "constraints": {
+    "responsive_scope": "desktop_only",
+    "primary_viewport": "1440x1000",
+    "desktop_pressure_points": ["1280x900", "1600x1000"],
+    "tablet_mobile_status": "N/A_JUSTIFIED for current visual phase; preserve existing behavior and do not claim fully responsive",
+    "release_authorization": "merge_only",
+    "implementation_style": "vanilla HTML/CSS/JavaScript; preserve existing architecture unless a material problem requires change",
+    "skill_routing": "smallest_applicable_graph",
+    "visual_completion_requires": "rendered evidence + automated sanity gates + Creative Director screenshot inspection",
+    "system_reality": "Do not describe static, simulated, deterministic, mock or partial behavior as real AI/production integration.",
+    "creative_direction": "Factory and routed skills own repeatable process and verification; ChatGPT acts as Creative Director for taste, hierarchy, brand fit and final visual judgment.",
+    "anti_patterns": [
+      "purple marketplace template",
+      "gradient or glass effects without a brand or hierarchy role",
+      "repeated centered-heading-plus-three-cards sections",
+      "universal hero shells across materially different page roles",
+      "fake AI claims",
+      "merging substantial visual changes without opened rendered screenshots"
+    ]
+  }
+}
