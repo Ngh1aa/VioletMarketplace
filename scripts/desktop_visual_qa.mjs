@@ -28,12 +28,32 @@ async function waitForServer() {
   throw new Error('Static server did not become ready.');
 }
 
+async function settleVisualMedia(page) {
+  // Trigger browser-native lazy loading before creating a full-page visual artifact.
+  await page.evaluate(async () => {
+    const height = document.documentElement.scrollHeight;
+    const step = Math.max(420, Math.floor(window.innerHeight * 0.72));
+    for (let y = 0; y < height; y += step) {
+      window.scrollTo(0, y);
+      await new Promise(resolve => setTimeout(resolve, 90));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.waitForTimeout(250);
+  await page.waitForFunction(() =>
+    [...document.images].every(image => image.complete),
+    null,
+    { timeout: 15000 },
+  ).catch(() => {});
+}
+
 const pages = [
   { name: 'home', path: '/index.html', kind: 'home' },
   { name: 'library', path: '/search.html', kind: 'library' },
   { name: 'product-violette-03', path: '/product.html?id=violette-03', kind: 'product' },
 ];
 
+await waitForServer();
 const browser = await chromium.launch({ headless: true });
 const context = await browser.newContext({
   viewport: { width: 1440, height: 1000 },
@@ -64,10 +84,7 @@ for (const spec of pages) {
   page.on('pageerror', error => pageErrors.push(String(error)));
 
   await page.goto(baseURL + spec.path, { waitUntil: 'networkidle', timeout: 45000 });
-  await page.screenshot({
-    path: path.join(outputDir, `${spec.name}-1440.png`),
-    fullPage: true,
-  });
+  await settleVisualMedia(page);
 
   const metrics = await page.evaluate(kind => {
     const body = document.body;
@@ -88,6 +105,10 @@ for (const spec of pages) {
     const cardWidth = firstCard ? Math.round(firstCard.getBoundingClientRect().width) : 0;
     const heroHeight = hero ? Math.round(hero.getBoundingClientRect().height) : 0;
     const detailColumns = detail ? getComputedStyle(detail).gridTemplateColumns.split(' ').filter(Boolean).length : 0;
+    const brokenImages = [...document.images]
+      .filter(image => visible(image) && image.complete && image.naturalWidth === 0)
+      .map(image => image.currentSrc || image.src)
+      .slice(0, 8);
 
     return {
       kind,
@@ -100,12 +121,14 @@ for (const spec of pages) {
       cardWidth,
       filterVisible: visible(filter),
       detailColumns,
+      brokenImages,
       desktopSheetLoaded: [...document.styleSheets].some(sheet => String(sheet.href || '').includes('desktop-luxury-v2.css')),
     };
   }, spec.kind);
 
   if (consoleErrors.length) issue(spec.name, 'P0', 'console-error', consoleErrors.join(' | '));
   if (pageErrors.length) issue(spec.name, 'P0', 'page-error', pageErrors.join(' | '));
+  if (metrics.brokenImages.length) issue(spec.name, 'P0', 'broken-image', metrics.brokenImages.join(' | '));
   if (metrics.scrollWidth > metrics.clientWidth + 2) issue(spec.name, 'P0', 'horizontal-overflow', `${metrics.scrollWidth}px > ${metrics.clientWidth}px`);
   if (metrics.h1Count !== 1) issue(spec.name, 'P1', 'heading-structure', `Expected one h1, found ${metrics.h1Count}`);
   if (!metrics.navVisible) issue(spec.name, 'P1', 'desktop-navigation', 'Desktop navigation is not visible.');
@@ -123,6 +146,11 @@ for (const spec of pages) {
   if (spec.kind === 'product' && metrics.detailColumns < 2) {
     issue(spec.name, 'P1', 'pdp-composition', 'Desktop PDP should remain a two-column composition.');
   }
+
+  await page.screenshot({
+    path: path.join(outputDir, `${spec.name}-1440.png`),
+    fullPage: true,
+  });
 
   report.pages.push({
     name: spec.name,
