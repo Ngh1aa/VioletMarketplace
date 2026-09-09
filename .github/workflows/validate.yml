@@ -27,7 +27,21 @@ jobs:
           test -f seller.html
           test -f admin.html
           test -f styles.css
+          test -f perfume-luxury.css
+          test -f DESIGN-DIRECTION.md
           test -f data.js
           test -f app.js
           test ! -e package.json
           test ! -e tsconfig.json
+
+      - name: Validate Violet Parfumerie direction
+        run: |
+          grep -q "Violet Parfumerie" index.html
+          grep -q "Curated fragrance marketplace" index.html
+          grep -q "Olfactive family" search.html
+          grep -q "note-pyramid" app.js
+          grep -q "category: 'floral'" data.js
+          grep -q "category: 'woody'" data.js
+          grep -q "category: 'amber'" data.js
+          grep -q "perfume-luxury.css" index.html
+          grep -q "perfume-luxury.css" product.html
