@@ -36,6 +36,9 @@ jobs:
           test -f scent-portrait.css
           test -f scent-portrait.js
           test -f DESIGN-DIRECTION.md
+          test -f .uiux-profile.json
+          test -f docs/uiux/Operating-Profile.md
+          test -f docs/uiux/Skill-Version-Lock.md
           test -f design-artifacts/scent-portrait-contract.json
           test -f design-artifacts/scent-portrait-skill-trace.json
           test -f scripts/desktop_visual_qa.mjs
@@ -72,3 +75,11 @@ jobs:
           grep -q 'visual_composition' design-artifacts/scent-portrait-contract.json
           grep -q 'browser_qa' design-artifacts/scent-portrait-contract.json
           grep -q 'visual_qa' design-artifacts/scent-portrait-contract.json
+
+      - name: Validate UIUX operating profile
+        run: |
+          node -e "const p=require('./.uiux-profile.json'); if(p.project.mode!=='interactive_prototype') process.exit(1); if(p.constraints.responsive_scope!=='desktop_only') process.exit(1); if(p.constraints.skill_routing!=='smallest_applicable_graph') process.exit(1);"
+          grep -q '1a3c9ef2d72e6bd0d4a4fc79c885c59f98e41c33' docs/uiux/Skill-Version-Lock.md
+          grep -q 'rendered evidence + automated sanity gates + Creative Director screenshot inspection' .uiux-profile.json
+          grep -q 'Factory and routed skills own repeatable process and verification' .uiux-profile.json
+          grep -q 'Installed does not mean active' docs/uiux/Skill-Version-Lock.md
