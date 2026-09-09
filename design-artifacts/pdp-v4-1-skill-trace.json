@@ -1,0 +1,47 @@
+{
+  "phase": "V4.1 PDP media-dominant recovery",
+  "skills_repository": "Ngh1aa/skills_UIUX",
+  "skills_ref": "e8ed8c9212d20edb2cf4c8c0881fff34add7076e",
+  "orchestration_policy": "adaptive-prompt-os-v4",
+  "active": [
+    {
+      "skill": "project-context",
+      "reason": "Preserve Violet project truth, desktop-only visual scope, prototype reality and existing V4 strengths."
+    },
+    {
+      "skill": "adaptive-skill-routing-and-context-budget",
+      "reason": "Route this as a substantial local redesign rather than loading the whole skill library."
+    },
+    {
+      "skill": "website-delivery-pipeline",
+      "reason": "The fix crosses audit, reference research, contract, implementation, rendered QA and release smoke."
+    },
+    {
+      "skill": "asset-media-and-art-direction",
+      "reason": "Changes product photography roles, crop strategy, media coherence and rendered focal checks."
+    },
+    {
+      "skill": "visual-design-direction",
+      "reason": "Recomposes the PDP around the fragrance object as the primary decision evidence with a 70/30 visual-information target."
+    },
+    {
+      "skill": "interaction-patterns-and-form-ux",
+      "reason": "Clarifies discovery-trio and bottle actions and removes a false single-size selector affordance."
+    },
+    {
+      "skill": "ui-craft-and-visual-qa",
+      "reason": "Adds scroll-state evidence, sticky/fixed occlusion checks and human inspection after an obvious defect escaped previous QA."
+    }
+  ],
+  "not_active": [
+    "full site IA redesign",
+    "mobile responsive redesign",
+    "new production backend/payment integration"
+  ],
+  "decision_changed_by_skills": [
+    "Media receives explicit evidence-bearing roles instead of generic stock fill.",
+    "Primary composition is locked before CSS implementation.",
+    "Sticky behavior is treated as a rendered-state risk requiring discrete scroll evidence.",
+    "The defect is repaired at composition/QA owner layers instead of masked with z-index patches."
+  ]
+}
