@@ -1,0 +1,44 @@
+name: PDP V4.1 Visual QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'product.html'
+      - 'pdp-v4-1.css'
+      - 'pdp-v4-1.js'
+      - 'data.js'
+      - 'app.js'
+      - 'storefront-v4.js'
+      - 'scripts/pdp_v4_1_qa.mjs'
+      - '.github/workflows/pdp-v4-1-qa.yml'
+      - 'design-artifacts/pdp-v4-1-*'
+      - 'docs/uiux/**'
+
+jobs:
+  pdp-v4-1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          sudo sed -i '\|dl.google.com/linux/chrome|d' /etc/apt/sources.list 2>/dev/null || true
+          for source in /etc/apt/sources.list.d/*; do
+            if [ -f "$source" ] && grep -q 'dl.google.com/linux/chrome' "$source"; then
+              sudo rm -f "$source"
+            fi
+          done
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run PDP V4.1 scroll-state and media gates
+        run: node scripts/pdp_v4_1_qa.mjs artifacts/pdp-v4-1-qa
+      - name: Upload PDP V4.1 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-pdp-v4-1-qa
+          path: artifacts/pdp-v4-1-qa
+          retention-days: 14
