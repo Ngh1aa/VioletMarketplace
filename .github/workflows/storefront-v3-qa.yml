@@ -1,0 +1,35 @@
+name: Storefront V3 QA
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  storefront-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run desktop V3 flow and visual gates
+        run: node scripts/storefront_v3_qa.mjs artifacts/storefront-v3-qa
+
+      - name: Upload V3 rendered evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-storefront-v3-qa
+          path: artifacts/storefront-v3-qa/
+          if-no-files-found: error
+          retention-days: 14

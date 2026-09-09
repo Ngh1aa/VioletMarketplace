@@ -16,8 +16,10 @@ jobs:
           node --check data.js
           node --check app.js
           node --check scent-portrait.js
+          node --check storefront-v3.js
           node --check scripts/desktop_visual_qa.mjs
           node --check scripts/scent_portrait_qa.mjs
+          node --check scripts/storefront_v3_qa.mjs
 
       - name: Validate required static files
         run: |
@@ -33,16 +35,21 @@ jobs:
           test -f styles.css
           test -f perfume-luxury.css
           test -f desktop-luxury-v2.css
+          test -f desktop-experience-v3.css
           test -f scent-portrait.css
           test -f scent-portrait.js
+          test -f storefront-v3.js
           test -f DESIGN-DIRECTION.md
           test -f .uiux-profile.json
           test -f docs/uiux/Operating-Profile.md
           test -f docs/uiux/Skill-Version-Lock.md
+          test -f docs/uiux/Desktop-V3-Flow.md
           test -f design-artifacts/scent-portrait-contract.json
           test -f design-artifacts/scent-portrait-skill-trace.json
+          test -f design-artifacts/desktop-v3-design-contract.json
           test -f scripts/desktop_visual_qa.mjs
           test -f scripts/scent_portrait_qa.mjs
+          test -f scripts/storefront_v3_qa.mjs
           test -f data.js
           test -f app.js
           test ! -e package.json
@@ -54,16 +61,20 @@ jobs:
           grep -q "Curated fragrance marketplace" index.html
           grep -q "Violet philosophy" index.html
           grep -q "finder.html" index.html
-          grep -q "Olfactive family" search.html
-          grep -q "note-pyramid" app.js
+          grep -q "Olfactive family" storefront-v3.js
           grep -q "category: 'floral'" data.js
           grep -q "category: 'woody'" data.js
           grep -q "category: 'amber'" data.js
           grep -q "desktop-luxury-v2.css" index.html
-          grep -q "desktop-luxury-v2.css" search.html
-          grep -q "desktop-luxury-v2.css" product.html
-          grep -q "desktop-luxury-v2.css" cart.html
-          grep -q "desktop-luxury-v2.css" checkout.html
+          grep -q "desktop-experience-v3.css" index.html
+          grep -q "desktop-experience-v3.css" search.html
+          grep -q "desktop-experience-v3.css" product.html
+          grep -q "desktop-experience-v3.css" cart.html
+          grep -q "desktop-experience-v3.css" checkout.html
+          grep -q "desktop-experience-v3.css" finder.html
+          grep -q "storefront-v3.js" index.html
+          grep -q "storefront-v3.js" search.html
+          grep -q "storefront-v3.js" product.html
 
       - name: Validate skill-grounded Scent Portrait contract
         run: |
@@ -75,6 +86,19 @@ jobs:
           grep -q 'visual_composition' design-artifacts/scent-portrait-contract.json
           grep -q 'browser_qa' design-artifacts/scent-portrait-contract.json
           grep -q 'visual_qa' design-artifacts/scent-portrait-contract.json
+
+      - name: Validate Desktop V3 Factory contract
+        run: |
+          grep -q 'asset-media-and-art-direction' docs/uiux/Desktop-V3-Flow.md
+          grep -q 'ecommerce-website' docs/uiux/Desktop-V3-Flow.md
+          grep -q 'visual-design-direction' docs/uiux/Desktop-V3-Flow.md
+          grep -q 'visual-taste-calibration' docs/uiux/Desktop-V3-Flow.md
+          grep -q 'ui-craft-and-visual-qa' docs/uiux/Desktop-V3-Flow.md
+          grep -q 'desktop_experience_v3' design-artifacts/desktop-v3-design-contract.json
+          grep -q 'try_first_and_full_bottle_actions' design-artifacts/desktop-v3-design-contract.json
+          grep -q 'rendered_evidence_required' design-artifacts/desktop-v3-design-contract.json
+          grep -q 'prototype rating' storefront-v3.js
+          grep -q 'do not process a real transaction' checkout.html
 
       - name: Validate UIUX operating profile
         run: |
