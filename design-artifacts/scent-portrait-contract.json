@@ -1,0 +1,56 @@
+{
+  "contract": "violet-scent-portrait-v1",
+  "mode": "interactive_prototype",
+  "goal": "Help fragrance shoppers reduce a broad catalogue to three explainable recommendations without requiring perfumery vocabulary.",
+  "project_truth": {
+    "brand": "Violet Parfumerie",
+    "domain": "curated niche fragrance marketplace",
+    "visual_signature": "warm violet consultation room: editorial serif scale, warm lilac/blush fields, aubergine ink, fine rules, large fragrance imagery and one quiet circular motif",
+    "constraint": "Keep familiar commerce controls predictable; distinctiveness belongs in composition, editorial rhythm and media treatment rather than novel control behavior."
+  },
+  "page_role_composition_matrix": [
+    {
+      "page_role": "discovery/consultation",
+      "user_question": "Which fragrance direction fits how I want to feel and be perceived?",
+      "owner_message": "Violet narrows choice through feeling and context, not marketplace overload.",
+      "first_visual_anchor": "two-pane consultation desk with an editorial Scent Portrait narrative",
+      "decision_object": "four reversible single-choice questions",
+      "primary_cta": "Continue / Reveal my Violet Edit",
+      "media_treatment": "4:5 brand-neutral perfume photography with restrained category tone",
+      "mobile_transformation": "story becomes an introduction block; decision workspace follows in reading order"
+    },
+    {
+      "page_role": "recommendation/result",
+      "user_question": "Why are these scents right for me and what should I try next?",
+      "owner_message": "Three scents, not thirty; recommendations are transparent and intentionally limited.",
+      "first_visual_anchor": "three large fragrance portraits",
+      "decision_object": "three ranked products with a why-it-fits explanation",
+      "primary_cta": "Explore fragrance",
+      "media_treatment": "consistent desaturated warm editorial treatment",
+      "mobile_transformation": "single-column result stories with preserved explanations"
+    }
+  ],
+  "interaction_contract": {
+    "states": ["question", "selection", "next", "back", "results", "restart"],
+    "persistence": "answers are preserved when moving backward during the current session",
+    "recovery": "back and restart never require page reload",
+    "recommendation_truth": "deterministic scoring over prototype product metadata; never represented as AI inference"
+  },
+  "factory_stage_owners": {
+    "ux_ia": ["question sequence", "decision model", "recovery/back behavior"],
+    "art_direction": ["consultation-room signature", "editorial rhythm", "image treatment"],
+    "design_system": ["option states", "progress rail", "result-card grammar"],
+    "visual_composition": ["desktop two-pane composition", "three-result reveal"],
+    "implementation": ["finder.html", "scent-portrait.css", "scent-portrait.js"],
+    "browser_qa": ["flow completion", "back-state preservation", "no runtime/overflow/broken-media failures"],
+    "visual_qa": ["rendered desktop initial/results inspection", "anti-template and signature review"]
+  },
+  "success_criteria": [
+    "Four meaningful questions and progress are visible and reversible.",
+    "Results contain exactly three ranked fragrances with an explicit why-it-fits explanation.",
+    "Desktop at 1440px has no horizontal overflow, console/page errors or broken visible images.",
+    "All option buttons expose selected state and keyboard-visible focus.",
+    "Without logo/header, the consultation/result screen still carries at least three independent Violet cues.",
+    "Visual QA uses actual rendered screenshots, not source assertions alone."
+  ]
+}
