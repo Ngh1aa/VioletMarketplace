@@ -1,0 +1,63 @@
+{
+  "artifact": "violet-scent-portrait-skill-trace-v1",
+  "source_repository": "Ngh1aa/skills_UIUX",
+  "skills": [
+    {
+      "id": "visual-design-direction",
+      "source": "visual-design-direction/SKILL.md",
+      "factory_stages": ["art_direction", "visual_composition"],
+      "principles_applied": [
+        "Define an implementable visual grammar rather than mood adjectives.",
+        "Trace composition to page role, user question, owner message and decision object.",
+        "Use one purposeful visual device and avoid repeated generic card/hero shells.",
+        "Treat image crop and media direction as design decisions."
+      ],
+      "applied_to": ["two-pane consultation composition", "result reveal", "warm violet media grammar", "page-role composition matrix"]
+    },
+    {
+      "id": "brand-distinctiveness-and-visual-signature",
+      "source": "brand-distinctiveness-and-visual-signature/SKILL.md",
+      "factory_stages": ["art_direction", "design_system", "visual_qa"],
+      "principles_applied": [
+        "Recognition must come from multiple repeatable cues, not logo plus primary color.",
+        "Keep interaction conventions familiar while making composition and expression ownable.",
+        "Test whether representative screens remain coherent with logo/header mentally removed."
+      ],
+      "applied_to": ["lilac-blush field behavior", "editorial serif rhythm", "fine-rule grammar", "circular motif", "consistent 4:5 image treatment"]
+    },
+    {
+      "id": "visual-taste-calibration",
+      "source": "visual-taste-calibration/SKILL.md",
+      "factory_stages": ["visual_qa", "repair"],
+      "principles_applied": [
+        "Challenge interchangeable template defaults after direction exists.",
+        "Concentrate boldness in one memorable commitment rather than many novelty devices.",
+        "Use KEEP / REVISE / REMOVE against rendered evidence."
+      ],
+      "applied_to": ["Scent Portrait as the primary memorable commitment", "anti-marketplace density", "restrained decoration"]
+    },
+    {
+      "id": "interaction-patterns-and-form-ux",
+      "source": "interaction-patterns-and-form-ux/SKILL.md",
+      "factory_stages": ["ux_ia", "implementation", "browser_qa"],
+      "principles_applied": [
+        "Every interaction defines what the user sees, does, receives and how they recover.",
+        "Multi-step flows should reduce cognitive load, show meaningful progress and preserve data on back.",
+        "Controls need explicit labels/states and keyboard-visible focus."
+      ],
+      "applied_to": ["four-step single-choice flow", "progress rail", "back-state preservation", "restart recovery", "aria-pressed selection state"]
+    },
+    {
+      "id": "ui-craft-and-visual-qa",
+      "source": "ui-craft-and-visual-qa/SKILL.md",
+      "factory_stages": ["browser_qa", "visual_qa", "repair"],
+      "principles_applied": [
+        "Source/build success is not visual QA; inspect actual rendered evidence.",
+        "Review macro hierarchy and anti-template composition before micro polish.",
+        "Treat broken focal media, overflow, invisible states and obvious visual sanity failures as blockers."
+      ],
+      "applied_to": ["Playwright desktop flow gate", "initial/results screenshots", "broken-image check", "focus/selection-state checks", "manual screenshot review before merge"]
+    }
+  ],
+  "reference_boundary": "External fragrance sites inform discovery/trial principles only. Violet does not copy their branded layouts, copy, imagery or identity assets."
+}
