@@ -1,0 +1,40 @@
+name: V4 Representative QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'search.html'
+      - 'product.html'
+      - 'discovery.html'
+      - 'desktop-experience-v4.css'
+      - 'storefront-v4.js'
+      - 'app.js'
+      - 'data.js'
+      - 'scripts/v4_representative_qa.mjs'
+      - '.github/workflows/v4-representative-qa.yml'
+      - 'docs/uiux/**'
+
+jobs:
+  representative-v4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run V4 representative rendered gates
+        run: node scripts/v4_representative_qa.mjs artifacts/v4-representative-qa
+      - name: Upload V4 representative evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-v4-representative-qa
+          path: artifacts/v4-representative-qa
+          retention-days: 14

@@ -6,7 +6,10 @@ on:
     paths:
       - 'finder.html'
       - 'scent-portrait.css'
+      - 'scent-media-direction.css'
       - 'scent-portrait.js'
+      - 'storefront-v4-rollout.js'
+      - 'desktop-experience-v4.css'
       - 'data.js'
       - 'app.js'
       - 'styles.css'

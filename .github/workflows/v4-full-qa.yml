@@ -1,0 +1,40 @@
+name: V4 Full QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '*.html'
+      - 'desktop-experience-v4*.css'
+      - 'storefront-v4*.js'
+      - 'scent-portrait.js'
+      - 'data.js'
+      - 'app.js'
+      - 'scripts/v4_full_qa.mjs'
+      - 'scripts/v4_ops_smoke.mjs'
+      - '.github/workflows/v4-full-qa.yml'
+      - 'docs/uiux/**'
+
+jobs:
+  v4-full:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run V4 full-site rendered gates
+        run: node scripts/v4_full_qa.mjs artifacts/v4-full-qa
+      - name: Smoke seller and admin operations routes
+        run: node scripts/v4_ops_smoke.mjs artifacts/v4-full-qa
+      - name: Upload V4 full-site evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-v4-full-qa
+          path: artifacts/v4-full-qa
+          retention-days: 14
