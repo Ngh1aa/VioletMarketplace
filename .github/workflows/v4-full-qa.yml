@@ -11,6 +11,7 @@ on:
       - 'data.js'
       - 'app.js'
       - 'scripts/v4_full_qa.mjs'
+      - 'scripts/v4_ops_smoke.mjs'
       - '.github/workflows/v4-full-qa.yml'
       - 'docs/uiux/**'
 
@@ -28,6 +29,8 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Run V4 full-site rendered gates
         run: node scripts/v4_full_qa.mjs artifacts/v4-full-qa
+      - name: Smoke seller and admin operations routes
+        run: node scripts/v4_ops_smoke.mjs artifacts/v4-full-qa
       - name: Upload V4 full-site evidence
         if: always()
         uses: actions/upload-artifact@v4
