@@ -1,0 +1,479 @@
+/* Violet Parfumerie — Desktop Luxury V2
+   Applies only to large desktop canvases. Tablet/mobile keep the existing
+   perfume-luxury.css behavior as a stable responsive baseline. */
+
+@media (min-width: 1024px) {
+  :root {
+    --desktop-max: 1400px;
+    --desktop-gutter: 56px;
+    --v2-aubergine: #3a2440;
+    --v2-plum: #65426c;
+    --v2-lilac: #d9bee2;
+    --v2-blush: #f0ddd7;
+    --v2-ivory: #fffaf7;
+    --v2-ink: #2c222e;
+  }
+
+  .container {
+    width: min(var(--desktop-max), calc(100% - var(--desktop-gutter) * 2));
+  }
+
+  /* Header: quiet boutique chrome instead of marketplace toolbar. */
+  .topbar-inner {
+    height: 30px;
+    font-size: 10px;
+  }
+
+  .site-header {
+    background: rgba(255, 250, 247, .965);
+    box-shadow: 0 1px 0 rgba(58, 36, 64, .05);
+  }
+
+  .header-main {
+    grid-template-columns: 260px minmax(340px, 620px) auto;
+    justify-content: space-between;
+    height: 94px;
+    gap: 42px;
+  }
+
+  .brand {
+    font-size: 35px;
+    letter-spacing: -.055em;
+  }
+
+  .brand small {
+    margin-left: 9px;
+    font-size: 8px;
+    letter-spacing: .22em;
+  }
+
+  .search-shell {
+    max-width: 620px;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .search-form input {
+    padding-block: 15px;
+  }
+
+  .header-actions {
+    gap: 14px;
+  }
+
+  .icon-link {
+    min-width: 50px;
+    height: 50px;
+  }
+
+  .nav-inner {
+    height: 50px;
+    gap: 42px;
+  }
+
+  /* Hero: warm pastel violet field, not a dark marketplace promo banner. */
+  .perfume-hero {
+    padding: 26px 0 14px;
+  }
+
+  .perfume-hero .hero-grid {
+    grid-template-columns: minmax(0, 1.72fr) minmax(330px, .66fr);
+    gap: 14px;
+  }
+
+  .perfume-hero .hero-main {
+    min-height: 690px;
+    padding: 78px 78px 70px;
+    justify-content: flex-end;
+    background:
+      linear-gradient(90deg,
+        rgba(255, 248, 250, .98) 0%,
+        rgba(246, 231, 244, .95) 39%,
+        rgba(226, 197, 226, .80) 58%,
+        rgba(174, 127, 174, .32) 76%,
+        rgba(68, 41, 73, .08) 100%),
+      url("https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1900&q=90") 76% 48% / cover no-repeat;
+    color: var(--v2-ink);
+  }
+
+  .perfume-hero .hero-main::before {
+    background:
+      radial-gradient(circle at 14% 18%, rgba(255,255,255,.72), transparent 22%),
+      linear-gradient(180deg, rgba(255,255,255,.10), rgba(71,40,77,.05));
+  }
+
+  .perfume-hero .hero-main::after {
+    width: 390px;
+    height: 390px;
+    right: 8%;
+    top: 10%;
+    border: 1px solid rgba(91, 57, 96, .14);
+  }
+
+  .perfume-hero .eyebrow {
+    color: #76547a;
+    opacity: 1;
+    font-size: 9px;
+    letter-spacing: .22em;
+  }
+
+  .perfume-hero h1 {
+    max-width: 780px;
+    margin: 20px 0 20px;
+    font-size: clamp(74px, 6.5vw, 104px);
+    line-height: .88;
+    color: #332337;
+  }
+
+  .perfume-hero h1 em {
+    color: #9a6ca1;
+  }
+
+  .perfume-hero p {
+    max-width: 580px;
+    color: #5f5060;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .perfume-hero .hero-actions {
+    margin-top: 32px;
+  }
+
+  .perfume-hero .btn-primary {
+    background: #38243d;
+    color: #fffaf7;
+  }
+
+  .perfume-hero .btn-secondary {
+    border-color: rgba(67, 42, 73, .24);
+    background: rgba(255,250,247,.55);
+    color: #4f3158;
+  }
+
+  .hero-notes {
+    margin-top: 42px;
+    color: #725f73;
+    font-size: 12px;
+  }
+
+  .hero-notes span + span::before {
+    color: #a17aa7;
+  }
+
+  .perfume-hero .hero-side {
+    grid-template-rows: 1.2fr .8fr;
+    gap: 14px;
+  }
+
+  .promo-card {
+    min-height: unset;
+    padding: 40px 38px;
+  }
+
+  .promo-card.editorial {
+    position: relative;
+    overflow: hidden;
+    justify-content: flex-end;
+    min-height: 420px;
+    border: 0;
+    background:
+      linear-gradient(180deg, rgba(55,31,59,.02) 0%, rgba(54,31,59,.08) 44%, rgba(42,24,45,.78) 100%),
+      url("https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=1100&q=88") center 58% / cover no-repeat;
+    color: #fffaf7;
+  }
+
+  .promo-card.editorial::after {
+    content: "VIOLET / 01";
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 8px;
+    letter-spacing: .18em;
+    color: rgba(255,255,255,.78);
+  }
+
+  .promo-card.editorial .eyebrow,
+  .promo-card.editorial small {
+    color: #f3e8f1;
+  }
+
+  .promo-card.editorial strong {
+    font-size: 43px;
+  }
+
+  .promo-card.dark {
+    min-height: 256px;
+    background:
+      radial-gradient(circle at 88% 10%, rgba(219,185,224,.20), transparent 26%),
+      linear-gradient(140deg, #2a192e 0%, #432849 58%, #68476d 100%);
+  }
+
+  /* Olfactive shortcuts become a fine navigation rail. */
+  .scent-shortcuts {
+    padding: 18px 0 36px;
+  }
+
+  .quick-item {
+    padding-block: 22px 20px;
+  }
+
+  /* Editorial rhythm: more air, fewer products per row. */
+  .section {
+    padding: 84px 0;
+  }
+
+  .section-head {
+    margin-bottom: 42px;
+  }
+
+  .section-head h2,
+  .scent-concierge h2 {
+    font-size: clamp(46px, 4.2vw, 66px);
+  }
+
+  .section-head p {
+    max-width: 620px;
+    font-size: 13px;
+  }
+
+  [data-new],
+  [data-houses],
+  [data-recommend],
+  .plp .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 52px 22px;
+  }
+
+  [data-new] .product-card:nth-child(n+4),
+  [data-houses] .product-card:nth-child(n+4),
+  [data-recommend] .product-card:nth-child(n+4) {
+    display: none;
+  }
+
+  .product-media {
+    aspect-ratio: 4 / 5.15;
+  }
+
+  .product-body {
+    padding-top: 18px;
+  }
+
+  .product-title {
+    font-size: 26px;
+  }
+
+  .product-scent-line,
+  .product-meta {
+    font-size: 10px;
+  }
+
+  .price-row {
+    margin-top: 15px;
+    padding-top: 13px;
+  }
+
+  /* The new editorial interlude breaks the repeated section/grid cadence. */
+  .violet-manifesto {
+    padding: 0 0 92px;
+  }
+
+  .violet-manifesto-inner {
+    display: grid;
+    grid-template-columns: .78fr 1.22fr;
+    min-height: 430px;
+    border-top: 1px solid #ddcfd9;
+    border-bottom: 1px solid #ddcfd9;
+  }
+
+  .manifesto-index {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 44px 48px 44px 0;
+    border-right: 1px solid #ddcfd9;
+  }
+
+  .manifesto-index strong {
+    max-width: 280px;
+    font-family: "Iowan Old Style", Georgia, serif;
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 1.08;
+  }
+
+  .manifesto-index span,
+  .manifesto-copy .manifesto-kicker {
+    font-size: 9px;
+    font-weight: 760;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #8d678a;
+  }
+
+  .manifesto-copy {
+    display: grid;
+    align-content: center;
+    padding: 54px 0 54px 76px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(204,171,215,.25), transparent 24%),
+      linear-gradient(120deg, #fffaf7 0%, #f7edf5 100%);
+  }
+
+  .manifesto-copy blockquote {
+    max-width: 760px;
+    margin: 18px 0 24px;
+    font-family: "Iowan Old Style", Georgia, serif;
+    font-size: clamp(42px, 4vw, 60px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -.04em;
+    color: #3d2b41;
+  }
+
+  .manifesto-copy p {
+    max-width: 590px;
+    margin: 0;
+    color: #746574;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* Olfactive family tiles read like a gallery index, not app cards. */
+  .category-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .category-card {
+    min-height: 190px;
+    padding: 34px 30px;
+  }
+
+  .category-card strong {
+    font-size: 27px;
+  }
+
+  /* Dark maison edit receives a stronger gallery silhouette. */
+  .perfume-house-edit {
+    padding: 64px 58px 70px;
+  }
+
+  .perfume-house-edit .section-head {
+    margin-bottom: 48px;
+  }
+
+  /* Scent concierge becomes a full-width closing statement. */
+  .scent-concierge {
+    min-height: 430px;
+    grid-template-columns: 1.25fr .75fr;
+    padding: 74px 78px;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(255,226,211,.28), transparent 22%),
+      radial-gradient(circle at 10% 90%, rgba(229,194,232,.22), transparent 30%),
+      linear-gradient(120deg, #4a2d51 0%, #735078 48%, #af7f9f 100%);
+  }
+
+  .scent-concierge h2 {
+    max-width: 760px;
+  }
+
+  /* PLP: three large columns and a calmer filter rail. */
+  .fragrance-library-hero {
+    max-width: 980px;
+    padding: 76px 0 42px;
+  }
+
+  .fragrance-library-hero h1 {
+    font-size: clamp(64px, 6vw, 90px);
+  }
+
+  .plp {
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 52px;
+  }
+
+  .filter-panel {
+    top: 188px;
+    padding-right: 28px;
+  }
+
+  .plp-top {
+    margin-bottom: 28px;
+  }
+
+  .sort {
+    min-width: 190px;
+  }
+
+  /* PDP: product image dominates like a fragrance campaign still. */
+  .product-detail {
+    grid-template-columns: minmax(0, 1.18fr) minmax(430px, .82fr);
+    gap: clamp(72px, 7vw, 118px);
+    padding: 62px 0 104px;
+  }
+
+  .perfume-detail-media {
+    top: 190px;
+    aspect-ratio: 4 / 4.85;
+  }
+
+  .detail-info {
+    padding-top: 34px;
+  }
+
+  .detail-info h1 {
+    font-size: clamp(66px, 5.4vw, 86px);
+  }
+
+  .detail-intro {
+    max-width: 560px;
+    font-size: 19px;
+  }
+
+  .note-pyramid {
+    margin-top: 32px;
+  }
+
+  .detail-actions .btn {
+    min-height: 56px;
+  }
+
+  .benefits {
+    margin-top: 22px;
+  }
+
+  /* Cart and checkout remain restrained but gain desktop breathing room. */
+  .cart-layout,
+  .checkout-layout {
+    grid-template-columns: minmax(0, 1fr) 410px;
+    gap: 54px;
+    padding-bottom: 92px;
+  }
+
+  .summary-card {
+    top: 188px;
+    padding: 28px;
+  }
+
+  .checkout-block {
+    padding: 28px;
+  }
+
+  .site-footer {
+    padding-top: 76px;
+  }
+
+  .footer-grid {
+    gap: 70px;
+  }
+}
+
+@media (min-width: 1480px) {
+  :root {
+    --desktop-gutter: 64px;
+  }
+
+  .perfume-hero .hero-main {
+    min-height: 730px;
+  }
+}
