@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.3.0",
+  "project": "Violet Parfumerie",
+  "phase": "desktop_experience_v3",
+  "mode": "interactive_prototype",
+  "responsive_scope": "desktop_only",
+  "primary_viewport": "1440x1000",
+  "skill_ref": "1a3c9ef2d72e6bd0d4a4fc79c885c59f98e41c33",
+  "goal": "Raise perceived quality of the complete Violet storefront so it reads as a curated niche-fragrance destination rather than a polished purple marketplace template while preserving commerce clarity and existing prototype behavior.",
+  "source_of_truth": [
+    ".uiux-profile.json",
+    "DESIGN-DIRECTION.md",
+    "docs/uiux/Operating-Profile.md",
+    "docs/uiux/Skill-Version-Lock.md",
+    "docs/uiux/Desktop-V3-Flow.md"
+  ],
+  "stage_owners": {
+    "project_context": ["preserve architecture", "desktop scope", "system reality"],
+    "ux_ia": ["PLP refinement", "PDP decision sequence", "try-first path"],
+    "art_direction": ["imagery system", "page-role compositions", "visual signature"],
+    "design_system": ["V3 media treatment", "editorial annotation grammar", "filter and PDP state patterns"],
+    "visual_composition": ["homepage", "library", "PDP", "Scent Portrait cross-page rhythm"],
+    "implementation": ["vanilla HTML/CSS/JS", "URL-persistent PLP filters", "truthful prototype CTAs"],
+    "browser_qa": ["overflow", "broken images", "errors", "filter state", "CTA behavior"],
+    "visual_qa": ["cross-page rendered review", "hierarchy", "brand recognition", "anti-template", "media consistency"]
+  },
+  "signature": {
+    "statement": "Warm violet editorial fields + fragrance-object photography + precise scent annotations make Violet recognizable without relying on its logo.",
+    "cues": [
+      "warm violet twilight fields",
+      "editorial scent indexing",
+      "4:5 fragrance-object media",
+      "serif scent language",
+      "fine-rule annotation grammar"
+    ]
+  },
+  "page_roles": {
+    "home": {
+      "question": "What kind of fragrance world is Violet?",
+      "first_anchor": "atmospheric hero plus editorial scent object",
+      "decision_object": "Scent Portrait and curated edit",
+      "primary_action": "Create Scent Portrait"
+    },
+    "library": {
+      "question": "How do I narrow to scents that fit me?",
+      "first_anchor": "active refinement rail plus fragrance gallery",
+      "decision_object": "filter state plus product card",
+      "primary_action": "Open fragrance"
+    },
+    "pdp": {
+      "question": "What does this smell like and should I commit?",
+      "first_anchor": "large product object plus scent character",
+      "decision_object": "scent profile plus try-first path",
+      "primary_action": "Try first or add full bottle"
+    },
+    "finder": {
+      "question": "What suits my instinct?",
+      "first_anchor": "consultation workspace",
+      "decision_object": "selected answers plus explainable shortlist",
+      "primary_action": "View fragrance"
+    },
+    "cart_checkout": {
+      "question": "Can I complete this confidently?",
+      "first_anchor": "order object and summary",
+      "decision_object": "quantity, delivery and total",
+      "primary_action": "Checkout / place order"
+    }
+  },
+  "media_contract": {
+    "catalog_ratio": "4:5",
+    "lighting": "soft side light with warm highlight and violet cast",
+    "background": "quiet stone, silk, translucent glass or tonal field",
+    "avoid": ["neon purple", "unrelated real-brand logos", "mixed casual stock style", "heavy fake-gold cues"],
+    "truth_boundary": "Remote prototype photography is representative imagery, not a final licensed campaign asset set."
+  },
+  "pdp_sequence": [
+    "identity",
+    "scent_character",
+    "price_and_availability",
+    "try_first_and_full_bottle_actions",
+    "olfactive_profile",
+    "note_architecture",
+    "violet_curation_and_provenance",
+    "wearing_ritual",
+    "reasoned_related_scents"
+  ],
+  "plp_filters": ["family", "mood", "presence", "concentration", "curated_house"],
+  "gates": {
+    "rendered_evidence_required": true,
+    "creative_director_inspection_required": true,
+    "max_blocking_issues": 0,
+    "target_visual_score": 94,
+    "no_fake_ai_or_production_claims": true
+  }
+}
