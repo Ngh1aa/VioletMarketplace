@@ -22,14 +22,32 @@ async function waitForServer(){
 }
 
 async function settle(page){
+  // Full-page evidence must represent loaded media, not a synthetic fast-scroll
+  // state. Force lazy images to load for the capture only; runtime behavior is
+  // unchanged. A failed media load is a gate failure rather than a blank card.
+  await page.evaluate(() => {
+    document.querySelectorAll('img[loading="lazy"]').forEach(image => {
+      image.loading = 'eager';
+    });
+  });
   await page.evaluate(async () => {
     const height = document.documentElement.scrollHeight;
     const step = Math.max(500, Math.floor(innerHeight * .72));
-    for(let y = 0; y < height; y += step){ scrollTo(0,y); await new Promise(r => setTimeout(r,75)); }
+    for(let y = 0; y < height; y += step){
+      scrollTo(0,y);
+      await new Promise(r => setTimeout(r,120));
+    }
     scrollTo(0,0);
   });
-  await page.waitForTimeout(220);
-  await page.waitForFunction(() => [...document.images].every(image => image.complete), null, { timeout:15000 }).catch(() => {});
+  await page.waitForFunction(
+    () => [...document.images].every(image => image.complete && image.naturalWidth > 0),
+    null,
+    { timeout:30000 },
+  );
+  await page.evaluate(async () => {
+    await Promise.all([...document.images].map(image => image.decode?.().catch(() => undefined)));
+  });
+  await page.waitForTimeout(180);
 }
 
 function pushIssue(report, page, severity, code, message){ report.issues.push({ page, severity, code, message }); }
@@ -79,6 +97,7 @@ for(const spec of specs){
     const gridColumns = grid ? getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length : 0;
     const detail = document.querySelector('.pdp-v3');
     const brokenImages = [...document.images].filter(image => visible(image) && image.complete && image.naturalWidth === 0).map(image => image.currentSrc || image.src).slice(0,8);
+    const incompleteImages = [...document.images].filter(image => visible(image) && (!image.complete || image.naturalWidth === 0)).map(image => image.currentSrc || image.src).slice(0,8);
     const v3SheetLoaded = [...document.styleSheets].some(sheet => String(sheet.href || '').includes('desktop-experience-v3.css'));
     return {
       kind,
@@ -87,6 +106,7 @@ for(const spec of specs){
       navVisible:visible(document.querySelector('.nav-inner')),
       v3SheetLoaded,
       brokenImages,
+      incompleteImages,
       editorialBridgeVisible:visible(document.querySelector('.v3-editorial-bridge')),
       heroHeight:Math.round(document.querySelector('.perfume-hero .hero-main')?.getBoundingClientRect().height || 0),
       filterVisible:visible(document.querySelector('.filter-panel')),
@@ -108,6 +128,7 @@ for(const spec of specs){
   if(consoleErrors.length) pushIssue(report,spec.name,'P0','console-error',consoleErrors.join(' | '));
   if(pageErrors.length) pushIssue(report,spec.name,'P0','page-error',pageErrors.join(' | '));
   if(metrics.brokenImages.length) pushIssue(report,spec.name,'P0','broken-image',metrics.brokenImages.join(' | '));
+  if(metrics.incompleteImages.length) pushIssue(report,spec.name,'P0','incomplete-image',metrics.incompleteImages.join(' | '));
   if(metrics.scrollWidth > metrics.clientWidth + 2) pushIssue(report,spec.name,'P0','horizontal-overflow',`${metrics.scrollWidth}px > ${metrics.clientWidth}px`);
   if(metrics.h1Count !== 1) pushIssue(report,spec.name,'P1','heading-structure',`Expected one h1, found ${metrics.h1Count}`);
   if(!metrics.navVisible) pushIssue(report,spec.name,'P1','desktop-navigation','Desktop navigation is not visible.');
