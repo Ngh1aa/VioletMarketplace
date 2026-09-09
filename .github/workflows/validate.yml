@@ -19,10 +19,12 @@ jobs:
           node --check storefront-v3.js
           node --check storefront-v4.js
           node --check storefront-v4-rollout.js
+          node --check pdp-v4-1.js
           node --check scripts/desktop_visual_qa.mjs
           node --check scripts/scent_portrait_qa.mjs
           node --check scripts/storefront_v3_qa.mjs
           node --check scripts/v4_representative_qa.mjs
+          node --check scripts/pdp_v4_1_qa.mjs
 
       - name: Validate required static files
         run: |
@@ -44,6 +46,8 @@ jobs:
           test -f desktop-experience-v3.css
           test -f desktop-experience-v4.css
           test -f desktop-experience-v4-rollout.css
+          test -f pdp-v4-1.css
+          test -f pdp-v4-1.js
           test -f scent-portrait.css
           test -f scent-portrait.js
           test -f storefront-v3.js
@@ -71,7 +75,11 @@ jobs:
           test -f design-artifacts/scent-portrait-contract.json
           test -f design-artifacts/scent-portrait-skill-trace.json
           test -f design-artifacts/desktop-v3-design-contract.json
+          test -f design-artifacts/pdp-v4-1-audit-and-benchmark.md
+          test -f design-artifacts/pdp-v4-1-design-contract.json
+          test -f design-artifacts/pdp-v4-1-skill-trace.json
           test -f scripts/v4_representative_qa.mjs
+          test -f scripts/pdp_v4_1_qa.mjs
           test ! -e package.json
           test ! -e tsconfig.json
 
@@ -108,6 +116,18 @@ jobs:
           ! grep -q "desktop-experience-v3.css" product.html
           ! grep -q "Violet philosophy" index.html
 
+      - name: Validate PDP V4.1 media-dominant contract
+        run: |
+          grep -q 'pdp-v4-1.css' product.html
+          grep -q 'pdp-v4-1.js' product.html
+          grep -q 'media_share_target": 0.7' design-artifacts/pdp-v4-1-design-contract.json
+          grep -q 'minimum_media_roles": 4' design-artifacts/pdp-v4-1-design-contract.json
+          grep -q 'scroll_states' design-artifacts/pdp-v4-1-design-contract.json
+          grep -q 'data-pdp-media-role' pdp-v4-1.js
+          grep -q 'Add to discovery trio' pdp-v4-1.js
+          grep -q 'Build a trio of 3 scents to compare' pdp-v4-1.js
+          ! grep -q 'in prototype inventory' pdp-v4-1.js
+
       - name: Validate Prompt OS Phase 1 contract
         run: |
           grep -q 'PHASE 1 RESULT = PASSED' docs/uiux/Phase-1-Handoff.md
@@ -117,7 +137,7 @@ jobs:
           grep -q 'Home + PLP + PDP + Discovery' docs/uiux/Phase-State.md
           grep -q 'visibly and behaviorally structural' docs/uiux/Redesign-Delta-Contract.md
           grep -q 'N/A_JUSTIFIED' docs/uiux/Design-Intelligence-Decision-Log.md
-          grep -q '1a3c9ef2d72e6bd0d4a4fc79c885c59f98e41c33' docs/uiux/Skill-Version-Lock.md
+          grep -q 'e8ed8c9212d20edb2cf4c8c0881fff34add7076e' docs/uiux/Skill-Version-Lock.md
 
       - name: Preserve previous grounded contracts
         run: |
@@ -131,7 +151,7 @@ jobs:
       - name: Validate UIUX operating profile
         run: |
           node -e "const p=require('./.uiux-profile.json'); if(p.project.mode!=='interactive_prototype') process.exit(1); if(p.constraints.responsive_scope!=='desktop_only') process.exit(1); if(p.constraints.skill_routing!=='smallest_applicable_graph') process.exit(1);"
-          grep -q '1a3c9ef2d72e6bd0d4a4fc79c885c59f98e41c33' docs/uiux/Skill-Version-Lock.md
+          grep -q 'e8ed8c9212d20edb2cf4c8c0881fff34add7076e' docs/uiux/Skill-Version-Lock.md
           grep -q 'rendered evidence + automated sanity gates + Creative Director screenshot inspection' .uiux-profile.json
           grep -q 'Factory and routed skills own repeatable process and verification' .uiux-profile.json
           grep -q 'Installed does not mean active' docs/uiux/Skill-Version-Lock.md
