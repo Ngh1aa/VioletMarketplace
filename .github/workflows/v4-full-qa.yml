@@ -6,6 +6,8 @@ on:
     paths:
       - '*.html'
       - 'desktop-experience-v4*.css'
+      - 'pdp-v4-1.css'
+      - 'pdp-v4-1.js'
       - 'storefront-v4*.js'
       - 'scent-portrait.js'
       - 'data.js'
@@ -14,6 +16,7 @@ on:
       - 'scripts/v4_ops_smoke.mjs'
       - '.github/workflows/v4-full-qa.yml'
       - 'docs/uiux/**'
+      - 'design-artifacts/pdp-v4-1-*'
 
 jobs:
   v4-full:
@@ -25,6 +28,12 @@ jobs:
           node-version: '22'
       - name: Install Playwright
         run: |
+          sudo sed -i '\|dl.google.com/linux/chrome|d' /etc/apt/sources.list 2>/dev/null || true
+          for source in /etc/apt/sources.list.d/*; do
+            if [ -f "$source" ] && grep -q 'dl.google.com/linux/chrome' "$source"; then
+              sudo rm -f "$source"
+            fi
+          done
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
       - name: Run V4 full-site rendered gates
