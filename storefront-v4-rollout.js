@@ -56,7 +56,9 @@
     if(!stage) return;
     const sync = () => {
       const action = stage.querySelector('.portrait-discovery a');
-      if(action){ action.href='discovery.html'; action.textContent='Build a trial trio'; }
+      if(!action) return;
+      if(action.getAttribute('href') !== 'discovery.html') action.setAttribute('href','discovery.html');
+      if(action.textContent !== 'Build a trial trio') action.textContent='Build a trial trio';
     };
     sync();
     new MutationObserver(sync).observe(stage,{childList:true,subtree:true});
