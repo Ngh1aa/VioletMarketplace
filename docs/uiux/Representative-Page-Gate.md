@@ -1,6 +1,6 @@
 # Representative Page Gate — Violet V4
 
-Status: `IN_PROGRESS`
+Status: `PASSED`
 
 ## Selected pages and rationale
 
@@ -15,17 +15,25 @@ These four cover the highest-risk composition and journey changes before Houses/
 
 OLD = V3 artifact `10108103705`, 1440 full-page with 1280/1600 pressure evidence.
 
-## PASS conditions
+## Evidence
 
-- visible structural delta, not reskin;
-- four first-screen silhouettes are materially distinct;
+- final representative workflow run: `34380767621`
+- final representative artifact: `10115770893`
+- head verified: `e238b8799288a1115cd383553f40e839a6b10abf`
+- automated result: PASS, zero P0/P1
+- manual visual review: PASS
+
+## Gate findings
+
+- visible structural delta is materially beyond a reskin;
+- Home, PLP, PDP and Discovery use distinct first-screen silhouettes;
 - task-led navigation works;
 - Home removes/merges V3 explanatory repetition;
-- PLP filter state + recovery remain working;
-- PDP price/size/sample/full bottle are a clear buying desk;
-- Discovery sample selection is truthful local/simulated state;
-- media safe-zone and load checks pass;
-- no horizontal overflow, console/page error or P0/P1 craft defect at declared desktop widths;
-- NEW screenshots manually inspected.
+- PLP filter state and recovery remain working;
+- the PLP editorial interruption was revised after manual review so the remaining catalogue no longer ends with an accidental orphan card;
+- PDP price/size/sample/full bottle form a clear buying desk;
+- Discovery sample selection remains truthful local/simulated state;
+- media load and crop sanity pass;
+- no horizontal overflow, console/page errors, broken focal media or P0/P1 craft defects at declared desktop widths.
 
-Result remains pending until implementation and rendered evidence exist.
+Result: `PASSED`. Whole-site rollout was authorized only after this gate passed.
