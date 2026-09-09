@@ -29,10 +29,48 @@ jobs:
         with:
           enablement: true
 
+      - name: Prepare cache-busted static site
+        env:
+          CACHE_VERSION: ${{ github.sha }}
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          rsync -a \
+            --exclude='.git' \
+            --exclude='_site' \
+            --exclude='node_modules' \
+            ./ _site/
+          touch _site/.nojekyll
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+
+          site = Path('_site')
+          version = os.environ['CACHE_VERSION'][:12]
+          assets = [
+              'styles.css',
+              'perfume-luxury.css',
+              'desktop-luxury-v2.css',
+              'desktop-experience-v3.css',
+              'scent-portrait.css',
+              'scent-media-direction.css',
+              'data.js',
+              'app.js',
+              'storefront-v3.js',
+              'scent-portrait.js',
+          ]
+
+          for html in site.rglob('*.html'):
+              text = html.read_text(encoding='utf-8')
+              for asset in assets:
+                  text = text.replace(f'{asset}"', f'{asset}?v={version}"')
+              html.write_text(text, encoding='utf-8')
+          PY
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
