@@ -15,6 +15,7 @@ jobs:
         run: |
           node --check data.js
           node --check app.js
+          node --check scripts/desktop_visual_qa.mjs
 
       - name: Validate required static files
         run: |
@@ -28,7 +29,9 @@ jobs:
           test -f admin.html
           test -f styles.css
           test -f perfume-luxury.css
+          test -f desktop-luxury-v2.css
           test -f DESIGN-DIRECTION.md
+          test -f scripts/desktop_visual_qa.mjs
           test -f data.js
           test -f app.js
           test ! -e package.json
@@ -38,10 +41,14 @@ jobs:
         run: |
           grep -q "Violet Parfumerie" index.html
           grep -q "Curated fragrance marketplace" index.html
+          grep -q "Violet philosophy" index.html
           grep -q "Olfactive family" search.html
           grep -q "note-pyramid" app.js
           grep -q "category: 'floral'" data.js
           grep -q "category: 'woody'" data.js
           grep -q "category: 'amber'" data.js
-          grep -q "perfume-luxury.css" index.html
-          grep -q "perfume-luxury.css" product.html
+          grep -q "desktop-luxury-v2.css" index.html
+          grep -q "desktop-luxury-v2.css" search.html
+          grep -q "desktop-luxury-v2.css" product.html
+          grep -q "desktop-luxury-v2.css" cart.html
+          grep -q "desktop-luxury-v2.css" checkout.html
