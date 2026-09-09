@@ -17,8 +17,28 @@
 
 ## Phase 2 — Implementation
 
-- result: `IN_PROGRESS`
+- result: `PASSED`
 - representative gate: Home + PLP + PDP + Discovery
-- whole-site rollout: NOT AUTHORIZED BY GATE YET
+- representative rendered run: `34380767621`
+- representative artifact: `10115770893`
+- whole-site buyer rollout: complete
+- primary buyer routes implemented/inspected: Home, Library, PDP, Discovery, Houses, House detail, Scent Portrait, Bag, Checkout, Confirmation
 
-Phase 2 must not be marked PASSED until representative pages pass first and all primary buyer routes in scope are implemented/inspected.
+## Phase 3 — Final QA & Remediation
+
+- result: `PASSED`
+- full rendered run: `34380767592`
+- full rendered artifact: `10115777267`
+- automated score: `100/100`
+- P0: 0
+- P1: 0
+- Seller/Admin ops smoke: `PASSED`
+- Scent Portrait regression: `PASSED`
+- Creative Director visual veto: `KEEP`
+
+## Phase 4 — Release & Production Smoke
+
+- result: `PENDING_RELEASE`
+- next action: merge PR #9, wait for GitHub Pages deployment of the merge commit, then verify the production URL and representative buyer routes.
+
+Phase 4 must not be marked PASSED until the exact merged/deployed version is verified on production.
