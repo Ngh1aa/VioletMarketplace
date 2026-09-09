@@ -1,0 +1,40 @@
+name: Scent Portrait QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'finder.html'
+      - 'scent-portrait.css'
+      - 'scent-portrait.js'
+      - 'data.js'
+      - 'app.js'
+      - 'styles.css'
+      - 'perfume-luxury.css'
+      - 'desktop-luxury-v2.css'
+      - 'design-artifacts/**'
+      - 'scripts/scent_portrait_qa.mjs'
+      - '.github/workflows/scent-portrait-qa.yml'
+
+jobs:
+  rendered-flow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run skill-grounded Scent Portrait QA
+        run: node scripts/scent_portrait_qa.mjs artifacts/scent-portrait-qa
+      - name: Upload rendered evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-scent-portrait-qa
+          path: artifacts/scent-portrait-qa/
+          if-no-files-found: error
+          retention-days: 14
