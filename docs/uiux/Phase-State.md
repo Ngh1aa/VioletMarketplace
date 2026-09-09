@@ -11,16 +11,14 @@
 ## Phase 1 — Research & Design Contract
 
 - result: `PASSED`
-- due-now BLOCKED: 0
-- due-now UNACCOUNTED: 0
-- DONE_VERIFIED: 14
-- N/A_JUSTIFIED: 3
-- PENDING_FUTURE_PHASE: 5
+- handoff commit: `b9adf5e5c2e080104996fde45d34b4d554e25f90`
+- BLOCKED: 0
+- UNACCOUNTED: 0
 
-## Next owner
+## Phase 2 — Implementation
 
-Phase 2 — Implementation.
+- result: `IN_PROGRESS`
+- representative gate: Home + PLP + PDP + Discovery
+- whole-site rollout: NOT AUTHORIZED BY GATE YET
 
-Representative gate: Home + PLP + PDP + Discovery before whole-site rollout.
-
-This file is the durable phase-status source of truth; downstream work must not rely on chat history alone.
+Phase 2 must not be marked PASSED until representative pages pass first and all primary buyer routes in scope are implemented/inspected.
