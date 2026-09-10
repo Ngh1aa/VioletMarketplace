@@ -18,8 +18,8 @@ body.violet-v4 .cart-link{position:relative!important;width:auto;min-width:96px;
 body.violet-v4 .cart-count{position:static!important;inset:auto!important;transform:none!important;flex:0 0 20px;min-width:20px;height:20px;margin:0;border-radius:50%;font-size:8px}
 body.violet-v4 .nav-inner{min-height:38px}
 
-/* VS-02 — filter sticky offset follows the actual sticky header, never dead air. */
-.v4-filter-rail{top:122px;max-height:calc(100vh - 138px);scrollbar-gutter:stable}
+/* VS-02 — filter sticky offset follows the rendered sticky header, never dead air. */
+.v4-filter-rail{top:148px;max-height:calc(100vh - 164px);scrollbar-gutter:stable}
 
 /* VS-03 — a sticky buying desk used to overlap the full-width story below it.
    Until the PDP top section gets its own containment wrapper, keep the desk in flow. */
@@ -62,7 +62,6 @@ body.violet-v4 :where(button,.btn,input,select,a):focus-visible{outline:2px soli
 @media (max-width:1320px) and (min-width:1024px){
   body.violet-v4 .header-main{grid-template-columns:190px minmax(320px,1fr) auto;gap:20px}
   body.violet-v4 .search-shell{width:min(620px,100%)}
-  .v4-filter-rail{top:120px}
   .v4-houses-note{grid-template-columns:100px minmax(0,1fr) 280px;gap:24px}
   .v4-houses-note h2{font-size:30px}
 }
