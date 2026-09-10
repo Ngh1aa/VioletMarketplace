@@ -1,0 +1,79 @@
+/*
+  Violet Visual Safety V5
+  Regression guardrails derived from rendered UI failures seen on 2026-09-10.
+  This layer is deliberately boring: layout safety beats decorative cleverness.
+*/
+
+/* VS-01 — the generated header wrapper must not trap the sticky header. */
+[data-site-header]{display:contents}
+body.violet-v4 .site-header{position:sticky;top:0;z-index:80}
+body.violet-v4 .header-main{grid-template-columns:minmax(190px,240px) minmax(360px,1fr) auto;gap:28px;min-height:72px}
+body.violet-v4 .search-shell{width:min(720px,100%)}
+body.violet-v4 .search-form{grid-template-columns:minmax(0,1fr) 72px;min-height:42px;border:1px solid var(--violet-rule);background:var(--violet-ivory)}
+body.violet-v4 .search-form input{min-width:0;height:42px;padding:0 13px}
+body.violet-v4 .search-form button{min-width:72px;height:42px;padding:0 12px;border-left:1px solid var(--violet-rule);font-weight:750;cursor:pointer}
+body.violet-v4 .search-form button:hover{background:var(--violet-aubergine);color:#fff}
+body.violet-v4 .header-actions>.icon-link:not(.cart-link){display:none}
+body.violet-v4 .cart-link{position:relative!important;width:auto;min-width:96px;height:42px;border-radius:0;padding:0 12px;justify-content:space-between}
+body.violet-v4 .cart-count{position:static!important;inset:auto!important;transform:none!important;flex:0 0 20px;min-width:20px;height:20px;margin:0;border-radius:50%;font-size:8px}
+body.violet-v4 .nav-inner{min-height:38px}
+
+/* VS-02 — filter sticky offset follows the actual sticky header, never dead air. */
+.v4-filter-rail{top:122px;max-height:calc(100vh - 138px);scrollbar-gutter:stable}
+
+/* VS-03 — a sticky buying desk used to overlap the full-width story below it.
+   Until the PDP top section gets its own containment wrapper, keep the desk in flow. */
+.v4-pdp,.v4-pdp>*{min-width:0}
+.v4-buying-desk{position:relative;top:auto;align-self:start;min-height:0;overflow-wrap:break-word}
+.v4-buying-desk h1{font-size:clamp(42px,3.4vw,58px);line-height:.94;overflow-wrap:break-word}
+.v4-pdp-character{max-width:100%}
+.v4-pdp-story{position:relative;z-index:1;background:var(--violet-paper)}
+
+/* VS-04 — migrated sections must never fall back to browser-default typography. */
+.v4-houses-note{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(260px,360px);gap:32px;align-items:center;min-height:0;margin-top:54px;padding:28px 0;border-top:1px solid var(--violet-ink);border-bottom:1px solid var(--violet-rule)}
+.v4-houses-note>span{align-self:start;padding-top:5px;color:var(--violet-aubergine);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.v4-houses-note h2{margin:0 0 10px;font-family:var(--violet-serif);font-size:34px;line-height:1.02;letter-spacing:-.035em;font-weight:400}
+.v4-houses-note p{max-width:760px;margin:0;color:var(--violet-muted);font-size:10px;line-height:1.7}
+.v4-houses-note::after{content:"";display:block;width:100%;height:178px;background:linear-gradient(rgba(32,25,31,.07),rgba(32,25,31,.07)),url("https://images.pexels.com/photos/7828507/pexels-photo-7828507.jpeg?auto=compress&cs=tinysrgb&w=1200") center/cover no-repeat;filter:saturate(.72) contrast(.96)}
+
+/* VS-05 — empty states should explain the next action, not reserve half a viewport. */
+.v4-discovery-workspace{min-height:0;align-items:stretch}
+.v4-discovery-guide{padding:34px 36px 34px 0}
+.v4-discovery-guide h2{margin:36px 0 20px;font-size:34px;line-height:1.04}
+.v4-trio-panel{padding:34px 0 34px 38px}
+.v4-trio-empty{min-height:148px;padding:26px 0;justify-content:center}
+.v4-trio-empty strong{font-size:25px}
+.v4-trio-state{padding-top:10px}
+
+/* VS-06 — consultation questions need visual counterweight and safer line lengths. */
+@media (min-width:1024px){
+  body.violet-v4 .portrait-question{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(230px,.52fr);column-gap:30px;align-items:start;padding-top:38px}
+  body.violet-v4 .portrait-question::after{content:"";grid-column:2;grid-row:1/4;display:block;min-height:190px;background:linear-gradient(rgba(52,35,56,.05),rgba(52,35,56,.05)),url("https://images.pexels.com/photos/16296816/pexels-photo-16296816.jpeg?auto=compress&cs=tinysrgb&w=1000") center/cover no-repeat;filter:saturate(.68) contrast(.96)}
+  body.violet-v4 .portrait-question>.question-kicker,body.violet-v4 .portrait-question>h2,body.violet-v4 .portrait-question>p{grid-column:1}
+  body.violet-v4 .portrait-question>h2{max-width:620px;font-size:clamp(36px,2.65vw,48px);line-height:1.03}
+  body.violet-v4 .portrait-question>.portrait-options,body.violet-v4 .portrait-question>.portrait-nav{grid-column:1/-1}
+}
+
+/* Shared defensive constraints. */
+body.violet-v4 :where(.v4-plp-results,.v4-pdp-media,.v4-buying-desk,.portrait-workspace,.v4-house-copy,.v4-house-feature){min-width:0}
+body.violet-v4 :where(h1,h2,h3,p,strong,button,a){overflow-wrap:break-word}
+body.violet-v4 :where(button,.btn,input,select,a):focus-visible{outline:2px solid var(--violet-accent);outline-offset:3px}
+
+@media (max-width:1320px) and (min-width:1024px){
+  body.violet-v4 .header-main{grid-template-columns:190px minmax(320px,1fr) auto;gap:20px}
+  body.violet-v4 .search-shell{width:min(620px,100%)}
+  .v4-filter-rail{top:120px}
+  .v4-houses-note{grid-template-columns:100px minmax(0,1fr) 280px;gap:24px}
+  .v4-houses-note h2{font-size:30px}
+}
+
+@media (max-width:1023px){
+  [data-site-header]{display:block}
+  body.violet-v4 .site-header{position:relative;top:auto}
+  body.violet-v4 .header-main{grid-template-columns:1fr auto;gap:16px}
+  body.violet-v4 .search-shell{width:100%}
+  .v4-filter-rail{top:auto;max-height:none}
+  .v4-houses-note{grid-template-columns:1fr;gap:18px;padding:24px 0}
+  .v4-houses-note::after{height:240px;grid-row:2}
+  .v4-discovery-guide,.v4-trio-panel{padding:28px 0}
+}
