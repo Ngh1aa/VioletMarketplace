@@ -96,10 +96,18 @@ for (const width of report.viewportWidths) {
   const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, colorScheme: 'light' });
 
   // Header + filter: catches the old sticky-parent trap and dead offset above the rail.
+  // Scroll from the filter's document position rather than a magic scrollY: a sticky element
+  // should be judged only after its natural position has crossed the sticky threshold.
   {
     const page = await context.newPage();
     await page.goto(`${base}/search.html?sample=1`, { waitUntil: 'networkidle' });
-    await page.evaluate(() => scrollTo(0, 900));
+    const scrollPlan = await page.evaluate(() => {
+      const filter = document.querySelector('.v4-filter-rail');
+      const filterDocumentTop = filter ? filter.getBoundingClientRect().top + scrollY : 0;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+      return { filterDocumentTop, targetScroll: Math.min(filterDocumentTop + 220, Math.max(0, maxScroll - 220)) };
+    });
+    await page.evaluate(y => scrollTo(0, y), scrollPlan.targetScroll);
     await page.waitForTimeout(120);
     const data = await page.evaluate(() => {
       const header = document.querySelector('.site-header')?.getBoundingClientRect();
@@ -116,8 +124,9 @@ for (const width of report.viewportWidths) {
         }).length
       };
     });
+    data.scrollPlan = scrollPlan;
     if (!data.header || Math.abs(data.header.top) > 2) fail('sticky-header', `${width}px: header must remain pinned after scroll`, data);
-    if (!data.filter || !data.header || data.filter.top < data.header.bottom - 2 || data.filter.top - data.header.bottom > 24) fail('filter-dead-offset', `${width}px: filter rail must sit directly below sticky header`, data);
+    if (!data.filter || !data.header || data.filter.top < data.header.bottom - 2 || data.filter.top - data.header.bottom > 24) fail('filter-dead-offset', `${width}px: sticky filter rail must sit directly below the rendered header`, data);
     if (!data.searchButton || data.searchButton.width < 64 || data.searchButton.height < 40) fail('undersized-search-action', `${width}px: search submit control is too small`, data.searchButton);
     if (data.cartCountPosition !== 'static') fail('floating-cart-badge', `${width}px: bag count must participate in layout`, data);
     if (data.visibleMysteryActions !== 0) fail('mystery-header-action', `${width}px: cryptic buyer-header action remains visible`, data);
@@ -127,7 +136,7 @@ for (const width of report.viewportWidths) {
     await page.close();
   }
 
-  // PDP: explicitly test the old sticky buying-desk / story collision while scrolling.
+  // PDP: explicitly test the old buying-desk / story collision while scrolling.
   {
     const page = await context.newPage();
     await page.goto(`${base}/product.html?id=violette-03`, { waitUntil: 'networkidle' });
