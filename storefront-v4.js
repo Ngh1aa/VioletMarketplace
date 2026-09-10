@@ -28,15 +28,18 @@
     'signature-gift-trio': { mood:['explore','gift'], presence:'varied', character:'Three travel directions across floral light, amber warmth and quiet woods.', wear:'gifting · travel', sample:false }
   };
 
+  /* Supporting imagery is intentionally botanical / tactile rather than photographs of
+     unrelated branded perfume bottles. These images communicate ingredients, material
+     and atmosphere; the catalogue image remains the only product-object source. */
   const EDITORIAL_MEDIA = [
-    'https://images.pexels.com/photos/12053222/pexels-photo-12053222.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/11678213/pexels-photo-11678213.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/4735894/pexels-photo-4735894.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/6947683/pexels-photo-6947683.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/7814535/pexels-photo-7814535.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/20766085/pexels-photo-20766085.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/11482448/pexels-photo-11482448.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/6958875/pexels-photo-6958875.jpeg?auto=compress&cs=tinysrgb&w=1600'
+    'https://images.pexels.com/photos/16296816/pexels-photo-16296816.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/7828507/pexels-photo-7828507.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/34330514/pexels-photo-34330514.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/7232409/pexels-photo-7232409.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/37048236/pexels-photo-37048236.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/1261173/pexels-photo-1261173.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/3817638/pexels-photo-3817638.jpeg?auto=compress&cs=tinysrgb&w=1600',
+    'https://images.pexels.com/photos/30618181/pexels-photo-30618181.jpeg?auto=compress&cs=tinysrgb&w=1600'
   ];
 
   const moodLabels = { clean:'Clean / lucid', intimate:'Intimate / skin', soft:'Soft / powdery', warm:'Warm / enveloping', luminous:'Luminous / bright', contemplative:'Contemplative', mysterious:'Mysterious / shadowed', explore:'Discovery', gift:'Giftable' };
@@ -65,7 +68,7 @@
   function v4Card(product, extra=''){
     const meta=metaFor(product); const house=houseFor(product); const media=mediaFor(product);
     return `<article class="v4-object-card"><a class="v4-object-link" href="product.html?id=${encodeURIComponent(product.id)}">
-      <div class="v4-object-media"><img src="${media[0]}" alt="${product.name} by ${product.brand}" loading="lazy"><img class="v5-card-image--alt" src="${media[1]}" alt="Editorial fragrance study for ${product.name}" loading="lazy">${meta.sample?'<span class="v5-card-badge">Try first</span>':''}</div>
+      <div class="v4-object-media"><img src="${media[0]}" alt="${product.name} by ${product.brand}" loading="lazy"><img class="v5-card-image--alt" src="${media[1]}" alt="Editorial material study for ${product.name}" loading="lazy">${meta.sample?'<span class="v5-card-badge">Try first</span>':''}</div>
       <div class="v4-object-index"><span>${house ? house.origin : 'Violet edit'}</span><span>${product.family || ''}</span></div>
       <div class="v4-object-heading"><span>${product.brand}</span><h3>${product.name}</h3></div>
       <div class="v4-object-meta"><span>${product.concentration || ''}${product.size ? ` · ${product.size}` : ''}</span><strong>${money(product.price)}</strong></div>
@@ -88,7 +91,7 @@
     const feature=document.querySelector('[data-v4-feature]'); if(!feature) return;
     const product=byId('violette-03') || DATA.products[0]; const meta=metaFor(product); const house=houseFor(product); const media=mediaFor(product);
     feature.innerHTML=`<div class="v4-feature-copy"><div class="v4-section-label"><span>V.01 / FEATURED OBJECT</span><span>${house?.origin || 'Violet edit'}</span></div><div><span class="v4-kicker">${product.brand}</span><h1>${product.name}</h1><p class="v4-feature-sensory">${meta.character}</p></div><div class="v4-feature-commerce"><span>${product.concentration} · ${product.size}</span><strong>${money(product.price)}</strong><div><a class="btn btn-primary" href="product.html?id=${product.id}">View object</a><a class="v4-text-link" href="discovery.html?focus=${product.id}">Try first →</a></div></div></div>
-      <a class="v4-feature-media" href="product.html?id=${product.id}" aria-label="Explore ${product.name}"><div class="v5-hero-mosaic"><div class="v5-hero-shot"><img src="${media[0]}" alt="${product.name} by ${product.brand}"><span>Object / ${product.family}</span></div><div class="v5-hero-shot"><img src="${media[1]}" alt="Editorial fragrance still life"><span>Material study</span></div><div class="v5-hero-shot"><img src="${media[2]}" alt="Editorial fragrance atmosphere"><span>Atmosphere</span></div></div></a>`;
+      <a class="v4-feature-media" href="product.html?id=${product.id}" aria-label="Explore ${product.name}"><div class="v5-hero-mosaic"><div class="v5-hero-shot"><img src="${media[0]}" alt="${product.name} by ${product.brand}"><span>Object / ${product.family}</span></div><div class="v5-hero-shot"><img src="${media[1]}" alt="Editorial fragrance material study"><span>Material study</span></div><div class="v5-hero-shot"><img src="${media[2]}" alt="Editorial fragrance atmosphere"><span>Atmosphere</span></div></div></a>`;
 
     const houseIndex=document.querySelector('[data-v4-house-index]');
     if(houseIndex) houseIndex.innerHTML=`<div class="v4-house-index">${HOUSES.slice(0,5).map((house,index)=>{ const p=house.products.map(byId).find(Boolean)||DATA.products[0]; return `<a href="house.html?id=${house.id}"><span>${String(index+1).padStart(2,'0')}</span><img class="v5-house-thumb" src="${p?.image||''}" alt="${house.name} edit" loading="lazy"><strong>${house.name}</strong><em>${house.origin}</em><small>${house.territory}</small><i>↗</i></a>`; }).join('')}</div>`;
