@@ -23,6 +23,9 @@ jobs:
           node --check scripts/scent_portrait_qa.mjs
           node --check scripts/storefront_v3_qa.mjs
           node --check scripts/v4_representative_qa.mjs
+          node --check scripts/v4_full_qa.mjs
+          node --check scripts/visual_layout_guard.mjs
+          node --check scripts/language_consistency_qa.mjs
 
       - name: Validate required static files
         run: |
@@ -68,22 +71,26 @@ jobs:
           test -f docs/uiux/Skill-Execution-Ledger.md
           test -f docs/uiux/Phase-1-Handoff.md
           test -f docs/uiux/Phase-State.md
+          test -f docs/uiux/Content-Strategy.md
           test -f design-artifacts/scent-portrait-contract.json
           test -f design-artifacts/scent-portrait-skill-trace.json
           test -f design-artifacts/desktop-v3-design-contract.json
           test -f scripts/v4_representative_qa.mjs
+          test -f scripts/v4_full_qa.mjs
+          test -f scripts/visual_layout_guard.mjs
+          test -f scripts/language_consistency_qa.mjs
           test ! -e package.json
           test ! -e tsconfig.json
 
       - name: Validate Violet V4 direction and rollout
         run: |
           grep -q "Violet Parfumerie" index.html
-          grep -q "Three ways into Violet" index.html
+          grep -q "Ba lối vào Violet" index.html
           grep -q "data-v4-house-index" index.html
           grep -q "discovery.html" index.html
           grep -q "data-v4-houses-index" houses.html
           grep -q "data-v4-house-detail" house.html
-          for f in index.html search.html product.html discovery.html houses.html house.html finder.html cart.html checkout.html order-success.html; do grep -q "desktop-experience-v4.css" "$f"; done
+          for f in index.html search.html product.html discovery.html houses.html house.html finder.html cart.html checkout.html order-success.html; do grep -q 'lang="vi"' "$f"; grep -q "desktop-experience-v4.css" "$f"; done
           grep -q "desktop-experience-v4-rollout.css" search.html
           grep -q "desktop-experience-v4-rollout.css" houses.html
           grep -q "desktop-experience-v4-rollout.css" house.html
@@ -103,6 +110,7 @@ jobs:
           grep -q "category: 'floral'" data.js
           grep -q "category: 'woody'" data.js
           grep -q "category: 'amber'" data.js
+          grep -q "Primary locale: Vietnamese" docs/uiux/Content-Strategy.md
           ! grep -q "desktop-experience-v3.css" index.html
           ! grep -q "desktop-experience-v3.css" search.html
           ! grep -q "desktop-experience-v3.css" product.html
@@ -126,7 +134,7 @@ jobs:
           grep -q 'visual_composition' design-artifacts/scent-portrait-contract.json
           grep -q 'browser_qa' design-artifacts/scent-portrait-contract.json
           grep -q 'rendered_evidence_required' design-artifacts/desktop-v3-design-contract.json
-          grep -q 'do not process a real transaction' checkout.html
+          grep -q 'không xử lý giao dịch thật' checkout.html
 
       - name: Validate UIUX operating profile
         run: |
