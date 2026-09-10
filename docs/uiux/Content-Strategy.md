@@ -74,9 +74,46 @@ Explain the ritual, not fake fulfillment:
 
 Any price/credit/sample fulfillment introduced in Phase 2 is `SIMULATED/MOCK` and must be labeled accordingly.
 
-## Language
+## Language contract — release blocker
 
-Vietnamese is primary. English is reserved for familiar fragrance/commerce terms (`Eau de Parfum`, house names, `Discovery`, note vocabulary) and brand voice where translation would feel less precise. Avoid switching languages inside one sentence without a clear terminology reason.
+**Primary locale: Vietnamese (`vi`).** This is a product contract, not a tone preference.
+
+### What must be Vietnamese
+
+All decision-making and navigation copy must use Vietnamese consistently:
+- global navigation, search, filters and footer;
+- headings, section labels and helper text;
+- buttons, links, form labels, validation and status messages;
+- empty, loading, success and error states;
+- accessibility labels and image alt text when they describe UI meaning;
+- Scent Portrait questions, progress labels, answers and recommendation rationale;
+- cart, checkout, seller and admin operational UI.
+
+### Documented exceptions
+
+The following may remain untranslated when translation would reduce recognition or fragrance precision:
+- brand and maison names, e.g. `Violet Parfumerie`, `Maison Aster`;
+- product names, e.g. `Violette 03`, `Violet Discovery Wardrobe`;
+- established concentration names, e.g. `Eau de Parfum`, `Extrait de Parfum`;
+- ingredient / note vocabulary such as `iris`, `neroli`, `saffron`, `sandalwood`, `ambrette`;
+- technical prototype terms when explicitly labeled as such, e.g. `prototype`, `AI`, `SKU`, `KYC`, `SLA`.
+
+Exceptions must not turn an otherwise Vietnamese sentence into casual code-switching. Prefer a Vietnamese sentence with the necessary domain term embedded naturally.
+
+### Forbidden release state
+
+A screen with `html[lang="vi"]` must not ship when generic UI copy is visibly mixed between Vietnamese and English without a documented terminology reason. Examples of blockers include `Step 1 of 4` next to a Vietnamese question, `Continue` beside Vietnamese helper text, or an English global navigation surrounding Vietnamese page content.
+
+### Verification
+
+Before merge:
+1. render representative buyer, checkout and operational routes;
+2. exercise interaction-generated copy, especially every Scent Portrait step and result state;
+3. audit visible UI strings and accessibility labels against this contract;
+4. preserve screenshots and the machine-readable language QA report;
+5. fail CI on accidental English UI chrome in the Vietnamese locale.
+
+For this repository, `scripts/language_consistency_qa.mjs` and `.github/workflows/language-consistency-qa.yml` encode the rendered language gate.
 
 ## SEO/content intent for prototype
 
