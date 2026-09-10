@@ -6,6 +6,7 @@ on:
     paths:
       - '*.html'
       - 'desktop-experience-v4*.css'
+      - 'visual-safety-v5.css'
       - 'storefront-v4*.js'
       - 'scent-portrait.js'
       - 'data.js'

@@ -1,2 +1,3 @@
-/* Violet Desktop Experience V4 now resolves to the consolidated image-first design system. */
+/* Violet Desktop Experience V4 resolves to the image-first design system plus regression safety guards. */
 @import url('./image-first-redesign.css');
+@import url('./visual-safety-v5.css');
