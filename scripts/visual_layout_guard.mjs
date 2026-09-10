@@ -37,6 +37,15 @@ function intersection(a, b) {
   return (right - left) * (bottom - top);
 }
 
+async function instantScroll(page, y) {
+  await page.evaluate(value => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    if (document.body) document.body.style.scrollBehavior = 'auto';
+    window.scrollTo(0, value);
+  }, y);
+  await page.waitForTimeout(40);
+}
+
 async function commonHealth(page, name) {
   const metrics = await page.evaluate(() => ({
     scrollWidth: document.documentElement.scrollWidth,
@@ -49,8 +58,7 @@ async function commonHealth(page, name) {
 }
 
 async function textOverlapScan(page, name, scrollY) {
-  await page.evaluate(y => scrollTo(0, y), scrollY);
-  await page.waitForTimeout(80);
+  await instantScroll(page, scrollY);
   const overlaps = await page.evaluate(() => {
     const viewport = { left: 0, top: 0, right: innerWidth, bottom: innerHeight };
     const visible = el => {
@@ -122,8 +130,7 @@ for (const width of report.viewportWidths) {
     if (Math.abs(scrollPlan.filterDocumentTop - scrollPlan.resultsDocumentTop) > 32) {
       fail('filter-column-misalignment', `${width}px: filter rail starts far below the results column`, scrollPlan);
     }
-    await page.evaluate(y => scrollTo(0, y), scrollPlan.targetScroll);
-    await page.waitForTimeout(120);
+    await instantScroll(page, scrollPlan.targetScroll);
     const data = await page.evaluate(() => {
       const header = document.querySelector('.site-header')?.getBoundingClientRect();
       const filter = document.querySelector('.v4-filter-rail')?.getBoundingClientRect();
@@ -162,8 +169,7 @@ for (const width of report.viewportWidths) {
     const scrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
     const positions = [0, 500, 900, 1300, 1700, 2200].filter(y => y < scrollHeight);
     for (const y of positions) {
-      await page.evaluate(value => scrollTo(0, value), y);
-      await page.waitForTimeout(60);
+      await instantScroll(page, y);
       const boxes = await page.evaluate(() => {
         const pick = selector => {
           const r = document.querySelector(selector)?.getBoundingClientRect();
@@ -174,7 +180,7 @@ for (const width of report.viewportWidths) {
       if (boxes.desk && boxes.story && intersection(boxes.desk, boxes.story) > 8) fail('pdp-section-overlap', `${width}px: buying desk overlaps story at scrollY=${y}`, boxes);
       await textOverlapScan(page, `pdp-${width}`, y);
     }
-    await page.evaluate(() => scrollTo(0, 1100));
+    await instantScroll(page, 1100);
     await page.screenshot({ path: path.join(out, `pdp-scroll-${width}.png`), fullPage: false });
     await page.close();
   }
