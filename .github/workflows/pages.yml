@@ -43,28 +43,43 @@ jobs:
           touch _site/.nojekyll
           python3 - <<'PY'
           import os
+          import re
           from pathlib import Path
 
           site = Path('_site')
           version = os.environ['CACHE_VERSION'][:12]
-          assets = [
-              'styles.css',
-              'perfume-luxury.css',
-              'desktop-luxury-v2.css',
-              'desktop-experience-v3.css',
-              'scent-portrait.css',
-              'scent-media-direction.css',
-              'data.js',
-              'app.js',
-              'storefront-v3.js',
-              'scent-portrait.js',
-          ]
+
+          # Version every local CSS/JS reference instead of maintaining a fragile
+          # hand-written asset allowlist. This keeps newly added redesign files from
+          # being served stale by GitHub Pages or the browser cache.
+          html_asset = re.compile(
+              r'(\b(?:href|src)=["\'])(?!https?:|//|data:)([^"\']+\.(?:css|js))(?:\?[^"\']*)?(["\'])',
+              re.IGNORECASE,
+          )
 
           for html in site.rglob('*.html'):
               text = html.read_text(encoding='utf-8')
-              for asset in assets:
-                  text = text.replace(f'{asset}"', f'{asset}?v={version}"')
+              text = html_asset.sub(
+                  lambda match: f'{match.group(1)}{match.group(2)}?v={version}{match.group(3)}',
+                  text,
+              )
               html.write_text(text, encoding='utf-8')
+
+          # CSS imported from another CSS file also needs a version. Without this,
+          # desktop-experience-v4.css can be fresh while image-first-redesign.css
+          # remains stale in the browser cache.
+          css_import = re.compile(
+              r'(@import\s+url\(\s*["\']?)([^"\')?]+\.css)(?:\?[^"\')]+)?(["\']?\s*\))',
+              re.IGNORECASE,
+          )
+
+          for css in site.rglob('*.css'):
+              text = css.read_text(encoding='utf-8')
+              text = css_import.sub(
+                  lambda match: f'{match.group(1)}{match.group(2)}?v={version}{match.group(3)}',
+                  text,
+              )
+              css.write_text(text, encoding='utf-8')
           PY
 
       - name: Upload static site
