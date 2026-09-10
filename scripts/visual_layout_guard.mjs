@@ -95,18 +95,33 @@ const browser = await chromium.launch({ headless: true });
 for (const width of report.viewportWidths) {
   const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, colorScheme: 'light' });
 
-  // Header + filter: catches the old sticky-parent trap and dead offset above the rail.
-  // Scroll from the filter's document position rather than a magic scrollY: a sticky element
-  // should be judged only after its natural position has crossed the sticky threshold.
+  // Header + filter: catches the old sticky-parent trap and dead filter column.
+  // First check natural column alignment. Then, only if the document can scroll far
+  // enough to cross the sticky threshold, assert the sticky offset against the real header.
   {
     const page = await context.newPage();
     await page.goto(`${base}/search.html?sample=1`, { waitUntil: 'networkidle' });
     const scrollPlan = await page.evaluate(() => {
       const filter = document.querySelector('.v4-filter-rail');
+      const results = document.querySelector('.v4-plp-results');
       const filterDocumentTop = filter ? filter.getBoundingClientRect().top + scrollY : 0;
+      const resultsDocumentTop = results ? results.getBoundingClientRect().top + scrollY : 0;
+      const stickyTop = filter ? parseFloat(getComputedStyle(filter).top) || 0 : 0;
       const maxScroll = Math.max(0, document.documentElement.scrollHeight - innerHeight);
-      return { filterDocumentTop, targetScroll: Math.min(filterDocumentTop + 220, Math.max(0, maxScroll - 220)) };
+      const stickyThreshold = Math.max(0, filterDocumentTop - stickyTop);
+      return {
+        filterDocumentTop,
+        resultsDocumentTop,
+        stickyTop,
+        stickyThreshold,
+        maxScroll,
+        targetScroll: Math.min(filterDocumentTop + 220, maxScroll),
+        canReachSticky: maxScroll >= stickyThreshold + 4
+      };
     });
+    if (Math.abs(scrollPlan.filterDocumentTop - scrollPlan.resultsDocumentTop) > 32) {
+      fail('filter-column-misalignment', `${width}px: filter rail starts far below the results column`, scrollPlan);
+    }
     await page.evaluate(y => scrollTo(0, y), scrollPlan.targetScroll);
     await page.waitForTimeout(120);
     const data = await page.evaluate(() => {
@@ -115,6 +130,7 @@ for (const width of report.viewportWidths) {
       const searchButton = document.querySelector('.search-form button')?.getBoundingClientRect();
       const cartCount = document.querySelector('.cart-count');
       return {
+        actualScrollY: scrollY,
         header: header && { top: header.top, bottom: header.bottom, height: header.height },
         filter: filter && { top: filter.top },
         searchButton: searchButton && { width: searchButton.width, height: searchButton.height },
@@ -126,7 +142,9 @@ for (const width of report.viewportWidths) {
     });
     data.scrollPlan = scrollPlan;
     if (!data.header || Math.abs(data.header.top) > 2) fail('sticky-header', `${width}px: header must remain pinned after scroll`, data);
-    if (!data.filter || !data.header || data.filter.top < data.header.bottom - 2 || data.filter.top - data.header.bottom > 24) fail('filter-dead-offset', `${width}px: sticky filter rail must sit directly below the rendered header`, data);
+    if (scrollPlan.canReachSticky && (!data.filter || !data.header || data.filter.top < data.header.bottom - 2 || data.filter.top - data.header.bottom > 24)) {
+      fail('filter-dead-offset', `${width}px: sticky filter rail must sit directly below the rendered header once sticky`, data);
+    }
     if (!data.searchButton || data.searchButton.width < 64 || data.searchButton.height < 40) fail('undersized-search-action', `${width}px: search submit control is too small`, data.searchButton);
     if (data.cartCountPosition !== 'static') fail('floating-cart-badge', `${width}px: bag count must participate in layout`, data);
     if (data.visibleMysteryActions !== 0) fail('mystery-header-action', `${width}px: cryptic buyer-header action remains visible`, data);
