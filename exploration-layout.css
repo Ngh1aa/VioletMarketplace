@@ -234,7 +234,7 @@ body.violet-maison .maison-reveal.is-visible{opacity:1;transform:none}
   body.violet-maison .container{width:min(100% - 44px,1240px)}
   body.violet-maison .v4-home-hero{grid-template-columns:minmax(0,80fr) minmax(250px,20fr)!important}
   body.violet-maison .v4-object-grid>.v4-object-card{grid-column:span 4!important;margin-top:0!important}
-  body.violet-maison .explore-pdp-intro{grid-template-columns:minmax(0,1.45fr) minmax(360px,.55fr);gap:38px}
+  body.violet-maison .explore-pdp-intro{grid-template-columns:minmax(0,3fr) minmax(340px,2fr);gap:30px}
 }
 
 @media (prefers-reduced-motion:reduce){
