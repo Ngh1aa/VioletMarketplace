@@ -1,0 +1,42 @@
+{
+  "schema_version": "factory-v6-violet-1.0",
+  "project_slug": "violet-parfumerie",
+  "visual_signature": "Editorial · Tactile · Portable",
+  "representative_pages": [
+    {
+      "path": "/index.html",
+      "role": "home",
+      "composition_family": "editorial object-led opening",
+      "decision_object": "featured fragrance object",
+      "sections": ["dominant object/media hero", "manifesto", "asymmetric Violet edit", "ritual story", "entry routes", "horizontal maisons", "try-first CTA"]
+    },
+    {
+      "path": "/search.html",
+      "role": "fragrance library",
+      "composition_family": "progressive-refinement object field",
+      "decision_object": "comparable fragrance objects",
+      "sections": ["library masthead", "optional refinements", "asymmetric image-led result field", "editorial interruption"]
+    },
+    {
+      "path": "/product.html?id=violette-03",
+      "role": "product detail",
+      "composition_family": "media gallery + bounded buying desk",
+      "decision_object": "fragrance bottle / trial decision",
+      "sections": ["Object → Material → Atmosphere gallery", "buying desk", "notes/drydown story", "related objects"]
+    },
+    {
+      "path": "/discovery.html",
+      "role": "try-first discovery",
+      "composition_family": "journey workspace",
+      "decision_object": "three-scent trial wardrobe",
+      "sections": ["ritual orientation", "selection workspace", "trio state", "wear/return guidance"]
+    }
+  ],
+  "cross_route_rules": [
+    "No route inherits a universal hero merely for consistency.",
+    "Product imagery is the primary visual decision object on commerce routes.",
+    "Operational routes remain calmer and denser than showroom routes.",
+    "Figma capture mode changes rendering mechanics only, never information hierarchy."
+  ],
+  "gate": "ready_for_implementation"
+}
