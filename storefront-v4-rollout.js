@@ -1,7 +1,7 @@
 (() => {
   const DATA = window.VIOLET_DATA || { products: [] };
   const qs = new URLSearchParams(location.search);
-  const money = n => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(n || 0));
+  const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(Number(n || 0));
 
   const HOUSES = [
     { id:'maison-aster', name:'Maison Aster', origin:'Paris', territory:'powdered violet · green fig · quiet woods', ethos:'Soft structure, cool florals and contemplative green woods.', signature:'Powdered florals with a green, meditative edge.' },
@@ -14,6 +14,39 @@
 
   const houseById = id => HOUSES.find(house => house.id === id);
   const productsForHouse = house => DATA.products.filter(product => product.brand === house.name);
+
+  function cartCount(){
+    try {
+      return JSON.parse(localStorage.getItem('violet-marketplace-cart-v1') || '[]')
+        .reduce((sum,row)=>sum+Number(row.qty||0),0);
+    } catch { return 0; }
+  }
+
+  function normalizeBuyerChrome(){
+    document.documentElement.lang = 'en';
+    const input = document.querySelector('[data-search-form] input');
+    if(input){
+      input.placeholder = 'Search fragrance, note, or maison…';
+      input.setAttribute('aria-label','Search fragrances');
+      input.addEventListener('input',()=>requestAnimationFrame(()=>{
+        const box = document.querySelector('[data-suggestions]');
+        const fallback = box?.querySelector('a.suggestion:only-child');
+        if(fallback && fallback.textContent.trim().startsWith('Xem fragrance')){
+          fallback.textContent = `View results for “${input.value}”`;
+        }
+      }));
+    }
+    const searchButton = document.querySelector('[data-search-form] button');
+    if(searchButton) searchButton.textContent = 'Search';
+
+    const actions = document.querySelector('.header-actions');
+    if(actions){
+      actions.innerHTML = `<a class="icon-link v5-trio-link" href="discovery.html">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">${cartCount()}</span></a>`;
+    }
+
+    const footerMeta = document.querySelector('.footer-bottom span:last-child');
+    if(footerMeta) footerMeta.textContent = 'Vietnam · VND · Curated prototype';
+  }
 
   function card(product){
     return `<a class="v4-house-object" href="product.html?id=${encodeURIComponent(product.id)}">
@@ -71,6 +104,7 @@
     const note = document.querySelector('.v3-reality-note'); if(note) note.classList.replace('v3-reality-note','v4-reality-note');
   }
 
+  normalizeBuyerChrome();
   renderHousesIndex();
   renderHouseDetail();
   patchFinder();

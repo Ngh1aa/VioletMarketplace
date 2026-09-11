@@ -1,3 +1,424 @@
-/* Violet Desktop Experience V4 resolves to the image-first design system plus regression safety guards. */
+/* Violet Desktop Experience V4 — canonical owner layer.
+   Foundation stays in image-first-redesign.css; this file owns the current
+   Editorial · Tactile · Refined direction so new iterations do not create
+   another parallel v5/v6 override stylesheet. */
 @import url('./image-first-redesign.css');
 @import url('./visual-safety-v5.css');
+
+:root{
+  --violet-paper:#f7f3ee;
+  --violet-paper-deep:#eee8f2;
+  --violet-ink:#241b26;
+  --violet-muted:#746a72;
+  --violet-rule:#d8d0d2;
+  --violet-aubergine:#513448;
+  --violet-accent:#765a7d;
+  --violet-lilac:#d8c9e0;
+  --violet-blush:#e8d6cf;
+  --violet-ivory:#fffdf9;
+  --violet-champagne:#b89e72;
+  --violet-success:#426853;
+  --violet-error:#9a4c55;
+  --violet-warning:#99753d;
+}
+
+/* Core accessibility + interaction contract */
+body.violet-v4 :where(a,button,input,select,textarea):focus-visible{
+  outline:2px solid var(--violet-accent);
+  outline-offset:3px;
+}
+body.violet-v4 :where(button,a,.v4-object-link,.v4-route){
+  -webkit-tap-highlight-color:transparent;
+}
+body.violet-v4 .btn:disabled,
+body.violet-v4 button:disabled{
+  cursor:not-allowed;
+  opacity:.42;
+}
+body.violet-v4 .btn-primary{
+  background:var(--violet-aubergine);
+  border-color:var(--violet-aubergine);
+}
+body.violet-v4 .btn-primary:hover{
+  background:#3e2939;
+  border-color:#3e2939;
+}
+body.violet-v4 .btn-secondary:hover{
+  background:var(--violet-ink);
+  color:var(--violet-ivory);
+}
+
+/* Chrome — quieter, less marketplace-template-like. */
+body.violet-v4 .topbar{
+  background:var(--violet-ink);
+  color:#eee8ec;
+}
+body.violet-v4 .site-header{
+  background:rgba(247,243,238,.965);
+}
+body.violet-v4 .header-main{
+  grid-template-columns:220px minmax(360px,1fr) auto;
+}
+body.violet-v4 .brand span{
+  color:var(--violet-aubergine);
+}
+body.violet-v4 .search-form{
+  border-bottom-color:#9e939a;
+}
+body.violet-v4 .search-form:focus-within{
+  border-bottom-color:var(--violet-aubergine);
+}
+body.violet-v4 .header-actions{
+  gap:18px;
+  align-items:center;
+}
+body.violet-v4 .icon-link{
+  width:auto;
+  height:auto;
+  min-height:42px;
+  border:0;
+  border-radius:0;
+  padding:0;
+  font-size:8px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+body.violet-v4 .cart-link{
+  min-width:auto;
+  border-radius:0;
+  padding:0;
+}
+body.violet-v4 .cart-count{
+  min-width:19px;
+  height:19px;
+  background:var(--violet-aubergine);
+}
+body.violet-v4 .nav-inner{
+  justify-content:flex-start;
+  gap:36px;
+}
+body.violet-v4 .nav-inner a{
+  position:relative;
+  padding:14px 0 12px;
+}
+body.violet-v4 .nav-inner a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:100%;
+  bottom:8px;
+  height:1px;
+  background:var(--violet-aubergine);
+  transition:right .18s var(--violet-ease);
+}
+body.violet-v4 .nav-inner a:hover::after,
+body.violet-v4 .nav-inner a:focus-visible::after{
+  right:0;
+}
+
+/* Home entry system — replace the repeated equal 3-card pattern with an editorial ledger. */
+.v4-route-index{
+  margin-top:108px;
+}
+.v5-route-heading{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(300px,.55fr);
+  gap:84px;
+  align-items:end;
+  margin:18px 0 30px;
+}
+.v5-route-heading h2{
+  margin:0;
+  max-width:780px;
+  font-family:var(--violet-serif);
+  font-size:56px;
+  line-height:.96;
+  letter-spacing:-.05em;
+  font-weight:400;
+}
+.v5-route-heading p{
+  margin:0 0 4px;
+  max-width:440px;
+  justify-self:end;
+  color:var(--violet-muted);
+  font-size:11px;
+  line-height:1.75;
+}
+.v4-route-grid{
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-auto-flow:dense;
+  border-top:1px solid var(--violet-ink);
+  border-bottom:1px solid var(--violet-ink);
+}
+.v4-route{
+  min-height:188px;
+  border:0;
+  border-left:1px solid var(--violet-rule);
+  border-bottom:1px solid var(--violet-rule);
+  padding:25px 30px;
+}
+.v4-route:hover{
+  background:var(--violet-ivory);
+}
+.v4-route.v5-route-feature{
+  grid-column:span 7;
+  grid-row:span 2;
+  min-height:376px;
+  border-left:0;
+  border-bottom:0;
+  background:var(--violet-ivory);
+  padding:34px 40px;
+}
+.v4-route.v5-route-feature strong{
+  max-width:520px;
+  margin-top:auto;
+  font-size:54px;
+  line-height:.92;
+  letter-spacing:-.04em;
+}
+.v4-route.v5-route-feature p{
+  max-width:430px;
+  margin:15px 0 28px;
+  font-size:12px;
+}
+.v4-route:not(.v5-route-feature){
+  grid-column:span 5;
+}
+.v4-route:not(.v5-route-feature):last-child{
+  border-bottom:0;
+}
+.v4-route>strong{
+  letter-spacing:-.025em;
+}
+.v4-route>i{
+  color:var(--violet-aubergine);
+}
+
+/* Product cards — image remains the dominant information surface. */
+.v4-object-media{
+  background:#ebe4df;
+}
+.v4-object-media img{
+  filter:saturate(.78) contrast(.98);
+}
+.v4-object-link:hover .v4-object-media .v5-card-image--alt{
+  transform:scale(1.015);
+}
+.v5-card-badge{
+  background:rgba(255,253,249,.92);
+  border-bottom:1px solid var(--violet-aubergine);
+  color:var(--violet-aubergine);
+}
+.v4-object-heading h3{
+  font-size:23px;
+  line-height:1.05;
+}
+.v4-object-reason{
+  max-width:34ch;
+}
+
+/* Library — calm decision density, stronger readable controls. */
+.v4-library-masthead h1{
+  font-size:68px;
+}
+.v4-plp{
+  grid-template-columns:230px minmax(0,1fr);
+  gap:48px;
+}
+.v4-filter-group a{
+  min-height:30px;
+  align-items:center;
+  font-size:11px;
+}
+.v4-plp-toolbar{
+  min-height:48px;
+  height:auto;
+}
+.v4-plp-toolbar select{
+  min-height:40px;
+  color:var(--violet-ink);
+  font-size:10px;
+}
+.v4-active-chips .chip{
+  min-height:32px;
+  display:inline-flex;
+  align-items:center;
+}
+.v4-plp-interrupt{
+  min-height:310px;
+}
+.v4-plp-interrupt>div{
+  max-width:560px;
+  padding:42px;
+}
+.v4-plp-interrupt strong{
+  font-size:40px;
+}
+
+/* PDP — preserve the explicit ~70/30 media-to-buying balance. */
+.v4-pdp{
+  grid-template-columns:minmax(0,7fr) minmax(360px,3fr);
+}
+.v4-pdp-media{
+  padding-right:20px;
+}
+.v4-buying-desk{
+  padding-left:38px;
+  background:linear-gradient(90deg,rgba(238,232,242,.32),rgba(247,243,238,0) 68%);
+}
+.v4-buying-desk h1{
+  font-size:60px;
+}
+.v4-pdp-character{
+  max-width:34ch;
+  font-size:19px;
+}
+.v4-pdp-actions .btn{
+  width:100%;
+}
+.v4-pdp-quick{
+  border-left-color:var(--violet-rule);
+}
+.v5-gallery-tile img,
+.v5-story-media img{
+  filter:saturate(.78) contrast(.985);
+}
+.v4-pdp-story{
+  gap:58px;
+}
+.v4-note-table>div{
+  min-height:48px;
+  align-items:center;
+}
+.v4-related-grid{
+  gap:22px;
+}
+
+/* Discovery — make the trial/evaluation loop the signature commerce flow. */
+.v4-discovery-hero{
+  padding-bottom:54px;
+}
+.v4-discovery-hero h1{
+  max-width:760px;
+  font-size:70px;
+}
+.v4-discovery-workspace{
+  grid-template-columns:3fr 9fr;
+}
+.v4-discovery-guide{
+  padding-right:46px;
+}
+.v4-trio-panel{
+  padding-left:54px;
+}
+.v4-trio-head strong{
+  color:var(--violet-aubergine);
+}
+.v4-sample-row{
+  min-height:112px;
+  grid-template-columns:38px 94px .9fr 1.45fr 120px;
+}
+.v5-sample-thumb{
+  width:94px;
+  height:94px;
+}
+.v4-sample-row button[aria-pressed="true"]{
+  background:var(--violet-lilac);
+  border-color:var(--violet-aubergine);
+  color:var(--violet-ink);
+}
+.v5-after-wear{
+  margin-top:94px;
+  padding-bottom:4px;
+}
+.v5-after-wear-grid{
+  display:grid;
+  grid-template-columns:minmax(320px,.82fr) minmax(0,1.18fr);
+  gap:88px;
+  padding:34px 0 8px;
+}
+.v5-after-wear-copy h2{
+  max-width:580px;
+  margin:10px 0 18px;
+  font-family:var(--violet-serif);
+  font-size:48px;
+  line-height:1;
+  letter-spacing:-.045em;
+  font-weight:400;
+}
+.v5-after-wear-copy p{
+  max-width:520px;
+  color:var(--violet-muted);
+  font-size:11px;
+  line-height:1.75;
+}
+.v5-drydown-trace{
+  list-style:none;
+  margin:0;
+  padding:0;
+  border-top:1px solid var(--violet-ink);
+}
+.v5-drydown-trace li{
+  display:grid;
+  grid-template-columns:46px 150px 1fr;
+  gap:20px;
+  align-items:center;
+  min-height:92px;
+  border-bottom:1px solid var(--violet-rule);
+}
+.v5-drydown-trace li>span{
+  color:var(--violet-aubergine);
+  font-size:8px;
+  letter-spacing:.12em;
+}
+.v5-drydown-trace strong{
+  font-family:var(--violet-serif);
+  font-size:22px;
+  font-weight:400;
+}
+.v5-drydown-trace small{
+  color:var(--violet-muted);
+  font-size:10px;
+  line-height:1.55;
+}
+.v4-wardrobe{
+  margin-top:104px;
+}
+
+/* Shared hierarchy polish. */
+.v4-section-label{
+  color:#6f646c;
+}
+.v4-kicker{
+  color:var(--violet-aubergine);
+}
+.v4-trust-line span{
+  color:#5f555d;
+}
+body.violet-v4 .site-footer{
+  background:var(--violet-ink);
+}
+
+/* Desktop pressure point only: project scope is currently 1280–1600px. */
+@media (max-width:1320px){
+  body.violet-v4 .container{width:min(1260px,calc(100% - 44px))}
+  body.violet-v4 .header-main{grid-template-columns:190px minmax(320px,1fr) auto;gap:24px}
+  .v4-feature-copy h1{font-size:68px}
+  .v5-route-heading h2{font-size:50px}
+  .v4-route.v5-route-feature strong{font-size:48px}
+  .v4-buying-desk{padding-left:30px}
+  .v4-buying-desk h1{font-size:54px}
+  .v5-after-wear-grid{gap:58px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.violet-v4 *,
+  body.violet-v4 *::before,
+  body.violet-v4 *::after{
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+  }
+}
