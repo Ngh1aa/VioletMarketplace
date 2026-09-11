@@ -1,25 +1,37 @@
 #!/usr/bin/env python3
-"""Install the optional Figma capture helper on every HTML route."""
+"""Install final accessibility + optional Figma capture helpers on every HTML route."""
 from __future__ import annotations
 
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = '  <script src="figma-capture.js"></script>'
+ACCESS_TAG = '  <script src="accessibility-v6.js"></script>'
+FIGMA_TAG = '  <script src="figma-capture.js"></script>'
 
 
 def main() -> int:
     changed: list[str] = []
     for path in sorted(ROOT.glob("*.html")):
         text = path.read_text(encoding="utf-8")
-        if 'src="figma-capture.js"' in text:
-            continue
         if "</body>" not in text:
-            raise SystemExit(f"Cannot install Figma capture helper; missing </body>: {path.name}")
-        updated = text.replace("</body>", f"{TAG}\n</body>")
+            raise SystemExit(f"Cannot install runtime helpers; missing </body>: {path.name}")
+
+        tags: list[str] = []
+        if 'src="accessibility-v6.js"' not in text:
+            tags.append(ACCESS_TAG)
+        if 'src="figma-capture.js"' not in text:
+            tags.append(FIGMA_TAG)
+        if not tags:
+            continue
+
+        # Runtime correction is loaded at the end of body, after the existing
+        # rollout scripts have appended their design layers. Figma capture stays
+        # last so it can normalize the final rendered page without changing IA.
+        updated = text.replace("</body>", "\n".join(tags) + "\n</body>")
         path.write_text(updated, encoding="utf-8", newline="\n")
         changed.append(path.name)
-    print("Installed Figma capture helper in:", ", ".join(changed) if changed else "no files")
+
+    print("Installed runtime helpers in:", ", ".join(changed) if changed else "no files")
     return 0
 
 
