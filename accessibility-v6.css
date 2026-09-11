@@ -54,3 +54,18 @@ body.violet-maison :where(a,button,input,select,textarea):focus-visible{
 body.violet-maison .site-footer :where(a,button):focus-visible{
   outline-color:#e8dcf2!important;
 }
+
+/* Core Web Vitals paint contract.
+   Above-the-fold route introductions must never wait for IntersectionObserver
+   before becoming visible. Below-the-fold editorial sections keep the reveal. */
+body.violet-maison .v4-home-hero.maison-reveal,
+body.violet-maison .v4-library-masthead.maison-reveal,
+body.violet-maison .explore-pdp-intro.maison-reveal,
+body.violet-maison .v4-discovery-hero.maison-reveal,
+body.violet-maison .v4-houses-hero.maison-reveal,
+body.violet-maison .v4-house-hero.maison-reveal,
+body.violet-maison .portrait-shell.maison-reveal,
+body.violet-maison .v4-utility-hero.maison-reveal{
+  opacity:1!important;
+  transform:none!important;
+}
