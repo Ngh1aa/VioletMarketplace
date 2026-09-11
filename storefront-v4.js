@@ -28,9 +28,6 @@
     'signature-gift-trio': { mood:['explore','gift'], presence:'varied', character:'Three travel directions across floral light, amber warmth and quiet woods.', wear:'gifting · travel', sample:false }
   };
 
-  /* Supporting imagery is intentionally botanical / tactile rather than photographs of
-     unrelated branded perfume bottles. These images communicate ingredients, material
-     and atmosphere; the catalogue image remains the only product-object source. */
   const EDITORIAL_MEDIA = [
     'https://images.pexels.com/photos/16296816/pexels-photo-16296816.jpeg?auto=compress&cs=tinysrgb&w=1600',
     'https://images.pexels.com/photos/7828507/pexels-photo-7828507.jpeg?auto=compress&cs=tinysrgb&w=1600',
@@ -46,16 +43,17 @@
   const presenceLabels = { intimate:'Close to skin', moderate:'Quiet presence', statement:'Statement', varied:'Varied', room:'Room scent' };
   const familyLabels = Object.fromEntries((DATA.categories || []).map(category => [category.id, category.name]));
 
-  function metaFor(product){ return META[product.id] || { mood:['soft'], presence:'moderate', character:product.description || product.family || 'Fine fragrance', wear:'everyday', sample:false }; }
-  function houseFor(product){ return HOUSES.find(house => house.name === product.brand) || null; }
-  function houseById(id){ return HOUSES.find(house => house.id === id); }
-  function concentrationKey(product){ const value=(product.concentration||'').toLowerCase(); if(value.includes('extrait')) return 'extrait'; if(value.includes('eau de parfum')) return 'edp'; if(value.includes('discovery')) return 'discovery'; return 'other'; }
-  function mediaFor(product){
-    const index = Math.max(0, DATA.products.findIndex(item => item.id === product.id));
+  const safeJSON = (value, fallback) => { try { return JSON.parse(value); } catch { return fallback; } };
+  const metaFor = product => META[product?.id] || { mood:['soft'], presence:'moderate', character:product?.description || product?.family || 'Fine fragrance', wear:'everyday', sample:false };
+  const houseFor = product => HOUSES.find(house => house.name === product?.brand) || null;
+  const houseById = id => HOUSES.find(house => house.id === id);
+  const concentrationKey = product => { const value=(product?.concentration||'').toLowerCase(); if(value.includes('extrait')) return 'extrait'; if(value.includes('eau de parfum')) return 'edp'; if(value.includes('discovery')) return 'discovery'; return 'other'; };
+  const mediaFor = product => {
+    const index = Math.max(0, DATA.products.findIndex(item => item.id === product?.id));
     const offset = (index * 2) % EDITORIAL_MEDIA.length;
-    return [product.image, EDITORIAL_MEDIA[offset], EDITORIAL_MEDIA[(offset + 3) % EDITORIAL_MEDIA.length], EDITORIAL_MEDIA[(offset + 5) % EDITORIAL_MEDIA.length]];
-  }
-  function safeJSON(value, fallback){ try { return JSON.parse(value); } catch { return fallback; } }
+    return [product?.image || EDITORIAL_MEDIA[0], EDITORIAL_MEDIA[offset], EDITORIAL_MEDIA[(offset + 3) % EDITORIAL_MEDIA.length], EDITORIAL_MEDIA[(offset + 5) % EDITORIAL_MEDIA.length]];
+  };
+
   function getCart(){ return safeJSON(localStorage.getItem(CART_KEY) || '[]', []); }
   function setCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); const count=cart.reduce((sum,row)=>sum+Number(row.qty||0),0); document.querySelectorAll('.cart-count').forEach(el=>el.textContent=count); }
   function addBottle(id){ const cart=getCart(); const existing=cart.find(row=>row.id===id); if(existing) existing.qty+=1; else cart.push({id,qty:1}); setCart(cart); status(`Added ${byId(id)?.name || 'fragrance'} to bag.`); }
@@ -68,7 +66,7 @@
   function v4Card(product, extra=''){
     const meta=metaFor(product); const house=houseFor(product); const media=mediaFor(product);
     return `<article class="v4-object-card"><a class="v4-object-link" href="product.html?id=${encodeURIComponent(product.id)}">
-      <div class="v4-object-media"><img src="${media[0]}" alt="${product.name} by ${product.brand}" loading="lazy"><img class="v5-card-image--alt" src="${media[1]}" alt="Editorial material study for ${product.name}" loading="lazy">${meta.sample?'<span class="v5-card-badge">Try first</span>':''}</div>
+      <div class="v4-object-media"><img src="${media[0]}" alt="${product.name} by ${product.brand}" loading="lazy"><img class="v5-card-image--alt" src="${media[1]}" alt="Editorial material study related to ${product.name}" loading="lazy">${meta.sample?'<span class="v5-card-badge">Try first</span>':''}</div>
       <div class="v4-object-index"><span>${house ? house.origin : 'Violet edit'}</span><span>${product.family || ''}</span></div>
       <div class="v4-object-heading"><span>${product.brand}</span><h3>${product.name}</h3></div>
       <div class="v4-object-meta"><span>${product.concentration || ''}${product.size ? ` · ${product.size}` : ''}</span><strong>${money(product.price)}</strong></div>
@@ -77,21 +75,23 @@
   }
 
   function upgradeChrome(){
+    document.documentElement.lang='en';
     document.body.classList.add('violet-v4');
     const nav=document.querySelector('.nav-inner');
-    if(nav) nav.innerHTML='<a href="search.html">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a>';
-    const top=document.querySelector('.topbar-inner > span'); if(top) top.textContent='Violet Editions · objects, houses and slower discovery';
-    const topLinks=document.querySelector('.top-links'); if(topLinks) topLinks.innerHTML='<a href="discovery.html">Discovery ritual</a><a href="finder.html">Scent portrait</a><a href="seller.html">For fragrance houses</a>';
-    const input=document.querySelector('[data-search-form] input'); if(input) input.placeholder='Search fragrance, note, or maison…';
+    if(nav) nav.innerHTML='<a href="search.html">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a><a href="about.html">About</a>';
+    const top=document.querySelector('.topbar-inner > span'); if(top) top.textContent='Violet Parfumerie · wear, wait, return';
+    const topLinks=document.querySelector('.top-links'); if(topLinks) topLinks.innerHTML='<a href="discovery.html">Try three</a><a href="finder.html">Begin with feeling</a><a href="about.html">Why Violet</a>';
+    const input=document.querySelector('[data-search-form] input'); if(input){ input.placeholder='Search fragrance, note, or maison…'; input.setAttribute('aria-label','Search fragrances'); }
     const footer=document.querySelector('.footer-grid');
-    if(footer) footer.innerHTML='<div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div>';
+    if(footer) footer.innerHTML='<div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional fragrance space designed around image, time and slower commitment.</p></div><div><h4>Explore</h4><div class="footer-links"><a href="search.html">Fragrance Library</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a></div></div><div><h4>Begin</h4><div class="footer-links"><a href="finder.html">Scent Portrait</a><a href="about.html">About Violet</a><a href="cart.html">Bag</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local commerce</span><span>No fake AI or fulfilment</span></div></div>';
+    const footerMeta=document.querySelector('.footer-bottom span:last-child'); if(footerMeta) footerMeta.textContent='International edit · EUR · Curated prototype';
   }
 
   function renderHome(){
     const feature=document.querySelector('[data-v4-feature]'); if(!feature) return;
     const product=byId('violette-03') || DATA.products[0]; const meta=metaFor(product); const house=houseFor(product); const media=mediaFor(product);
-    feature.innerHTML=`<div class="v4-feature-copy"><div class="v4-section-label"><span>V.01 / FEATURED OBJECT</span><span>${house?.origin || 'Violet edit'}</span></div><div><span class="v4-kicker">${product.brand}</span><h1>${product.name}</h1><p class="v4-feature-sensory">${meta.character}</p></div><div class="v4-feature-commerce"><span>${product.concentration} · ${product.size}</span><strong>${money(product.price)}</strong><div><a class="btn btn-primary" href="product.html?id=${product.id}">View object</a><a class="v4-text-link" href="discovery.html?focus=${product.id}">Try first →</a></div></div></div>
-      <a class="v4-feature-media" href="product.html?id=${product.id}" aria-label="Explore ${product.name}"><div class="v5-hero-mosaic"><div class="v5-hero-shot"><img src="${media[0]}" alt="${product.name} by ${product.brand}"><span>Object / ${product.family}</span></div><div class="v5-hero-shot"><img src="${media[1]}" alt="Editorial fragrance material study"><span>Material study</span></div><div class="v5-hero-shot"><img src="${media[2]}" alt="Editorial fragrance atmosphere"><span>Atmosphere</span></div></div></a>`;
+    feature.innerHTML=`<div class="v4-feature-copy"><div class="v4-section-label"><span>V.01 / FIRST GLIMPSE</span><span>${house?.origin || 'Violet edit'}</span></div><div><span class="v4-kicker">${product.brand}</span><h1>${product.name}</h1><p class="v4-feature-sensory">${meta.character}</p></div><div class="v4-feature-commerce"><span>${product.concentration} · ${product.size}</span><strong>${money(product.price)}</strong><div><a class="btn btn-primary" href="product.html?id=${product.id}">Look closer</a><a class="v4-text-link" href="discovery.html?focus=${product.id}">Wear it first →</a></div></div></div>
+      <a class="v4-feature-media" href="product.html?id=${product.id}" aria-label="Look closer at ${product.name}"><div class="v5-hero-mosaic"><div class="v5-hero-shot"><img src="${media[0]}" alt="${product.name} by ${product.brand}"><span>Partial object / ${product.family}</span></div><div class="v5-hero-shot"><img src="${media[1]}" alt="Editorial fragrance material study"><span>Material</span></div><div class="v5-hero-shot"><img src="${media[2]}" alt="Editorial fragrance atmosphere"><span>Atmosphere</span></div></div></a>`;
 
     const houseIndex=document.querySelector('[data-v4-house-index]');
     if(houseIndex) houseIndex.innerHTML=`<div class="v4-house-index">${HOUSES.slice(0,5).map((house,index)=>{ const p=house.products.map(byId).find(Boolean)||DATA.products[0]; return `<a href="house.html?id=${house.id}"><span>${String(index+1).padStart(2,'0')}</span><img class="v5-house-thumb" src="${p?.image||''}" alt="${house.name} edit" loading="lazy"><strong>${house.name}</strong><em>${house.origin}</em><small>${house.territory}</small><i>↗</i></a>`; }).join('')}</div>`;
@@ -100,7 +100,7 @@
     if(shelf){
       const objects=['peau-de-lune','velours-ambre','neroli-rain','santal-veil'].map(byId).filter(Boolean);
       const story=mediaFor(byId('nuit-de-figue')||objects[0]);
-      shelf.innerHTML=`${objects.slice(0,2).map(p=>v4Card(p)).join('')}<aside class="v5-shelf-story"><img src="${story[2]}" alt="Violet editorial scent atmosphere" loading="lazy"><div><span>VIOLET EDIT / SKIN & SHADOW</span><strong>Quiet can still leave a trace.</strong><a href="search.html?mood=intimate">Open the intimate edit →</a></div></aside>${objects.slice(2).map(p=>v4Card(p)).join('')}`;
+      shelf.innerHTML=`${objects.slice(0,2).map(p=>v4Card(p)).join('')}<aside class="v5-shelf-story"><img src="${story[2]}" alt="Full-width fragrance texture pause" loading="lazy"><div><span>VISUAL PAUSE</span><strong>Quiet can still leave a trace.</strong></div></aside>${objects.slice(2).map(p=>v4Card(p)).join('')}`;
     }
   }
 
@@ -110,12 +110,15 @@
   function renderLibrary(){
     const grid=document.querySelector('[data-results]'); const panel=document.querySelector('[data-v4-filter]'); if(!grid || !panel) return;
     const current=new URLSearchParams(location.search); const q=(current.get('q')||'').trim().toLowerCase(); const category=current.get('category')||''; const mood=current.get('mood')||''; const presence=current.get('presence')||''; const concentration=current.get('concentration')||''; const house=current.get('house')||''; const sample=current.get('sample')==='1';
-    panel.innerHTML=`<div class="v4-filter-title"><span>Refine</span><a href="search.html">Clear</a></div>
+    panel.innerHTML=`<div class="v4-filter-title"><span>Refine only when useful</span><a href="search.html">Clear all</a></div><div class="v4-filter-groups">
       <div class="v4-filter-group"><strong>Family</strong>${['floral','woody','amber','fresh','musk'].map(value=>`<a aria-current="${category===value}" href="${paramsUrl({category:value})}">${familyLabels[value]||value}<span>↗</span></a>`).join('')}</div>
       <div class="v4-filter-group"><strong>Mood</strong>${['clean','intimate','soft','warm','luminous','contemplative','mysterious'].map(value=>`<a aria-current="${mood===value}" href="${paramsUrl({mood:value})}">${moodLabels[value]}<span>↗</span></a>`).join('')}</div>
       <div class="v4-filter-group"><strong>Presence</strong>${['intimate','moderate','statement'].map(value=>`<a aria-current="${presence===value}" href="${paramsUrl({presence:value})}">${presenceLabels[value]}<span>↗</span></a>`).join('')}</div>
       <div class="v4-filter-group"><strong>House</strong>${HOUSES.map(value=>`<a aria-current="${house===value.id}" href="${paramsUrl({house:value.id})}">${value.name}<span>↗</span></a>`).join('')}</div>
-      <div class="v4-filter-group"><strong>Format</strong><a aria-current="${concentration==='edp'}" href="${paramsUrl({concentration:'edp'})}">Eau de Parfum<span>↗</span></a><a aria-current="${concentration==='extrait'}" href="${paramsUrl({concentration:'extrait'})}">Extrait<span>↗</span></a><a aria-current="${sample}" href="${paramsUrl({sample:'1'})}">Try first<span>↗</span></a></div>`;
+      <div class="v4-filter-group"><strong>Format</strong><a aria-current="${concentration==='edp'}" href="${paramsUrl({concentration:'edp'})}">Eau de Parfum<span>↗</span></a><a aria-current="${concentration==='extrait'}" href="${paramsUrl({concentration:'extrait'})}">Extrait<span>↗</span></a><a aria-current="${sample}" href="${paramsUrl({sample:'1'})}">Trial · try first<span>↗</span></a></div></div>`;
+
+    const toggle=document.querySelector('[data-v4-filter-toggle]');
+    if(toggle){ toggle.addEventListener('click',()=>{ const open=panel.classList.toggle('is-open'); toggle.setAttribute('aria-expanded',String(open)); toggle.textContent=open?'Hide refinements':'Refine the edit'; }); }
 
     let items=DATA.products.filter(product=>{
       const meta=metaFor(product); const productHouse=houseFor(product); const searchable=[product.name,product.brand,product.family,product.concentration,product.description,meta.character,...meta.mood].filter(Boolean).join(' ').toLowerCase();
@@ -129,8 +132,8 @@
     const draw=()=>{
       let list=[...items]; if(sort?.value==='price-asc') list.sort((a,b)=>a.price-b.price); if(sort?.value==='price-desc') list.sort((a,b)=>b.price-a.price); if(sort?.value==='rating') list.sort((a,b)=>b.rating-a.rating);
       document.querySelectorAll('[data-result-count]').forEach(el=>el.textContent=`${list.length} object${list.length===1?'':'s'}`);
-      if(!list.length){ grid.innerHTML='<div class="v4-empty"><span>NO OBJECT IN THIS EDIT</span><h2>Widen the scent portrait.</h2><p>Remove one refinement or begin from feeling instead.</p><div><a class="btn btn-secondary" href="search.html">Clear filters</a> <a class="btn btn-primary" href="finder.html">Scent Portrait</a></div></div>'; return; }
-      const chunks=[]; list.forEach((product,index)=>{ chunks.push(v4Card(product)); if(index===5 && list.length>6){ const image=mediaFor(product)[2]; chunks.push(`<aside class="v4-plp-interrupt"><img src="${image}" alt="Editorial fragrance atmosphere"><div><span>HOUSE INTERRUPTION / 03</span><strong>Browse a maison, not only a note.</strong><p>Use a house when you want a consistent scent territory instead of a longer filter list.</p><a href="houses.html">Open curated houses →</a></div></aside>`); } }); grid.innerHTML=chunks.join('');
+      if(!list.length){ grid.innerHTML='<div class="v4-empty"><span>NO OBJECT IN THIS EDIT</span><h2>Widen the question.</h2><p>Remove one refinement or begin from feeling instead.</p><div><a class="btn btn-secondary" href="search.html">Clear filters</a> <a class="btn btn-primary" href="finder.html">Begin with feeling</a></div></div>'; return; }
+      const chunks=[]; list.forEach((product,index)=>{ chunks.push(v4Card(product)); if(index===5 && list.length>6){ const image=mediaFor(product)[2]; chunks.push(`<aside class="v4-plp-interrupt"><img src="${image}" alt="Full-width editorial scent atmosphere"><div><span>VISUAL PAUSE</span><strong>Leave the grid for a moment.</strong></div></aside>`); } }); grid.innerHTML=chunks.join('');
     };
     sort?.addEventListener('change',draw); draw();
   }
@@ -145,12 +148,23 @@
     const product=byId(qs.get('id'))||DATA.products[0]; if(!product) return;
     const meta=metaFor(product); const house=houseFor(product); const notes=product.notes||{}; const related=relatedProducts(product); const media=mediaFor(product);
     document.title=`${product.name} · ${product.brand} · Violet Parfumerie`; host.className='v4-pdp';
-    host.innerHTML=`<div class="v4-pdp-media"><div class="v4-pdp-media-index"><span>V.11 / OBJECT STUDY</span><span>${product.family||'Fine fragrance'}</span></div>
-        <div class="v5-gallery"><figure class="v5-gallery-tile v5-gallery-main"><img src="${media[0]}" alt="${product.name} by ${product.brand}"><figcaption class="v5-media-caption">Object view</figcaption></figure><figure class="v5-gallery-tile"><img src="${media[1]}" alt="Editorial fragrance material study"><figcaption class="v5-media-caption">Material study</figcaption></figure><figure class="v5-gallery-tile"><img src="${media[2]}" alt="Editorial fragrance atmosphere"><figcaption class="v5-media-caption">Atmosphere</figcaption></figure><figure class="v5-gallery-tile v5-gallery-wide"><img src="${media[3]}" alt="Editorial fragrance texture study" loading="lazy"><figcaption class="v5-media-caption">Texture / editorial study</figcaption></figure></div>
-        <div class="v4-pdp-media-foot"><span>${product.brand}</span><span>${product.concentration||''} · ${product.size||''}</span></div></div>
-      <aside class="v4-buying-desk"><div class="v4-buying-index"><span>VIOLET OBJECT / ${String(DATA.products.findIndex(item=>item.id===product.id)+1).padStart(2,'0')}</span><span>${meta.sample?'TRY FIRST':'VIOLET EDIT'}</span></div><a class="v4-pdp-house" href="${house?`house.html?id=${house.id}`:'houses.html'}">${product.brand}</a><h1>${product.name}</h1><p class="v4-pdp-character">${meta.character}</p><div class="v4-pdp-format">${product.concentration||''} · ${product.size||''} · ${product.family||''}</div><div class="v4-pdp-price"><strong>${money(product.price)}</strong><span>${product.stock>0?`${product.stock} in prototype inventory`:'Unavailable'}</span></div><div class="v4-size-row"><span>Size</span><button type="button" aria-pressed="true">${product.size||'One size'}</button></div><div class="v4-pdp-actions"><button class="btn btn-primary" type="button" data-v4-add-bottle="${product.id}" ${product.stock<=0?'disabled':''}>Add full bottle</button>${meta.sample?`<button class="btn btn-secondary" type="button" data-v4-add-sample="${product.id}">Add to trial trio</button>`:`<a class="btn btn-secondary" href="discovery.html">Explore Discovery</a>`}</div><p class="v4-reality-note">Prototype commerce is browser-local. Editorial support images communicate mood/material and are not extra packshots of the fictional bottle.</p><div class="v4-pdp-quick"><div><span>Presence</span><strong>${presenceLabels[meta.presence]||meta.presence}</strong></div><div><span>Wear</span><strong>${meta.wear}</strong></div></div></aside>
-      <section class="v4-pdp-story"><figure class="v5-story-media"><img src="${media[2]}" alt="Editorial scent atmosphere for ${product.name}" loading="lazy"><figcaption class="v5-media-caption">Scent atmosphere / editorial reference</figcaption></figure><div class="v5-story-copy"><div class="v4-pdp-story-lead"><span class="v4-kicker">01 / THE SCENT</span><h2>${product.description}</h2></div><div class="v4-note-table"><div><span>Top</span><strong>${notes.top||'—'}</strong></div><div><span>Heart</span><strong>${notes.heart||'—'}</strong></div><div><span>Base</span><strong>${notes.base||'—'}</strong></div></div><div class="v4-house-proof"><span class="v4-kicker">02 / THE HOUSE</span><h3>${house?.name||product.brand}</h3><p>${house?.ethos||'Part of the Violet curated prototype edit.'}</p><p class="v4-house-territory">${house?.territory||product.family||''}</p><a href="${house?`house.html?id=${house.id}`:'houses.html'}">Open the maison →</a></div></div></section>
-      <section class="v4-related"><div class="v4-section-label"><span>03 / NEARBY DIRECTIONS</span><span>Shared family, mood or presence</span></div><div class="v4-related-grid">${related.map(row=>v4Card(row.item,row.reason)).join('')}</div></section>`;
+    host.innerHTML=`<div class="v6-pdp-stage">
+      <div class="v4-pdp-media"><div class="v4-pdp-media-index"><span>V.11 / OBJECT STUDY</span><span>${product.family||'Fine fragrance'}</span></div>
+        <div class="v6-pdp-frame" data-v4-media-frame><img class="is-active" data-view="object" src="${media[0]}" alt="${product.name} by ${product.brand}"><img data-view="label" data-crop="label" src="${media[0]}" alt="Close crop of ${product.name} object image"><img data-view="material" src="${media[1]}" alt="Editorial material reference for ${product.name}"></div>
+        <div class="v6-pdp-dots" aria-label="Object views"><button type="button" data-v4-media-tab="object" aria-pressed="true">Object</button><button type="button" data-v4-media-tab="label" aria-pressed="false">Close crop</button><button type="button" data-v4-media-tab="material" aria-pressed="false">Material</button></div>
+        <div class="v4-pdp-media-foot"><span>${product.brand}</span><span>Fade study · editorial support clearly labelled</span></div></div>
+      <aside class="v4-buying-desk"><div class="v4-buying-index"><span>VIOLET OBJECT / ${String(DATA.products.findIndex(item=>item.id===product.id)+1).padStart(2,'0')}</span><span>${meta.sample?'TRY FIRST':'VIOLET EDIT'}</span></div><a class="v4-pdp-house" href="${house?`house.html?id=${house.id}`:'houses.html'}">${product.brand}</a><h1>${product.name}</h1><p class="v4-pdp-character">${meta.character}</p><div class="v4-pdp-format">${product.concentration||''} · ${product.size||''} · ${product.family||''}</div>
+        <div class="v6-note-orbit"><div><span>Opening</span><strong>${notes.top||'—'}</strong></div><div><span>Heart</span><strong>${notes.heart||'—'}</strong></div><div><span>Trace</span><strong>${notes.base||'—'}</strong></div></div>
+        <div class="v4-pdp-price"><strong>${money(product.price)}</strong><span>${product.stock>0?`${product.stock} in prototype inventory`:'Unavailable'}</span></div><div class="v4-size-row"><span>Size</span><button type="button" aria-pressed="true">${product.size||'One size'}</button></div><div class="v4-pdp-actions"><button class="btn btn-primary" type="button" data-v4-add-bottle="${product.id}" ${product.stock<=0?'disabled':''}>Add full bottle</button>${meta.sample?`<button class="btn btn-secondary" type="button" data-v4-add-sample="${product.id}">Add to trial trio</button>`:`<a class="btn btn-secondary" href="discovery.html">Explore Discovery</a>`}</div><p class="v4-reality-note">Prototype commerce is browser-local. Editorial support images communicate mood/material and are not additional packshots of the fictional bottle.</p><div class="v4-pdp-quick"><div><span>Presence</span><strong>${presenceLabels[meta.presence]||meta.presence}</strong></div><div><span>Wear</span><strong>${meta.wear}</strong></div></div><details class="v6-pdp-more"><summary>Read the longer story +</summary><div>${product.description}<br><br>${house?.ethos||'Part of the Violet curated prototype edit.'}</div></details></aside>
+    </div>
+    <section class="v4-pdp-story"><figure class="v5-story-media"><img src="${media[2]}" alt="Editorial scent atmosphere for ${product.name}" loading="lazy"><figcaption class="v5-media-caption">Scent atmosphere / editorial reference</figcaption></figure><div class="v5-story-copy"><div class="v4-pdp-story-lead"><span class="v4-kicker">01 / AFTER THE OPENING</span><h2>What remains when the first impression has left?</h2></div><div class="v4-note-table"><div><span>Top</span><strong>${notes.top||'—'}</strong></div><div><span>Heart</span><strong>${notes.heart||'—'}</strong></div><div><span>Base</span><strong>${notes.base||'—'}</strong></div></div><div class="v4-house-proof"><span class="v4-kicker">02 / THE HOUSE</span><h3>${house?.name||product.brand}</h3><p>${house?.ethos||'Part of the Violet curated prototype edit.'}</p><p class="v4-house-territory">${house?.territory||product.family||''}</p><a href="${house?`house.html?id=${house.id}`:'houses.html'}">Enter the maison →</a></div></div></section>
+    <section class="v4-related"><div class="v4-section-label"><span>03 / IF CURIOSITY MOVES SIDEWAYS</span><span>Shared family, mood or presence</span></div><div class="v4-related-grid">${related.map(row=>v4Card(row.item,row.reason)).join('')}</div></section>`;
+
+    host.querySelectorAll('[data-v4-media-tab]').forEach(button=>button.addEventListener('click',()=>{
+      const view=button.dataset.v4MediaTab;
+      host.querySelectorAll('[data-v4-media-tab]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      host.querySelectorAll('[data-v4-media-frame] img').forEach(img=>img.classList.toggle('is-active',img.dataset.view===view));
+    }));
     host.querySelector('[data-v4-add-bottle]')?.addEventListener('click',()=>addBottle(product.id));
     host.querySelector('[data-v4-add-sample]')?.addEventListener('click',event=>{ const result=addToTrio(product.id); status(result.message); if(result.ok) event.currentTarget.textContent='Added to trial trio'; });
   }
@@ -170,7 +184,7 @@
   function renderDiscovery(){
     if(!document.querySelector('.v4-discovery-page')) return; const focus=qs.get('focus'); if(focus && byId(focus) && metaFor(byId(focus)).sample && !getTrio().includes(focus)) addToTrio(focus); renderTrio(); renderSampleList();
     const wardrobe=document.querySelector('[data-v4-wardrobe]'); const product=byId('violet-discovery-set');
-    if(wardrobe&&product) wardrobe.innerHTML=`<div><span class="v4-kicker">03 / PRE-COMPOSED</span><h2>Prefer one ready-made wardrobe?</h2><p>${product.description}</p><div class="v4-wardrobe-meta"><span>${product.size}</span><strong>${money(product.price)}</strong></div><div class="v4-wardrobe-actions"><button class="btn btn-primary" type="button" data-v4-add-wardrobe>Add Discovery Wardrobe</button><a class="v4-text-link" href="product.html?id=${product.id}">View object →</a></div></div><div class="v4-wardrobe-media"><img src="${mediaFor(product)[0]}" alt="${product.name}"></div>`;
+    if(wardrobe&&product) wardrobe.innerHTML=`<div><span class="v4-kicker">04 / PRE-COMPOSED</span><h2>Prefer one ready-made wardrobe?</h2><p>${product.description}</p><div class="v4-wardrobe-meta"><span>${product.size}</span><strong>${money(product.price)}</strong></div><div class="v4-wardrobe-actions"><button class="btn btn-primary" type="button" data-v4-add-wardrobe>Add Discovery Wardrobe</button><a class="v4-text-link" href="product.html?id=${product.id}">Look closer →</a></div></div><div class="v4-wardrobe-media"><img src="${mediaFor(product)[0]}" alt="${product.name}"></div>`;
     wardrobe?.querySelector('[data-v4-add-wardrobe]')?.addEventListener('click',()=>addBottle(product.id));
   }
 

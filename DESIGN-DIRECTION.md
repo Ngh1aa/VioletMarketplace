@@ -1,135 +1,145 @@
-# Violet Parfumerie — Design Direction
+# Violet Parfumerie — Exploration Layout Direction
 
 ## Creative thesis
 
-Violet should feel like a **contemporary fragrance gallery with a working try-first marketplace inside it**, not a purple general marketplace.
+Violet is a **white fragrance space shaped around curiosity**. It should feel like entering rooms in a gallery, not scanning a marketplace catalogue.
 
-The current direction is anchored to three words:
+The governing idea is:
 
-- **Editorial** — composition, image scale and typography create the first impression; copy supports the object instead of competing with it.
-- **Tactile** — bottle, glass, paper, flowers, woods, skin, light and material studies make scent feel physical before it can be smelled.
-- **Refined** — luxury comes from restraint, hierarchy and detail rather than decorative gradients, large shadows, glass effects or excessive rounded cards.
+**Look → wonder → reveal → wear → wait → return → decide**
 
-The brand field is **warm violet twilight**: warm paper and ivory carry most of the canvas, aubergine provides authority, and dusty pastel lilac is an identity cue rather than wallpaper.
+The design must create desire to continue exploring before it asks for commitment.
 
-## Image-first contract
+## Visual contract
 
-The storefront is designed around a deliberate media-to-copy balance.
+- Page background: **#FFFFFF**.
+- Primary interaction / button / selected-state colour: **pastel violet**.
+- Dark aubergine is allowed for text depth and small contrast only; it must not become the dominant page surface.
+- No black or aubergine full-page blocks as the main visual identity.
+- Product and editorial imagery owns the page. Text is a guest.
+- Serif display typography carries emotion; sans-serif carries navigation and functional UI.
+- No decorative gradients, glassmorphism, generic rounded cards or heavy shadows.
 
-- Product detail above the fold: **~70% media / ~30% buying information**.
-- Homepage feature: **~70% media / ~30% copy and commerce**.
-- Product cards: imagery should visually occupy roughly three quarters or more of the card.
-- Discovery choices: every fragrance direction needs a thumbnail or visual anchor.
+### Core colour tokens
 
-A fragrance PDP uses four media roles:
+- White: `#FFFFFF`
+- Pastel 050: `#FBF8FD`
+- Pastel 100: `#F5EEF9`
+- Pastel 200: `#EADCF4`
+- Pastel 300 / primary CTA: `#DCC6EE`
+- Pastel 400 / hover-focus: `#C9A8E2`
+- Ink: `#17131B`
+- Muted text: `#706A74`
+- Aubergine text accent: `#3D2C45`
+- Fine rule: `#E9E4EC`
 
-1. **Object view** — the catalogue bottle/object source.
-2. **Material study** — botanical, glass, paper or ingredient-adjacent texture.
-3. **Atmosphere** — emotional/editorial context.
-4. **Texture study** — a supporting tactile surface lower in the gallery.
+## Three layout laws
 
-Supporting editorial imagery communicates mood and material. It must never be described as another packshot of the fictional product.
+### 1. Asymmetry over equal grids
 
-## Composition rules
+Equal retail grids read as templates. Violet should create visual tension through unequal columns, staggered heights, offset sections and deliberate crops. A user should have to visually locate the next anchor instead of scanning mechanically from left to right.
 
-- Product pages use a long media gallery with a sticky buying desk.
-- Homepage begins with one dominant object/media moment, then an asymmetric discovery ledger rather than three equal route cards.
-- PLP/card layouts prioritize image recognition first, then maison, object name, format and price.
-- Product grids may contain editorial/house interruptions only when they help a shopping decision.
-- House pages use their own editorial composition and must not reuse the PDP shell.
-- Discovery is a trial/evaluation journey, not a renamed product listing.
-- Cart, checkout, seller and admin are operational surfaces and should be calmer and denser than showroom pages.
+### 2. Whitespace + image dominance
 
-Avoid:
+Whitespace communicates confidence. Most sections should leave enough empty area for the next object or image to feel discovered rather than inserted. Long copy lines must stay below roughly 75 characters on desktop.
 
-- repeated centered heading + three generic cards;
-- universal hero shells across unrelated page roles;
-- glassmorphism, neon violet and decorative gradients;
-- oversized rounded cards and generic soft shadows;
-- text-heavy interruptions that displace fragrance objects;
-- fake AI, payment, inventory, provenance or fulfillment claims.
+### 3. Progressive reveal
 
-## Palette
+Do not expose every filter, price, story, note and specification simultaneously. Reveal information when intent increases: hover/focus, open a filter drawer, select a PDP view, expand a long story, or move from sample to bottle.
 
-Primary direction:
+## Image : text ratio contract
 
-- `#241B26` — Violet Ink
-- `#513448` — Aubergine
-- `#765A7D` — Muted Violet Accent
-- `#D8C9E0` — Dusty Pastel Lilac
-- `#EEE8F2` — Violet Mist
-- `#E8D6CF` — Warm Blush
-- `#F7F3EE` — Paper
-- `#FFFDF9` — Warm Ivory
-- `#B89E72` — Muted Champagne, micro-accent only
+| Section | Image : text | Text limit |
+| --- | ---: | --- |
+| Home hero | 85 : 15 | ~480px / one short idea + CTA |
+| Editorial story | 55 : 45 | 520–600px, short lines |
+| Product card | 75–80 : 20–25 | name + one scent line |
+| PDP opening stage | 60 : 40 | 440–500px buying column |
+| House / maison | 70 : 30 | ~400px story copy |
+| Texture rest | 95 : 5 or 100 : 0 | caption only |
+| Final CTA | 40 : 60 | ~480px |
 
-Recommended field balance: ~60% paper/ivory, ~22% ink, ~8% aubergine, ~7% lilac, ~3% remaining accents/semantic color.
+## Home rhythm
 
-Violet must not become a full-page purple wash.
+**large image → large statement → asymmetric objects → image-only pause → editorial story → open question → houses → pastel CTA**
 
-## Typography
+- Hero image occupies about 85% of the width and is intentionally cropped.
+- The philosophy statement follows before product commerce.
+- Product edit uses a 55/45 asymmetric composition with staggered vertical starts.
+- At least one image-only rest appears every 3–4 content sections.
+- Headlines should open a question or continue an unfinished thought.
 
-- Display: editorial serif with strong but controlled contrast.
-- UI/body: neutral or humanist sans for clarity.
-- Display scale comes from hierarchy and whitespace, not effects.
-- Body line length targets roughly 55–70 characters.
-- Micro labels are reserved for classification/indexing such as `V.03 / WOODS`, not every heading.
+## Fragrance Library
 
-## Signature system
+- No permanent Amazon-style left sidebar.
+- Filters live in a horizontal drawer and are closed by default.
+- The underlying layout still uses three desktop tracks for predictable rendering, but the tracks are unequal and card heights are staggered.
+- Product media occupies at least 75% of each card.
+- Price remains visually hidden until hover/focus; name, house, family and format come first.
+- A full-width editorial image interrupts every 6–8 objects.
 
-1. **Violet Index** — `V.01`, `HOUSE 03`, `DISCOVERY / 02` as restrained wayfinding.
-2. **Object → Material → Atmosphere** — recurring media sequence connecting commerce to sensory storytelling.
-3. **Drydown Trace** — Opening → Drydown → Return used selectively in discovery and product education.
-4. **Split Ink Rule** — aubergine/ink rules anchor active decisions without relying on card chrome.
+## Product Detail
 
-Use the first two signatures consistently. Use Drydown Trace only where the content supports it.
+- Opening composition is 60/40.
+- Media is sticky **inside the opening stage only**, so it never covers the story below.
+- The first media state shows the object; secondary states reveal a closer crop and a clearly labelled editorial material reference.
+- View changes use a slow fade (roughly 300–400ms), not a horizontal marketplace slider.
+- Information order: house → object name → emotional sentence → opening/heart/trace → price + CTA → progressive story disclosure.
+- Longer description stays behind a disclosure element.
 
-## Motion
+## Houses
 
-Motion is quiet and functional:
+- The house index deliberately switches to horizontal scroll + snap.
+- Each house acts like a room, not a row in a database.
+- House detail begins with a nearly full-viewport editorial atelier image and only a small amount of text at the bottom edge.
+- Story and product edit appear only after scroll.
 
-- product-card image cross-fade / subtle scale;
-- 150–300 ms control transitions;
-- one hero/media reveal may carry the strongest motion moment;
-- scroll reveal is selective, not universal;
-- `prefers-reduced-motion` removes non-essential motion.
+## Discovery and Scent Portrait
 
-## UX model
+Discovery is the behavioural thesis of Violet: **wear before commitment**.
 
-Primary discovery axes:
+Scent Portrait uses a 30/70 desktop split:
 
-1. Olfactive family
-2. Mood / wearing context
-3. Notes/material
-4. Maison
-5. Presence
-6. Discovery eligibility before full-bottle commitment
+- the story rail is quiet and stable;
+- each question occupies the decision workspace at near full-screen scale;
+- progress is text only (`02 / 04`), never a large survey progress bar;
+- selected states use pastel violet;
+- mood changes may tint the page subtly without becoming decorative.
 
-Primary buyer loop:
+The recommendation remains deterministic prototype logic. Never imply AI personality prediction.
 
-`Explore → Understand → Try → Wear → Return → Commit`
+## About
 
-Scent Portrait is a route into this loop, not a fake-AI endpoint.
+About behaves like a magazine spread: alternating 55/45 and 45/55 sections, full-height images, offset copy and large typographic pauses. It should read like turning pages, not a corporate About template.
 
-## Marketplace distinction
+## Commerce utilities
 
-Violet remains a marketplace, so the luxury layer must not hide operational trust:
+Bag, checkout and success stay calm and usable:
 
-- fictional fragrance houses are clearly presented as prototype data;
-- browser-local cart/discovery behavior is described truthfully;
-- authenticity/provenance language must not invent real stockist relationships;
-- buyer commerce and seller/admin operations remain separate page roles;
-- familiar controls win over novelty in bag and checkout.
+- white page surfaces;
+- pastel-violet primary actions and summary fields;
+- minimal borders;
+- no dark checkout shell;
+- explicit prototype reality text remains visible.
 
-Luxury should reduce noise, not reduce clarity.
+## Interaction principles
 
-## Representative-screen gate
+- Intentional crop on arrival; reveal more on hover/click.
+- Product hover may switch from object to material/atmosphere.
+- CTA copy should invite: “Look closer”, “Begin with three”, “Enter the maison”, “Start with a feeling”.
+- Avoid command-heavy labels unless necessary for commerce.
+- Motion is restrained fade/translate and always respects `prefers-reduced-motion`.
 
-Before propagating this direction across every route, verify these screens at the declared desktop pressure points:
+## Prototype truth boundaries
 
-1. Home
-2. Fragrance Library
-3. Product Detail
-4. Discovery
+- Fictional maisons remain visibly fictional.
+- Browser-local cart, trio and checkout states must never be presented as live fulfilment.
+- Supporting editorial imagery must never be represented as additional packshots of the fictional product.
+- English is the primary UI language and EUR is the single buyer-facing currency.
 
-Declared visual scope remains desktop-only at 1280 / 1440 / 1600 until responsive work is explicitly scheduled and verified.
+## Desktop verification scope
+
+Primary: 1440×1000.
+Pressure points: 1280×1000 and 1600×1000.
+
+Do not claim full mobile/tablet completion until a dedicated responsive phase is verified.

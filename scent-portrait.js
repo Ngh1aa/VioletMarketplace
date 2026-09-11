@@ -3,7 +3,7 @@
   if (!host) return;
 
   const DATA = window.VIOLET_DATA || { products: [] };
-  const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(Number(n || 0));
+  const money = n => `${new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 }).format(Number(n || 0))} €`;
 
   const PROFILE = {
     'violette-03': { moods:['intimate','soft'], presence:'quiet', occasions:['everyday','evening'], cues:['violet','iris','powder'] },

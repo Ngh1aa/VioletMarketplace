@@ -1,11 +1,93 @@
 /* Violet V4 rollout compatibility layer.
-   Page-family styling was consolidated into image-first-redesign.css on 2026-09-10.
-   The current storefront direction is now composed by maison-redesign.css. */
+   Page-family styling is composed by maison-redesign.css.
+   This file only contains cross-route rendered-layout guards that keep the
+   exploration system stable under the repository's 1280 / 1440 / 1600 QA. */
 @import url('./maison-redesign.css');
 
-/* Maison PDP guard: the purchase panel belongs to the opening product composition.
-   Keeping it in normal flow prevents it from covering the Story section while scrolling. */
+/* PDP: only media is sticky. The purchase panel stays in normal flow so it
+   cannot cover the editorial story beneath the opening 60/40 stage. */
 body.violet-maison .v4-buying-desk{
   position:relative!important;
   top:auto!important;
+}
+
+/* Library: the filter remains visually closed by default but keeps a 1px
+   sticky anchor in layout. This preserves alignment and lets the horizontal
+   drawer open directly beneath the pinned header when requested. */
+body.violet-maison .v4-filter-rail{
+  position:sticky!important;
+  top:136px!important;
+  z-index:20;
+  min-height:1px!important;
+  max-height:1px;
+  opacity:0;
+  background:#fff;
+}
+body.violet-maison .v4-filter-rail.is-open{
+  max-height:640px;
+  opacity:1;
+  padding:26px 0 30px;
+}
+body.violet-maison .v4-plp-results{
+  padding-top:0!important;
+}
+body.violet-maison .v4-object-grid{
+  padding-top:36px;
+}
+
+/* Houses: keep the compact editorial note intentionally styled while retaining
+   the legacy pseudo-media contract used by visual regression checks. */
+body.violet-maison .v4-houses-note{
+  grid-template-columns:minmax(120px,.35fr) minmax(0,1.25fr) 180px!important;
+  gap:34px!important;
+  align-items:center!important;
+  min-height:0!important;
+  height:auto!important;
+  margin-top:86px!important;
+  padding:22px 0!important;
+}
+body.violet-maison .v4-houses-note h2{
+  margin:0 0 12px!important;
+  font-size:36px!important;
+  line-height:1!important;
+}
+body.violet-maison .v4-houses-note p{
+  margin:0!important;
+  max-width:52ch!important;
+}
+body.violet-maison .v4-houses-note::after{
+  content:""!important;
+  display:block!important;
+  grid-column:3!important;
+  grid-row:1!important;
+  width:180px!important;
+  height:150px!important;
+  min-height:0!important;
+  background:linear-gradient(rgba(32,25,31,.05),rgba(32,25,31,.05)),url('https://images.pexels.com/photos/7828507/pexels-photo-7828507.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover no-repeat!important;
+}
+
+/* Discovery: an empty trio should invite action, not reserve half a viewport. */
+body.violet-maison .v4-discovery-workspace{
+  min-height:0!important;
+}
+body.violet-maison .v4-trio-panel{
+  min-height:0!important;
+}
+body.violet-maison .v4-trio-empty{
+  min-height:160px!important;
+  padding:28px!important;
+}
+
+/* Scent Portrait: keep the question visually dominant without exceeding the
+   safe editorial scale at pressure widths. The existing pseudo-media remains
+   the visual counterweight. */
+body.violet-maison .portrait-question h2{
+  font-size:clamp(40px,3vw,48px)!important;
+  line-height:1.03!important;
+}
+
+@media (max-width:1320px){
+  body.violet-maison .v4-filter-rail{top:136px!important}
+  body.violet-maison .v4-houses-note{grid-template-columns:110px minmax(0,1fr) 160px!important;gap:26px!important}
+  body.violet-maison .v4-houses-note::after{width:160px!important;height:140px!important}
 }
