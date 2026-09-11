@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Violet Parfumerie — a fictional fragrance maison marketplace shaped around scent objects, independent houses and slower discovery.">
   <title>Violet Parfumerie · Scent Objects & Slow Discovery</title>
+  <link rel="preload" as="image" href="assets/media/product-violette-03.jpg" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="perfume-luxury.css">
   <link rel="stylesheet" href="desktop-experience-v4.css">
   <link rel="stylesheet" href="maison-redesign.css">
+  <link rel="stylesheet" href="brand-contract.css" data-violet-brand-contract>
+  <link rel="stylesheet" href="exploration-layout.css" data-violet-exploration-layout>
+  <link rel="stylesheet" href="accessibility-v6.css" data-violet-accessibility-v6>
 </head>
-<body>
+<body class="violet-maison violet-v4">
   <div data-site-header></div>
   <main class="v4-main">
     <section class="container v4-home-hero" data-v4-feature></section>
@@ -28,7 +32,7 @@
     </section>
 
     <section class="container maison-ritual" aria-labelledby="maison-ritual-title">
-      <div class="maison-ritual-media"><img src="assets/media/editorial-04.jpg" alt="Soft evening light and botanical atmosphere" loading="lazy"></div>
+      <div class="maison-ritual-media"><img src="assets/media/editorial-04.jpg" width="1600" height="2623" alt="Soft evening light and botanical atmosphere" loading="lazy"></div>
       <div class="maison-ritual-copy"><span class="v4-kicker">02 / EVENING RITUAL</span><h2 id="maison-ritual-title">Let the drydown arrive before the decision.</h2><p>The opening is only a first impression. Violet treats fragrance discovery as a ritual: wear, wait, return, then choose the bottle that still belongs with you.</p><a href="discovery.html">Explore the trial ritual →</a></div>
     </section>
 
@@ -66,7 +70,7 @@
   <script src="app.js"></script>
   <script src="storefront-v4.js"></script>
   <script src="storefront-v4-rollout.js"></script>
-  <script src="figma-capture.js"></script>
-  <script src="accessibility-v6.js"></script>
+  <script src="figma-capture.js" defer></script>
+  <script src="accessibility-v6.js" defer></script>
 </body>
 </html>
