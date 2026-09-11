@@ -103,69 +103,67 @@ const browser = await chromium.launch({ headless: true });
 for (const width of report.viewportWidths) {
   const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, colorScheme: 'light' });
 
-  // Header + filter: catches the old sticky-parent trap and dead filter column.
-  // First check natural column alignment. Then, only if the document can scroll far
-  // enough to cross the sticky threshold, assert the sticky offset against the real header.
+  // Library contract: refinements are hidden by default and intentionally revealed on demand.
   {
     const page = await context.newPage();
     await page.goto(`${base}/search.html?sample=1`, { waitUntil: 'networkidle' });
-    const scrollPlan = await page.evaluate(() => {
-      const filter = document.querySelector('.v4-filter-rail');
-      const results = document.querySelector('.v4-plp-results');
-      const filterDocumentTop = filter ? filter.getBoundingClientRect().top + scrollY : 0;
-      const resultsDocumentTop = results ? results.getBoundingClientRect().top + scrollY : 0;
-      const stickyTop = filter ? parseFloat(getComputedStyle(filter).top) || 0 : 0;
-      const maxScroll = Math.max(0, document.documentElement.scrollHeight - innerHeight);
-      const stickyThreshold = Math.max(0, filterDocumentTop - stickyTop);
-      return {
-        filterDocumentTop,
-        resultsDocumentTop,
-        stickyTop,
-        stickyThreshold,
-        maxScroll,
-        targetScroll: Math.min(filterDocumentTop + 220, maxScroll),
-        canReachSticky: maxScroll >= stickyThreshold + 4
-      };
-    });
-    if (Math.abs(scrollPlan.filterDocumentTop - scrollPlan.resultsDocumentTop) > 32) {
-      fail('filter-column-misalignment', `${width}px: filter rail starts far below the results column`, scrollPlan);
-    }
-    await instantScroll(page, scrollPlan.targetScroll);
-    const data = await page.evaluate(() => {
+    const before = await page.evaluate(() => {
       const header = document.querySelector('.site-header')?.getBoundingClientRect();
-      const filter = document.querySelector('.v4-filter-rail')?.getBoundingClientRect();
+      const filter = document.querySelector('.v4-filter-rail');
+      const toggle = document.querySelector('.explore-filter-toggle');
       const searchButton = document.querySelector('.search-form button')?.getBoundingClientRect();
       const cartCount = document.querySelector('.cart-count');
       return {
-        actualScrollY: scrollY,
         header: header && { top: header.top, bottom: header.bottom, height: header.height },
-        filter: filter && { top: filter.top },
+        filterDisplay: filter ? getComputedStyle(filter).display : null,
+        toggle: toggle ? { width: toggle.getBoundingClientRect().width, height: toggle.getBoundingClientRect().height, text: toggle.textContent } : null,
         searchButton: searchButton && { width: searchButton.width, height: searchButton.height },
         cartCountPosition: cartCount ? getComputedStyle(cartCount).position : null,
-        visibleMysteryActions: [...document.querySelectorAll('.header-actions>.icon-link:not(.cart-link)')].filter(el => {
+        visibleMysteryActions: [...document.querySelectorAll('.header-actions>.icon-link:not(.cart-link):not(.v5-trio-link)')].filter(el => {
           const r = el.getBoundingClientRect(), s = getComputedStyle(el); return r.width > 0 && r.height > 0 && s.display !== 'none' && s.visibility !== 'hidden';
         }).length
       };
     });
-    data.scrollPlan = scrollPlan;
-    if (!data.header || Math.abs(data.header.top) > 2) fail('sticky-header', `${width}px: header must remain pinned after scroll`, data);
-    if (scrollPlan.canReachSticky && (!data.filter || !data.header || data.filter.top < data.header.bottom - 2 || data.filter.top - data.header.bottom > 24)) {
-      fail('filter-dead-offset', `${width}px: sticky filter rail must sit directly below the rendered header once sticky`, data);
-    }
-    if (!data.searchButton || data.searchButton.width < 64 || data.searchButton.height < 40) fail('undersized-search-action', `${width}px: search submit control is too small`, data.searchButton);
-    if (data.cartCountPosition !== 'static') fail('floating-cart-badge', `${width}px: bag count must participate in layout`, data);
-    if (data.visibleMysteryActions !== 0) fail('mystery-header-action', `${width}px: cryptic buyer-header action remains visible`, data);
+    if (before.filterDisplay !== 'none') fail('filter-not-progressive', `${width}px: refinement panel should be hidden by default`, before);
+    if (!before.toggle || before.toggle.width < 70 || before.toggle.height < 24) fail('missing-filter-toggle', `${width}px: visible refinement trigger is missing or too small`, before);
+    if (!before.searchButton || before.searchButton.width < 64 || before.searchButton.height < 40) fail('undersized-search-action', `${width}px: search submit control is too small`, before.searchButton);
+    if (before.cartCountPosition !== 'static') fail('floating-cart-badge', `${width}px: bag count must participate in layout`, before);
+    if (before.visibleMysteryActions !== 0) fail('mystery-header-action', `${width}px: cryptic buyer-header action remains visible`, before);
+
+    await page.click('.explore-filter-toggle');
+    const after = await page.evaluate(() => {
+      const filter = document.querySelector('.v4-filter-rail');
+      const r = filter?.getBoundingClientRect();
+      const toolbar = document.querySelector('.v4-plp-toolbar')?.getBoundingClientRect();
+      return {
+        display: filter ? getComputedStyle(filter).display : null,
+        rect: r && { top: r.top, bottom: r.bottom, width: r.width, height: r.height },
+        toolbar: toolbar && { top: toolbar.top, bottom: toolbar.bottom, width: toolbar.width }
+      };
+    });
+    if (after.display === 'none' || !after.rect || after.rect.height < 80) fail('filter-reveal-failed', `${width}px: refinement panel did not reveal intentionally`, after);
+    if (after.rect && after.toolbar && Math.abs(after.rect.width - after.toolbar.width) > 42) fail('filter-reveal-misalignment', `${width}px: revealed filters should align with results width`, after);
+    await instantScroll(page, 220);
+    const stickyHeader = await page.evaluate(() => document.querySelector('.site-header')?.getBoundingClientRect().top ?? 999);
+    if (Math.abs(stickyHeader) > 2) fail('sticky-header', `${width}px: header must remain pinned after scroll`, { stickyHeader });
     await commonHealth(page, `library-${width}`);
     await page.screenshot({ path: path.join(out, `library-${width}.png`), fullPage: false });
-    record('header-filter', { width, data });
+    record('progressive-filter', { width, before, after });
     await page.close();
   }
 
-  // PDP: explicitly test the old buying-desk / story collision while scrolling.
+  // PDP: the sticky media is bounded to the opening 60/40 composition and must never collide with Story.
   {
     const page = await context.newPage();
     await page.goto(`${base}/product.html?id=violette-03`, { waitUntil: 'networkidle' });
     await commonHealth(page, `pdp-${width}`);
+    const intro = await page.evaluate(() => {
+      const wrap = document.querySelector('.explore-pdp-intro')?.getBoundingClientRect();
+      const media = document.querySelector('.v4-pdp-media')?.getBoundingClientRect();
+      const desk = document.querySelector('.v4-buying-desk')?.getBoundingClientRect();
+      return wrap && media && desk ? { wrap: { width: wrap.width }, media: { width: media.width }, desk: { width: desk.width }, mediaRatio: media.width / wrap.width } : null;
+    });
+    if (!intro || intro.mediaRatio < .55 || intro.mediaRatio > .69) fail('pdp-ratio', `${width}px: PDP opening should remain approximately 60/40`, intro);
     const scrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
     const positions = [0, 500, 900, 1300, 1700, 2200].filter(y => y < scrollHeight);
     for (const y of positions) {
@@ -175,43 +173,50 @@ for (const width of report.viewportWidths) {
           const r = document.querySelector(selector)?.getBoundingClientRect();
           return r && { left: r.left, right: r.right, top: r.top, bottom: r.bottom, width: r.width, height: r.height };
         };
-        return { desk: pick('.v4-buying-desk'), story: pick('.v4-pdp-story') };
+        return { media: pick('.v4-pdp-media'), desk: pick('.v4-buying-desk'), story: pick('.v4-pdp-story') };
       });
+      if (boxes.media && boxes.story && intersection(boxes.media, boxes.story) > 8) fail('pdp-media-overlap', `${width}px: sticky media overlaps story at scrollY=${y}`, boxes);
       if (boxes.desk && boxes.story && intersection(boxes.desk, boxes.story) > 8) fail('pdp-section-overlap', `${width}px: buying desk overlaps story at scrollY=${y}`, boxes);
       await textOverlapScan(page, `pdp-${width}`, y);
     }
     await instantScroll(page, 1100);
     await page.screenshot({ path: path.join(out, `pdp-scroll-${width}.png`), fullPage: false });
+    record('pdp-bounded-sticky', { width, intro });
     await page.close();
   }
 
-  // Houses: migrated blocks must have intentional typography, density and media.
+  // Houses: horizontal movement must be intentional and contained inside the ledger, never on the body.
   {
     const page = await context.newPage();
     await page.goto(`${base}/houses.html`, { waitUntil: 'networkidle' });
     const data = await page.evaluate(() => {
+      const ledger = document.querySelector('.v4-houses-ledger');
+      const first = ledger?.querySelector('.v4-house-ledger-row');
       const note = document.querySelector('.v4-houses-note');
       const h2 = note?.querySelector('h2');
-      const r = note?.getBoundingClientRect();
-      const pseudo = note ? getComputedStyle(note, '::after') : null;
-      const h2Style = h2 ? getComputedStyle(h2) : null;
+      const ls = ledger ? getComputedStyle(ledger) : null;
       return {
-        height: r?.height || 0,
-        display: note ? getComputedStyle(note).display : null,
-        headingFont: h2Style?.fontFamily || '',
-        headingSize: h2Style ? parseFloat(h2Style.fontSize) : 0,
-        editorialMedia: pseudo?.backgroundImage || 'none'
+        bodyScrollWidth: document.documentElement.scrollWidth,
+        bodyClientWidth: document.documentElement.clientWidth,
+        ledgerOverflowX: ls?.overflowX || '',
+        ledgerScrollable: ledger ? ledger.scrollWidth > ledger.clientWidth + 20 : false,
+        firstWidth: first?.getBoundingClientRect().width || 0,
+        noteHeight: note?.getBoundingClientRect().height || 0,
+        noteBackground: note ? getComputedStyle(note).backgroundColor : '',
+        headingSize: h2 ? parseFloat(getComputedStyle(h2).fontSize) : 0
       };
     });
-    if (data.display !== 'grid' || data.headingSize < 26 || data.height > 300 || data.editorialMedia === 'none') fail('unstyled-migrated-section', `${width}px: Why Houses section lost intentional styling`, data);
-    await commonHealth(page, `houses-${width}`);
-    await page.locator('.v4-houses-note').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: path.join(out, `houses-note-${width}.png`), fullPage: false });
-    record('houses-note', { width, data });
+    if (!data.ledgerScrollable || !['auto','scroll'].includes(data.ledgerOverflowX)) fail('houses-not-horizontal', `${width}px: Houses index should be an intentional horizontal gallery`, data);
+    if (data.firstWidth < width * .48) fail('houses-card-too-small', `${width}px: each maison should feel like a room, not a narrow list row`, data);
+    if (data.bodyScrollWidth > data.bodyClientWidth + 2) fail('horizontal-overflow', `${width}px: horizontal Houses movement leaked to the page body`, data);
+    if (data.noteHeight > 340 || data.headingSize < 26 || data.noteBackground === 'rgba(0, 0, 0, 0)') fail('unstyled-migrated-section', `${width}px: Why Houses section lacks intentional compact styling`, data);
+    await page.locator('.v4-houses-ledger').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(out, `houses-horizontal-${width}.png`), fullPage: false });
+    record('houses-horizontal', { width, data });
     await page.close();
   }
 
-  // Discovery: empty state must remain content-driven rather than reserving half a viewport.
+  // Discovery: new contract is viewport-scale journey, but the empty tray itself stays compact.
   {
     const page = await context.newPage();
     await page.goto(`${base}/discovery.html`, { waitUntil: 'networkidle' });
@@ -219,13 +224,17 @@ for (const width of report.viewportWidths) {
     await page.reload({ waitUntil: 'networkidle' });
     const data = await page.evaluate(() => ({
       workspaceHeight: document.querySelector('.v4-discovery-workspace')?.getBoundingClientRect().height || 0,
-      emptyHeight: document.querySelector('.v4-trio-empty')?.getBoundingClientRect().height || 0
+      emptyHeight: document.querySelector('.v4-trio-empty')?.getBoundingClientRect().height || 0,
+      viewportHeight: innerHeight,
+      workspaceBackground: getComputedStyle(document.querySelector('.v4-discovery-workspace')).backgroundColor
     }));
-    if (data.workspaceHeight > 430 || data.emptyHeight > 190) fail('oversized-empty-state', `${width}px: discovery empty state wastes too much viewport`, data);
+    if (data.workspaceHeight < data.viewportHeight * .72 || data.workspaceHeight > data.viewportHeight * 1.12) fail('discovery-not-viewport-paced', `${width}px: discovery workspace should read as one deliberate viewport-scale step`, data);
+    if (data.emptyHeight > 190) fail('oversized-empty-state', `${width}px: discovery empty tray itself is too tall`, data);
+    if (data.workspaceBackground === 'rgba(0, 0, 0, 0)' || data.workspaceBackground === 'rgb(255, 255, 255)') fail('discovery-no-state-field', `${width}px: discovery step needs a distinct pastel journey field`, data);
     await commonHealth(page, `discovery-${width}`);
     await page.locator('.v4-discovery-workspace').scrollIntoViewIfNeeded();
     await page.screenshot({ path: path.join(out, `discovery-empty-${width}.png`), fullPage: false });
-    record('discovery-empty', { width, data });
+    record('discovery-viewport-step', { width, data });
     await page.close();
   }
 
