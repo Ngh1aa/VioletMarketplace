@@ -1,0 +1,89 @@
+/* Violet brand contract — pastel violet is a visible system color, not an incidental image color. */
+:root{
+  --maison-bg:#f3eef7;
+  --maison-paper:#fffdfb;
+  --maison-ink:#18141b;
+  --maison-muted:#6e6473;
+  --maison-line:#d8cde0;
+  --maison-soft:#ece3f1;
+  --maison-violet:#775f88;
+  --maison-violet-deep:#3e3048;
+  --maison-lilac:#e7ddef;
+  --maison-lilac-soft:#f1eaf5;
+  --maison-lilac-strong:#d4c0e0;
+  --maison-focus:#6f5282;
+}
+
+body.violet-maison{background:var(--maison-bg);color:var(--maison-ink)}
+body.violet-maison :where(a,button,input,select,textarea):focus-visible{outline-color:var(--maison-focus)}
+body.violet-maison .topbar{background:var(--maison-violet-deep)}
+body.violet-maison .site-header{background:rgba(243,238,247,.97)}
+body.violet-maison .nav-row{background:var(--maison-lilac-soft)}
+body.violet-maison .nav-inner a::after{background:var(--maison-violet)!important}
+body.violet-maison .btn-primary{background:var(--maison-violet-deep)!important;border-color:var(--maison-violet-deep)!important}
+body.violet-maison .btn-primary:hover{background:#2f2337!important;border-color:#2f2337!important}
+body.violet-maison .btn-secondary:hover{background:var(--maison-violet-deep)!important;border-color:var(--maison-violet-deep)!important}
+
+/* Home: pastel violet must occupy real composition space. */
+body.violet-maison .v4-home-hero{background:var(--maison-paper)}
+body.violet-maison .v4-feature-copy{background:var(--maison-lilac-soft)}
+body.violet-maison .v5-hero-shot span{background:rgba(241,234,245,.92)}
+body.violet-maison .maison-manifesto{
+  background:var(--maison-lilac);
+  border:1px solid var(--maison-lilac-strong);
+  padding-left:42px;
+  padding-right:42px;
+}
+body.violet-maison .maison-ritual,
+body.violet-maison .maison-ritual-copy{background:var(--maison-lilac-strong)}
+body.violet-maison .v4-route:hover,
+body.violet-maison .v4-house-index a:hover{background:var(--maison-lilac-soft)!important}
+body.violet-maison .v4-discovery-callout{background:var(--maison-violet-deep)!important}
+body.violet-maison .v4-trust-line{background:var(--maison-lilac-soft)}
+
+/* Product and catalogue states. */
+body.violet-maison .v4-object-media{background:var(--maison-lilac-soft)!important}
+body.violet-maison .v5-card-badge{background:var(--maison-lilac)!important;border:1px solid var(--maison-lilac-strong)!important}
+body.violet-maison .v4-active-chips .chip{background:var(--maison-lilac)!important;border-color:var(--maison-lilac-strong)!important}
+body.violet-maison .v4-filter-group a[aria-current='true']{
+  background:var(--maison-lilac);
+  color:var(--maison-ink)!important;
+  padding-left:8px;
+  padding-right:8px;
+}
+body.violet-maison .v4-plp-interrupt>div{background:var(--maison-lilac-soft)}
+
+/* PDP: pastel buying field + selected states, while media remains dominant. */
+body.violet-maison .v4-buying-desk{background:var(--maison-lilac-soft)!important}
+body.violet-maison .v4-size-row button[aria-pressed='true']{background:var(--maison-lilac);border-color:var(--maison-violet)}
+body.violet-maison .v4-pdp-quick{background:var(--maison-lilac-soft)}
+body.violet-maison .v4-note-table>div:nth-child(2){background:var(--maison-lilac-soft)}
+body.violet-maison .v4-house-proof{background:var(--maison-lilac-soft)}
+
+/* Discovery and guided flows. */
+body.violet-maison .v4-discovery-workspace{background:var(--maison-lilac-soft)}
+body.violet-maison .v4-trio-panel{background:var(--maison-paper)}
+body.violet-maison .v4-sample-row:nth-child(even){background:var(--maison-lilac-soft)}
+body.violet-maison .v4-sample-row button[aria-pressed='true']{background:var(--maison-lilac)!important;border-color:var(--maison-violet)!important}
+body.violet-maison .v5-after-wear{background:var(--maison-lilac-soft);padding:46px}
+body.violet-maison .v4-wardrobe{background:var(--maison-lilac)}
+body.violet-maison .portrait-shell{background:var(--maison-lilac-soft)}
+body.violet-maison .v4-finder-handoff{background:var(--maison-lilac)}
+
+/* Houses and utility commerce. */
+body.violet-maison .v4-houses-hero,
+body.violet-maison .v4-house-copy{background:var(--maison-lilac-soft)}
+body.violet-maison .v4-house-ledger-row:hover{background:var(--maison-lilac-soft)}
+body.violet-maison .v4-summary-card{background:var(--maison-lilac-soft)!important}
+body.violet-maison .checkout-block,
+body.violet-maison .cart-shop{background:var(--maison-paper)}
+body.violet-maison .v5-success-hero{background:var(--maison-lilac-soft);padding:54px}
+
+/* Footer remains dark, but reads as Violet rather than generic black. */
+body.violet-maison .site-footer{background:#241d29;color:#f7f0fa}
+body.violet-maison .footer-bottom{border-top-color:#4d3e55}
+
+@media (max-width:900px){
+  body.violet-maison .maison-manifesto{padding-left:24px;padding-right:24px}
+  body.violet-maison .v5-after-wear{padding:28px}
+}
