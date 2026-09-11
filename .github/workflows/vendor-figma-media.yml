@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - "assets/media-manifest.json"
+      - "figma-capture.js"
       - "scripts/sync_media_paths.py"
+      - "scripts/install_figma_capture.py"
       - ".github/workflows/vendor-figma-media.yml"
 
 permissions:
@@ -44,6 +46,9 @@ jobs:
       - name: Rewrite buyer-facing source to same-origin media
         run: python scripts/sync_media_paths.py
 
+      - name: Install Figma capture helper on HTML routes
+        run: python scripts/install_figma_capture.py
+
       - name: Ensure every declared asset exists
         shell: bash
         run: |
@@ -66,8 +71,8 @@ jobs:
           git add assets/media
           find . -maxdepth 1 -type f \( -name '*.html' -o -name '*.js' -o -name '*.css' \) -print0 | xargs -0 git add --
           if git diff --cached --quiet; then
-            echo "No media changes to commit."
+            echo "No Figma-preparation changes to commit."
             exit 0
           fi
-          git commit -m "Localize fragrance media for Figma-safe capture"
+          git commit -m "Prepare Violet media and routes for Figma capture"
           git push origin "HEAD:${GITHUB_REF_NAME}"
