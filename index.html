@@ -6,6 +6,8 @@
   <meta name="description" content="Violet Parfumerie — a fictional fragrance maison marketplace shaped around scent objects, independent houses and slower discovery.">
   <title>Violet Parfumerie · Scent Objects & Slow Discovery</title>
   <link rel="preload" as="image" href="assets/media/product-violette-03.jpg" fetchpriority="high">
+  <link rel="preload" as="style" href="image-first-redesign.css">
+  <link rel="preload" as="style" href="visual-safety-v5.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="perfume-luxury.css">
   <link rel="stylesheet" href="desktop-experience-v4.css">
@@ -29,7 +31,7 @@
       </div>
       <a class="v4-feature-media" href="product.html?id=violette-03" aria-label="Explore Violette 03">
         <div class="v5-hero-mosaic">
-          <div class="v5-hero-shot"><img src="assets/media/product-violette-03.jpg" width="681" height="800" fetchpriority="high" decoding="async" alt="Violette 03 by Maison Aster"><span>Object / Powdery Floral</span></div>
+          <div class="v5-hero-shot"><img src="assets/media/product-violette-03.jpg" width="681" height="800" fetchpriority="high" decoding="sync" alt="Violette 03 by Maison Aster"><span>Object / Powdery Floral</span></div>
           <div class="v5-hero-shot"><img src="assets/media/editorial-01.jpg" width="1600" height="1920" loading="lazy" fetchpriority="low" decoding="async" alt="Editorial fragrance material study"><span>Material study</span></div>
           <div class="v5-hero-shot"><img src="assets/media/editorial-04.jpg" width="1600" height="2623" loading="lazy" fetchpriority="low" decoding="async" alt="Editorial fragrance atmosphere"><span>Atmosphere</span></div>
         </div>
@@ -111,9 +113,13 @@
         location.href = `search.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
       }));
       syncCount();
+      if (new URLSearchParams(location.search).get('figma') === '1') {
+        const capture = document.createElement('script');
+        capture.src = 'figma-capture.js';
+        capture.async = false;
+        document.body.append(capture);
+      }
     })();
   </script>
-  <script src="figma-capture.js" defer></script>
-  <script src="accessibility-v6.js" defer></script>
 </body>
 </html>
