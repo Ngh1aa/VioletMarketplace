@@ -3,7 +3,7 @@
   if (!host) return;
 
   const DATA = window.VIOLET_DATA || { products: [] };
-  const money = n => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(n || 0));
+  const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(Number(n || 0));
 
   const PROFILE = {
     'violette-03': { moods:['intimate','soft'], presence:'quiet', occasions:['everyday','evening'], cues:['violet','iris','powder'] },
@@ -18,48 +18,48 @@
   const steps = [
     {
       key:'family', title:'Your instinct', kicker:'01 · Olfactive gravity',
-      question:'Bạn bị kéo về thế giới mùi hương nào trước tiên?',
-      help:'Không cần nghĩ quá kỹ. Chọn family khiến bạn muốn ngửi lại lần thứ hai.',
+      question:'Which scent world pulls you in first?',
+      help:'Do not overthink it. Choose the family that makes you want to lean in for a second smell.',
       options:[
-        ['floral','Floral','Iris, violet, petals · mềm và có chiều sâu'],
-        ['woody','Woods','Sandalwood, cedar, fig · khô, ấm, bình tĩnh'],
-        ['amber','Amber','Resin, saffron, tonka · ấm và giàu hiện diện'],
-        ['fresh','Fresh','Neroli, citrus, green notes · sáng và thoáng'],
-        ['musk','Skin Musk','Ambrette, soft musk · gần da và riêng tư']
+        ['floral','Floral','Iris, violet and petals · soft with depth'],
+        ['woody','Woods','Sandalwood, cedar and fig · dry, warm and composed'],
+        ['amber','Amber','Resin, saffron and tonka · warm with richer presence'],
+        ['fresh','Fresh','Neroli, citrus and green notes · bright and airy'],
+        ['musk','Skin Musk','Ambrette and soft musk · intimate and close to skin']
       ]
     },
     {
       key:'mood', title:'Your mood', kicker:'02 · Emotional register',
-      question:'Bạn muốn mùi hương khiến mình cảm thấy thế nào?',
-      help:'Violet ưu tiên cảm giác sử dụng hơn thuật ngữ perfumery.',
+      question:'How do you want the fragrance to make you feel?',
+      help:'Violet prioritizes the wearing experience over perfumery jargon.',
       options:[
-        ['clean','Clean','Sạch, sáng, nhẹ đầu — như áo sơ mi vừa giặt'],
-        ['intimate','Intimate','Gần da, kín đáo, chỉ người ở gần mới nhận ra'],
-        ['mysterious','Mysterious','Tối hơn, có độ kéo, không kể hết câu chuyện ngay'],
-        ['warm','Warm','Ấm, mềm, có cảm giác ôm lấy da'],
-        ['soft','Soft','Mịn, phấn hoặc airy — hiện diện nhẹ nhàng'],
-        ['bright','Bright','Tươi, linh hoạt, có năng lượng nhưng không chói']
+        ['clean','Clean','Lucid, light and composed — like a freshly pressed shirt'],
+        ['intimate','Intimate','Close to skin, restrained and noticed only nearby'],
+        ['mysterious','Mysterious','Darker, more magnetic and slow to reveal itself'],
+        ['warm','Warm','Soft, enveloping and gently radiant on skin'],
+        ['soft','Soft','Powdered or airy with a quiet presence'],
+        ['bright','Bright','Fresh, mobile and energetic without becoming sharp']
       ]
     },
     {
       key:'presence', title:'Your presence', kicker:'03 · Sillage preference',
-      question:'Bạn muốn người khác cảm nhận mùi hương ở mức nào?',
-      help:'Đây là preference về hiện diện, không phải cam kết kỹ thuật về projection thực tế.',
+      question:'How clearly should other people notice the fragrance?',
+      help:'This is a preference for perceived presence, not a technical promise about real-world projection.',
       options:[
-        ['quiet','Quiet','Một skin-level aura, thân mật và ít phô trương'],
-        ['balanced','Balanced','Đủ để được nhận ra, vẫn dễ sống cùng mỗi ngày'],
-        ['expressive','Expressive','Muốn fragrance là một phần rõ của tổng thể hiện diện']
+        ['quiet','Quiet','A skin-level aura that stays intimate and understated'],
+        ['balanced','Balanced','Noticeable without taking over the room'],
+        ['expressive','Expressive','Fragrance becomes a clear part of your overall presence']
       ]
     },
     {
       key:'occasion', title:'Your ritual', kicker:'04 · Context',
-      question:'Bạn đang tìm mùi hương cho khoảnh khắc nào?',
-      help:'Context giúp Violet ưu tiên mùi dễ mặc, giàu cảm xúc hay đáng khám phá.',
+      question:'What kind of moment are you choosing for?',
+      help:'Context helps Violet prioritize ease, emotion or exploration.',
       options:[
-        ['everyday','Everyday','Một signature scent có thể quay lại thường xuyên'],
-        ['evening','Evening','Dinner, event, night out hoặc những tối muốn có chiều sâu'],
-        ['gift','Gift','Một lựa chọn có cảm giác đặc biệt và gift-worthy'],
-        ['exploration','Exploration','Muốn thử một hướng mới thay vì lặp lại gu quen thuộc']
+        ['everyday','Everyday','A signature direction you can return to often'],
+        ['evening','Evening','Dinner, events or nights that call for more depth'],
+        ['gift','Gift','A direction that feels considered and gift-worthy'],
+        ['exploration','Exploration','A new scent territory rather than a repeat of your usual taste']
       ]
     }
   ];
@@ -117,11 +117,11 @@
   function why(product) {
     const profile = PROFILE[product.id];
     const reasons = [];
-    if (product.category === state.answers.family) reasons.push(`${product.family} đúng với family bạn chọn`);
-    if (profile.moods.includes(state.answers.mood)) reasons.push(`mood ${state.answers.mood}`);
-    if (profile.presence === state.answers.presence) reasons.push(`độ hiện diện ${state.answers.presence}`);
-    if (profile.occasions.includes(state.answers.occasion)) reasons.push(`hợp context ${state.answers.occasion}`);
-    return reasons.length ? `Vì ${reasons.slice(0,3).join(', ')}.` : `Một hướng đối lập có chủ đích để mở rộng scent wardrobe của bạn.`;
+    if (product.category === state.answers.family) reasons.push(`the ${product.family} family matches your first instinct`);
+    if (profile.moods.includes(state.answers.mood)) reasons.push(`it supports a ${state.answers.mood} mood`);
+    if (profile.presence === state.answers.presence) reasons.push(`its prototype profile is ${state.answers.presence}`);
+    if (profile.occasions.includes(state.answers.occasion)) reasons.push(`it fits your ${state.answers.occasion} context`);
+    return reasons.length ? `Selected because ${reasons.slice(0,3).join(', ')}.` : 'A deliberate contrast chosen to widen your scent wardrobe.';
   }
 
   function renderResults() {
@@ -132,11 +132,11 @@
     const labels = { family:state.answers.family, mood:state.answers.mood, presence:state.answers.presence, occasion:state.answers.occasion };
 
     host.innerHTML = `<div class="portrait-results">
-      <div class="results-heading"><div><span class="question-kicker">Your Scent Portrait · ${Object.values(labels).join(' / ')}</span><h2>Three scents, not thirty.</h2><p>Shortlist này là deterministic recommendation từ lựa chọn của bạn và metadata prototype hiện có — không giả vờ là AI hay “đoán tính cách”. Hãy thử trên da trước khi chọn full bottle.</p></div><button type="button" class="portrait-restart" data-restart>Start again ↺</button></div>
+      <div class="results-heading"><div><span class="question-kicker">Your Scent Portrait · ${Object.values(labels).join(' / ')}</span><h2>Three scents, not thirty.</h2><p>This shortlist is a deterministic recommendation based on your choices and the prototype catalogue metadata. It is not AI personality prediction. Wear a direction on skin before choosing a full bottle.</p></div><button type="button" class="portrait-restart" data-restart>Start again ↺</button></div>
       <div class="portrait-result-grid">
         ${candidates.map((p,i) => `<article class="portrait-result tone-${p.category}"><a href="product.html?id=${p.id}"><div class="result-media"><img src="${p.image}" alt="${p.name} by ${p.brand}"><span class="result-rank">${String(i+1).padStart(2,'0')} · Violet match</span></div></a><div class="result-copy"><span class="result-house">${p.brand}</span><h3>${p.name}</h3><p class="result-why">${why(p)}</p><div class="result-meta"><span>${p.family}</span><span>${money(p.price)}</span></div><a class="result-action" href="product.html?id=${p.id}">Explore fragrance →</a></div></article>`).join('')}
       </div>
-      <aside class="portrait-discovery"><div><span>Try before full bottle</span><strong>Still deciding? Build a discovery ritual.</strong><p>Violet Discovery Wardrobe cho phép thử nhiều mood trên da trước khi cam kết với full bottle — phù hợp với cách fragrance thực sự được cảm nhận theo thời gian.</p></div><a class="btn" href="product.html?id=violet-discovery-set">View Discovery Set</a></aside>
+      <aside class="portrait-discovery"><div><span>Try before full bottle</span><strong>Turn the shortlist into a trial ritual.</strong><p>Build a representative trio and wear each direction separately before returning to the bottle that still feels right after the drydown.</p></div><a class="btn" href="discovery.html">Build a trial trio</a></aside>
     </div>`;
     host.querySelector('[data-restart]').addEventListener('click', () => { state.step = 0; state.answers = {}; renderStep(); });
   }
