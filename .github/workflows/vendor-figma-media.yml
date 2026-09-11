@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "assets/media-manifest.json"
+      - "scripts/sync_media_paths.py"
       - ".github/workflows/vendor-figma-media.yml"
 
 permissions:
@@ -40,6 +41,9 @@ jobs:
             mv "$tmp" "$target"
           done < <(jq -r '.[] | [.path, .url] | @tsv' assets/media-manifest.json)
 
+      - name: Rewrite buyer-facing source to same-origin media
+        run: python scripts/sync_media_paths.py
+
       - name: Ensure every declared asset exists
         shell: bash
         run: |
@@ -53,16 +57,16 @@ jobs:
           done < <(jq -r '.[].path' assets/media-manifest.json)
           exit "$missing"
 
-      - name: Commit vendored media
+      - name: Commit vendored media and localized references
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/media
+          git add assets/media data.js storefront-v4.js index.html
           if git diff --cached --quiet; then
             echo "No media changes to commit."
             exit 0
           fi
-          git commit -m "Vendor same-origin fragrance media for Figma capture"
+          git commit -m "Localize fragrance media for Figma-safe capture"
           git push origin "HEAD:${GITHUB_REF_NAME}"
