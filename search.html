@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Fragrance Library — refine Violet scents by family, mood, house, presence and trial eligibility.">
+  <meta name="description" content="Violet Fragrance Library — explore by image first, then reveal filters only when they help.">
   <title>Fragrance Library · Violet Parfumerie</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="perfume-luxury.css">
@@ -15,15 +15,18 @@
   <main class="container v4-library-page">
     <header class="v4-library-masthead">
       <div><span class="v4-kicker">V.10 / FRAGRANCE LIBRARY</span><h1 data-result-title>Fragrance Library</h1></div>
-      <div class="v4-library-intro"><p>Objects first. Refine only when it helps the decision.</p><span data-result-count></span></div>
+      <div class="v4-library-intro"><p>Look first. Refine only when a feeling needs a name.</p><span data-result-count></span></div>
     </header>
+
     <div class="active-chips v4-active-chips" data-active-chips></div>
+
     <section class="v4-plp">
-      <aside class="v4-filter-rail" data-v4-filter aria-label="Fragrance refinement"></aside>
-      <div class="v4-plp-results">
-        <div class="v4-plp-toolbar"><span data-result-count></span><select class="sort" data-sort aria-label="Sort fragrances"><option value="popular">Violet order</option><option value="rating">Highest rated</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option></select></div>
-        <div class="v4-object-grid" data-results></div>
+      <div class="v4-plp-toolbar">
+        <div class="v4-plp-toolbar-left"><button class="v4-filter-toggle" type="button" data-v4-filter-toggle aria-expanded="false">Refine the edit</button><span data-result-count></span></div>
+        <select class="sort" data-sort aria-label="Sort fragrances"><option value="popular">Violet order</option><option value="rating">Highest rated</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option></select>
       </div>
+      <aside class="v4-filter-rail" data-v4-filter aria-label="Fragrance refinement"></aside>
+      <div class="v4-plp-results"><div class="v4-object-grid" data-results></div></div>
     </section>
   </main>
   <div data-site-footer></div>
