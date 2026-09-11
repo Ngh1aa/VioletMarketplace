@@ -4,7 +4,7 @@
   const ORDER_KEY = 'violet-marketplace-last-order';
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
-  const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(Number(n || 0));
+  const money = n => `${new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 }).format(Number(n || 0))} €`;
   const qs = new URLSearchParams(location.search);
   const productById = id => DATA.products.find(p => p.id === id);
   const discount = p => p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
@@ -49,7 +49,7 @@
     <header class="site-header"><div class="container header-main"><a class="brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><div class="search-shell"><form class="search-form" data-search-form><input name="q" autocomplete="off" placeholder="Search fragrance, note, or maison…" aria-label="Search fragrances"><button>Search</button></form><div class="search-suggestions" data-suggestions></div></div><div class="header-actions"><a class="icon-link" href="discovery.html" title="Saved discovery trio">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">0</span></a></div></div><div class="nav-row"><nav class="container nav-inner"><a href="search.html">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></nav></div></header>`;
   }
   function footer(){
-    return `<footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div></div><div class="footer-bottom"><span>© 2026 Violet Parfumerie</span><span>Vietnam · VND · Curated prototype</span></div></div></footer><nav class="mobile-nav"><a href="index.html">Home</a><a href="search.html">Scents</a><a href="cart.html">Bag</a><a href="discovery.html">Saved</a></nav>`;
+    return `<footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div></div><div class="footer-bottom"><span>© 2026 Violet Parfumerie</span><span>International edit · EUR · Curated prototype</span></div></div></footer><nav class="mobile-nav"><a href="index.html">Home</a><a href="search.html">Scents</a><a href="cart.html">Bag</a><a href="discovery.html">Saved</a></nav>`;
   }
   $$('[data-site-header]').forEach(el => el.innerHTML = header());
   $$('[data-site-footer]').forEach(el => el.innerHTML = footer());
@@ -113,7 +113,7 @@
     $$('[data-remove]',host).forEach(b=>b.addEventListener('click',()=>removeItem(b.dataset.remove))); updateSummary();
   }
   function updateSummary(){
-    const sub=cartSubtotal(), shipping=sub?30000:0, saving=sub>=5000000?50000:0, total=Math.max(0,sub+shipping-saving);
+    const sub=cartSubtotal(), shipping=sub?8:0, saving=0, total=Math.max(0,sub+shipping-saving);
     $$('[data-subtotal]').forEach(e=>e.textContent=money(sub)); $$('[data-shipping]').forEach(e=>e.textContent=shipping?money(shipping):money(0)); $$('[data-saving]').forEach(e=>e.textContent=`−${money(saving)}`); $$('[data-total]').forEach(e=>e.textContent=money(total));
   }
 
