@@ -1,7 +1,7 @@
 (() => {
   const DATA = window.VIOLET_DATA || { products: [] };
   const qs = new URLSearchParams(location.search);
-  const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(Number(n || 0));
+  const money = n => `${new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 }).format(Number(n || 0))} €`;
 
   const HOUSES = [
     { id:'maison-aster', name:'Maison Aster', origin:'Paris', territory:'powdered violet · green fig · quiet woods', ethos:'Soft structure, cool florals and contemplative green woods.', signature:'Powdered florals with a green, meditative edge.' },
@@ -14,6 +14,15 @@
 
   const houseById = id => HOUSES.find(house => house.id === id);
   const productsForHouse = house => DATA.products.filter(product => product.brand === house.name);
+
+  function installBrandContract(){
+    if(document.querySelector('link[data-violet-brand-contract]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'brand-contract.css';
+    link.dataset.violetBrandContract = 'true';
+    document.head.append(link);
+  }
 
   function cartCount(){
     try {
@@ -59,7 +68,7 @@
     });
 
     const footerMeta = document.querySelector('.footer-bottom span:last-child');
-    if(footerMeta) footerMeta.textContent = 'Vietnam · VND · Curated prototype';
+    if(footerMeta) footerMeta.textContent = 'International edit · EUR · Curated prototype';
   }
 
   function card(product){
@@ -136,6 +145,7 @@
     nodes.forEach(node=>{ node.classList.add('maison-reveal'); observer.observe(node); });
   }
 
+  installBrandContract();
   normalizeBuyerChrome();
   renderHousesIndex();
   renderHouseDetail();
