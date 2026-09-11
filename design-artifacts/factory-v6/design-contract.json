@@ -1,0 +1,51 @@
+{
+  "schema_version": "factory-v6-violet-1.0",
+  "status": "approved",
+  "project": {
+    "name": "Violet Parfumerie",
+    "domain": "luxury fragrance marketplace prototype",
+    "goal": "Strengthen the image-led editorial fragrance experience and make browser-to-Figma media transport reliable without regressing into a generic marketplace."
+  },
+  "ux": {
+    "primary_journey": ["Explore", "Understand", "Try", "Wear", "Return", "Commit"],
+    "representative_routes": ["/index.html", "/search.html", "/product.html?id=violette-03", "/discovery.html"],
+    "principles": [
+      "product/media recognition before metadata",
+      "trial stays adjacent to purchase decisions",
+      "page-role diversity is preserved",
+      "prototype system reality remains explicit"
+    ]
+  },
+  "visual": {
+    "signature": "Editorial · Tactile · Portable",
+    "layout_rules": [
+      "first major Home/PDP composition targets roughly 70% media and 30% copy-commerce",
+      "white and warm-paper canvas with pastel violet as focal identity cue",
+      "Object → Material → Atmosphere is the recurring media sequence",
+      "avoid generic repeated equal-card composition"
+    ],
+    "media_rules": [
+      "buyer-facing fragrance/editorial media must resolve from same-origin repository assets",
+      "remote source URLs live only in the provenance manifest",
+      "Figma capture mode forces media eager and removes non-essential motion/filter/transform effects",
+      "supporting imagery must not be represented as a fictional product packshot"
+    ]
+  },
+  "implementation_constraints": {
+    "stack": "vanilla HTML/CSS/JavaScript",
+    "preserve_page_role_diversity": true,
+    "avoid_generic_card_grid": true,
+    "avoid_shared_hero_everywhere": true,
+    "do_not_invent_evidence": true,
+    "no_local_workbench": true,
+    "external_brain": true
+  },
+  "gates": {
+    "same_origin_media": "required",
+    "browser_qa": "required",
+    "axe": "required",
+    "lighthouse": "required",
+    "rendered_screenshot_review": "required",
+    "merge_only_after_green": true
+  }
+}
