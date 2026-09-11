@@ -14,81 +14,81 @@ window.VIOLET_DATA = {
       id: 'violette-03', name: 'Violette 03', category: 'floral', family: 'Powdery Floral', brand: 'Maison Aster', seller: 'Maison Aster · Paris', official: true,
       concentration: 'Eau de Parfum', size: '50 ml', price: 3890000, oldPrice: null, rating: 4.9, sold: 428, stock: 18, fast: true,
       image: 'https://images.pexels.com/photos/15574229/pexels-photo-15574229.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Một violet mềm như phấn trên nền iris lạnh, sandalwood kem và chút vanilla khô. Thanh lịch, gần da và có độ lưu hương vừa đủ cho cả ngày.',
+      description: 'Powdered violet meets cool iris, creamy sandalwood and a trace of dry vanilla. Polished, close to skin and deliberately quiet.',
       notes: { top: 'Bergamot · Violet leaf', heart: 'Iris · Violet petals', base: 'Sandalwood · Vanilla skin musk' },
-      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: violet, iris, sandalwood', 'Phong cách: quiet luxury · powdery floral', 'Được tuyển chọn bởi Violet Parfumerie']
+      specs: ['Eau de Parfum · 50 ml', 'Scent direction: violet, iris, sandalwood', 'Character: powdery · intimate · composed', 'Fictional Violet prototype object']
     },
     {
       id: 'velours-ambre', name: 'Velours Ambre', category: 'amber', family: 'Warm Amber', brand: 'Atelier Nocturne', seller: 'Atelier Nocturne · Grasse', official: true,
       concentration: 'Extrait de Parfum', size: '50 ml', price: 4650000, oldPrice: 4950000, rating: 4.9, sold: 316, stock: 12, fast: false,
       image: 'https://images.pexels.com/photos/36355219/pexels-photo-36355219.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Amber ấm, resinous nhưng không nặng. Saffron khô mở đầu trước khi chuyển sang labdanum, tonka và gỗ cashmere phủ trên da.',
+      description: 'Warm amber with a dry rather than syrupy structure. Saffron opens into labdanum, tonka and cashmere woods with an evening-weight finish.',
       notes: { top: 'Saffron · Pink pepper', heart: 'Labdanum · Benzoin', base: 'Tonka · Cashmere wood' },
-      specs: ['Extrait de Parfum · 50 ml', 'Hương chủ đạo: saffron, amber, tonka', 'Phong cách: warm · sensual · evening', 'Batch nhỏ từ nhà hương độc lập']
+      specs: ['Extrait de Parfum · 50 ml', 'Scent direction: saffron, amber, tonka', 'Character: warm · sensual · evening', 'Fictional independent-house prototype']
     },
     {
       id: 'iris-haze', name: 'Iris Haze', category: 'floral', family: 'Iris Floral', brand: 'Élan Studio', seller: 'Élan Studio · Seoul', official: true,
       concentration: 'Eau de Parfum', size: '50 ml', price: 3280000, oldPrice: null, rating: 4.8, sold: 251, stock: 21, fast: true,
       image: 'https://images.pexels.com/photos/3785784/pexels-photo-3785784.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Iris sạch và sáng trên nền trà trắng, musk mềm và cedar. Một lựa chọn tinh gọn cho người thích fragrance thanh, ít ngọt và hiện đại.',
+      description: 'Lucid iris over white tea, soft musk and cedar. A restrained direction for someone who prefers airy, low-sweetness fragrance with a modern finish.',
       notes: { top: 'White tea · Pear skin', heart: 'Iris · Orris butter', base: 'Cedar · Soft musk' },
-      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: iris, tea, cedar', 'Phong cách: airy · minimal · intimate', 'Bao bì tối giản có thể tái chế']
+      specs: ['Eau de Parfum · 50 ml', 'Scent direction: iris, tea, cedar', 'Character: airy · minimal · intimate', 'Fictional Violet prototype object']
     },
     {
       id: 'santal-veil', name: 'Santal Veil', category: 'woody', family: 'Creamy Woods', brand: 'Orphée', seller: 'Orphée Fragrance House', official: true,
       concentration: 'Eau de Parfum', size: '75 ml', price: 3590000, oldPrice: null, rating: 4.9, sold: 509, stock: 27, fast: false,
       image: 'https://images.pexels.com/photos/34089129/pexels-photo-34089129.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Sandalwood mịn, fig leaf xanh và một lớp musk sạch. Không quá smoky, không quá ngọt — chỉ ấm, gọn và có chiều sâu.',
+      description: 'Smooth sandalwood, green fig leaf and clean musk. Neither heavily smoky nor sweet — warm, precise and quietly dimensional.',
       notes: { top: 'Fig leaf · Cardamom', heart: 'Sandalwood · Orris', base: 'White musk · Cedar' },
-      specs: ['Eau de Parfum · 75 ml', 'Hương chủ đạo: sandalwood, fig, musk', 'Phong cách: woody · creamy · unisex', 'Violet authenticity checked']
+      specs: ['Eau de Parfum · 75 ml', 'Scent direction: sandalwood, fig, musk', 'Character: woody · creamy · understated', 'Fictional Violet prototype object']
     },
     {
       id: 'neroli-rain', name: 'Neroli Rain', category: 'fresh', family: 'Citrus Aromatic', brand: 'Lumière 17', seller: 'Lumière 17 · Côte d’Azur', official: true,
       concentration: 'Eau de Parfum', size: '50 ml', price: 2980000, oldPrice: null, rating: 4.8, sold: 402, stock: 33, fast: true,
       image: 'https://images.pexels.com/photos/8361490/pexels-photo-8361490.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Neroli lấp lánh, petitgrain xanh và mineral musk tạo cảm giác như ánh nắng sau cơn mưa. Sạch, tươi nhưng vẫn có chất boutique.',
+      description: 'Radiant neroli, green petitgrain and mineral musk create the feeling of light after rain. Fresh and clean, with enough bitterness to stay precise.',
       notes: { top: 'Neroli · Lemon zest', heart: 'Petitgrain · Orange blossom', base: 'Mineral musk · Blond woods' },
-      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: neroli, petitgrain, musk', 'Phong cách: bright · green · effortless', 'Phù hợp khí hậu ấm']
+      specs: ['Eau de Parfum · 50 ml', 'Scent direction: neroli, petitgrain, musk', 'Character: bright · green · effortless', 'Fictional Violet prototype object']
     },
     {
       id: 'peau-de-lune', name: 'Peau de Lune', category: 'musk', family: 'Skin Musk', brand: 'Nacre', seller: 'Nacre Parfums · Tokyo', official: true,
       concentration: 'Eau de Parfum', size: '50 ml', price: 3420000, oldPrice: null, rating: 4.9, sold: 187, stock: 14, fast: false,
       image: 'https://images.pexels.com/photos/8450248/pexels-photo-8450248.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Một skin scent kín đáo với ambrette, steamed rice accord và clean woods. Mùi hương ở gần da, tinh tế và rất riêng tư.',
+      description: 'An intimate skin scent built around ambrette, steamed-rice softness and clean woods. Quiet, tactile and deliberately private.',
       notes: { top: 'Ambrette · Pear skin', heart: 'Steamed rice · Iris', base: 'Clean woods · White musk' },
-      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: ambrette, rice, musk', 'Phong cách: intimate · soft · understated', 'Ideal for layering']
+      specs: ['Eau de Parfum · 50 ml', 'Scent direction: ambrette, rice, musk', 'Character: intimate · soft · understated', 'Designed in the prototype for layering discovery']
     },
     {
       id: 'nuit-de-figue', name: 'Nuit de Figue', category: 'woody', family: 'Green Woody', brand: 'Maison Aster', seller: 'Maison Aster · Paris', official: true,
       concentration: 'Eau de Parfum', size: '50 ml', price: 3750000, oldPrice: 4050000, rating: 4.8, sold: 293, stock: 16, fast: false,
       image: 'https://images.pexels.com/photos/8361539/pexels-photo-8361539.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Fig sap xanh, cedar khô và một chút black tea. Tối, yên tĩnh và có cấu trúc — phù hợp cho những ngày muốn một mùi hương có cá tính nhưng không phô trương.',
+      description: 'Green fig sap, dry cedar and black tea give this scent a shadowed structure. Distinctive without pushing its presence too far.',
       notes: { top: 'Fig leaf · Black tea', heart: 'Fig pulp · Cedar', base: 'Vetiver · Dry amber' },
-      specs: ['Eau de Parfum · 50 ml', 'Hương chủ đạo: fig, tea, cedar', 'Phong cách: green · woody · contemplative', 'Curated Violet exclusive edit']
+      specs: ['Eau de Parfum · 50 ml', 'Scent direction: fig, tea, cedar', 'Character: green · woody · contemplative', 'Fictional Violet prototype edit']
     },
     {
       id: 'violet-discovery-set', name: 'Violet Discovery Wardrobe', category: 'discovery', family: 'Discovery Set', brand: 'Violet Parfumerie', seller: 'Violet Parfumerie', official: true,
       concentration: 'Discovery Set', size: '6 × 2 ml', price: 890000, oldPrice: null, rating: 4.9, sold: 731, stock: 48, fast: true,
       image: 'https://images.pexels.com/photos/8166611/pexels-photo-8166611.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Sáu mùi hương đại diện cho sáu mood khác nhau: floral, amber, woods, fresh, skin musk và green. Cách nhẹ nhàng nhất để tìm signature scent trước khi chọn full bottle.',
+      description: 'Six prototype scent directions across floral, amber, woods, fresh, skin musk and green. A lower-commitment way to compare the Violet catalogue before returning to a full bottle.',
       notes: { top: '6 scent stories', heart: '2 ml each', base: 'Curated across Violet houses' },
-      specs: ['6 × 2 ml', 'Có voucher áp dụng khi mua full bottle', 'Bao gồm scent cards hướng dẫn thử mùi', 'Đóng gói quà complimentary']
+      specs: ['6 × 2 ml prototype format', 'Six representative scent directions', 'Discovery ritual reference cards', 'No real sample fulfilment in this prototype']
     },
     {
       id: 'velvet-room-candle', name: 'Velvet Room Candle', category: 'home-fragrance', family: 'Home Fragrance', brand: 'Atelier Nocturne', seller: 'Atelier Nocturne · Grasse', official: true,
       concentration: 'Scented Candle', size: '220 g', price: 1850000, oldPrice: null, rating: 4.8, sold: 154, stock: 24, fast: false,
       image: 'https://images.pexels.com/photos/6311990/pexels-photo-6311990.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Tobacco leaf, iris dust và amber tạo nên một căn phòng ấm, tối và mềm như nhung. Một home scent dành cho buổi tối chậm.',
+      description: 'Tobacco leaf, iris dust and amber sketch a warm, shadowed room. A fictional home-scent object for a slower evening ritual.',
       notes: { top: 'Iris dust', heart: 'Tobacco leaf', base: 'Amber · Cedar' },
-      specs: ['220 g · khoảng 50 giờ cháy', 'Wax blend', 'Cotton wick', 'Gift-ready Violet wrapping']
+      specs: ['220 g prototype format', 'Wax-blend concept', 'Cotton-wick concept', 'Fictional Violet prototype object']
     },
     {
       id: 'signature-gift-trio', name: 'Signature Gift Trio', category: 'gifts', family: 'Gift Set', brand: 'Violet Parfumerie', seller: 'Violet Parfumerie', official: true,
       concentration: 'Gift Set', size: '3 × 10 ml', price: 2350000, oldPrice: null, rating: 4.9, sold: 226, stock: 19, fast: true,
       image: 'https://images.pexels.com/photos/14696052/pexels-photo-14696052.jpeg?auto=compress&cs=tinysrgb&w=1200',
-      description: 'Ba travel spray theo ba mood: luminous floral, warm amber và quiet woods. Đi kèm hộp quà violet-lilac và scent card cá nhân hóa.',
+      description: 'Three travel-size prototype directions: luminous floral, warm amber and quiet woods. Designed to test a gift-led discovery path inside Violet.',
       notes: { top: 'Floral edit', heart: 'Amber edit', base: 'Woody edit' },
-      specs: ['3 × 10 ml travel sprays', 'Complimentary gift wrap', 'Personal message card', 'Curated by Violet Parfumerie']
+      specs: ['3 × 10 ml prototype format', 'Three contrasting scent directions', 'Gift-message concept', 'Fictional Violet prototype object']
     }
   ]
 };
