@@ -16,12 +16,20 @@
   const productsForHouse = house => DATA.products.filter(product => product.brand === house.name);
 
   function installBrandContract(){
-    if(document.querySelector('link[data-violet-brand-contract]')) return;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'brand-contract.css';
-    link.dataset.violetBrandContract = 'true';
-    document.head.append(link);
+    if(!document.querySelector('link[data-violet-brand-contract]')){
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'brand-contract.css';
+      link.dataset.violetBrandContract = 'true';
+      document.head.append(link);
+    }
+    if(!document.querySelector('link[data-violet-exploration-layout]')){
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'exploration-layout.css';
+      link.dataset.violetExplorationLayout = 'true';
+      document.head.append(link);
+    }
   }
 
   function cartCount(){
@@ -38,7 +46,7 @@
     document.body.dataset.maisonPage = path.replace('.html','') || 'home';
 
     const topMessage = document.querySelector('.topbar-inner > span');
-    if(topMessage) topMessage.textContent = 'Violet Parfumerie · scent objects, fictional houses, slower discovery';
+    if(topMessage) topMessage.textContent = 'Violet Parfumerie · enter slowly, follow what stays';
 
     const input = document.querySelector('[data-search-form] input');
     if(input){
@@ -47,28 +55,25 @@
       input.addEventListener('input',()=>requestAnimationFrame(()=>{
         const box = document.querySelector('[data-suggestions]');
         const fallback = box?.querySelector('a.suggestion:only-child');
-        if(fallback && fallback.textContent.trim().startsWith('Xem fragrance')){
-          fallback.textContent = `View results for “${input.value}”`;
-        }
+        if(fallback && fallback.textContent.trim().startsWith('Xem fragrance')) fallback.textContent = `View results for “${input.value}”`;
       }));
     }
     const searchButton = document.querySelector('[data-search-form] button');
     if(searchButton) searchButton.textContent = 'Search';
 
     const actions = document.querySelector('.header-actions');
-    if(actions){
-      actions.innerHTML = `<a class="icon-link v5-trio-link" href="discovery.html">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">${cartCount()}</span></a>`;
-    }
+    if(actions) actions.innerHTML = `<a class="icon-link v5-trio-link" href="discovery.html">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">${cartCount()}</span></a>`;
 
     document.querySelectorAll('.nav-inner a').forEach(link => {
       const href = link.getAttribute('href') || '';
       const active = (path==='index.html' && href==='index.html') || (path==='search.html' && href.startsWith('search.html')) || (path==='houses.html' && href.startsWith('houses.html')) || (path==='house.html' && href.startsWith('houses.html')) || (path==='discovery.html' && href.startsWith('discovery.html')) || (path==='finder.html' && href.startsWith('finder.html'));
-      if(active) link.setAttribute('aria-current','page');
-      else link.removeAttribute('aria-current');
+      if(active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
     });
 
     const footerMeta = document.querySelector('.footer-bottom span:last-child');
     if(footerMeta) footerMeta.textContent = 'International edit · EUR · Curated prototype';
+    const footerDiscover = document.querySelector('.footer-links');
+    if(footerDiscover && !document.querySelector('.footer-links a[href="about.html"]')) footerDiscover.insertAdjacentHTML('beforeend','<a href="about.html">About Violet</a>');
   }
 
   function card(product){
@@ -97,27 +102,54 @@
     document.title = `${house.name} · Violet Parfumerie`;
     host.innerHTML = `<section class="v4-house-hero">
       <div class="v4-house-copy"><div><span class="v4-house-origin">V.31 / ${house.origin}</span><h1>${house.name}</h1><p class="v4-house-ethos">${house.ethos}</p></div><div class="v4-house-territory-block"><span>Scent territory</span><strong>${house.territory}</strong></div></div>
-      <div class="v4-house-feature"><div class="v4-house-feature-label"><span>HOUSE STUDY / FEATURE OBJECT</span><span>${feature ? feature.name : 'Violet edit'}</span></div>${feature?`<a class="v4-house-feature-media" href="product.html?id=${feature.id}"><img src="${feature.image}" alt="${feature.name} by ${house.name}"></a>`:'<div class="v4-house-feature-media"></div>'}<div class="v4-house-feature-foot"><span>${house.signature}</span><a href="search.html?house=${house.id}">Browse this house →</a></div></div>
+      <div class="v4-house-feature"><div class="v4-house-feature-label"><span>HOUSE STUDY / FEATURE OBJECT</span><span>${feature ? feature.name : 'Violet edit'}</span></div>${feature?`<a class="v4-house-feature-media" href="product.html?id=${feature.id}"><img src="${feature.image}" alt="${feature.name} by ${house.name}"></a>`:'<div class="v4-house-feature-media"></div>'}<div class="v4-house-feature-foot"><span>${house.signature}</span><a href="search.html?house=${house.id}">Follow this house →</a></div></div>
     </section>
-    <section class="v4-house-collection"><div class="v4-section-label"><span>V.32 / CURRENT EDIT</span><a href="search.html?house=${house.id}">Open in library →</a></div><div class="v4-house-collection-heading"><h2>The objects Violet keeps from this house.</h2><p>Fictional maison metadata is used to prototype house-led discovery. It is not a claim about a real fragrance company, stockist relationship or origin.</p></div><div class="v4-house-products">${products.length?products.map(card).join(''):'<div class="v4-empty"><span>NO OBJECTS</span><h2>This house has no prototype object yet.</h2><p>Return to the house index or fragrance library.</p></div>'}</div></section>`;
+    <section class="v4-house-collection"><div class="v4-section-label"><span>V.32 / CURRENT EDIT</span><a href="search.html?house=${house.id}">Enter the house edit →</a></div><div class="v4-house-collection-heading"><h2>What remains when one house keeps speaking in the same voice?</h2><p>Fictional maison metadata is used to prototype house-led discovery. It is not a claim about a real fragrance company, stockist relationship or origin.</p></div><div class="v4-house-products">${products.length?products.map(card).join(''):'<div class="v4-empty"><span>NO OBJECTS</span><h2>This house has no prototype object yet.</h2><p>Return to the house index or fragrance library.</p></div>'}</div></section>`;
   }
 
   function patchFinder(){
     const page = document.querySelector('.portrait-page');
     if(!page) return;
-    if(!document.querySelector('.v4-finder-handoff')){
-      page.insertAdjacentHTML('beforeend', `<section class="v4-finder-handoff"><span>V.23 / AFTER THE PORTRAIT</span><strong>Turn the shortlist into a trial, not an instant full-bottle decision.</strong><a class="btn btn-primary" href="discovery.html">Build a trial trio</a></section>`);
-    }
+    if(!document.querySelector('.v4-finder-handoff')) page.insertAdjacentHTML('beforeend', `<section class="v4-finder-handoff"><span>V.23 / AFTER THE PORTRAIT</span><strong>What if the shortlist is only the beginning?</strong><a class="btn btn-primary" href="discovery.html">Continue into a trial trio</a></section>`);
     const stage = document.querySelector('[data-portrait-stage]');
     if(!stage) return;
     const sync = () => {
       const action = stage.querySelector('.portrait-discovery a');
       if(!action) return;
       if(action.getAttribute('href') !== 'discovery.html') action.setAttribute('href','discovery.html');
-      if(action.textContent !== 'Build a trial trio') action.textContent='Build a trial trio';
+      if(action.textContent !== 'Continue into a trial trio') action.textContent='Continue into a trial trio';
     };
     sync();
     new MutationObserver(sync).observe(stage,{childList:true,subtree:true});
+  }
+
+  function patchLibrary(){
+    const page=document.querySelector('.v4-library-page');
+    const toolbar=document.querySelector('.v4-plp-toolbar');
+    if(!page || !toolbar || toolbar.querySelector('.explore-filter-toggle')) return;
+    const button=document.createElement('button');
+    button.type='button';
+    button.className='explore-filter-toggle';
+    button.setAttribute('aria-expanded','false');
+    button.textContent='Refine the path +';
+    toolbar.prepend(button);
+    button.addEventListener('click',()=>{
+      const open=page.classList.toggle('is-filter-open');
+      button.setAttribute('aria-expanded',String(open));
+      button.textContent=open?'Close refinements −':'Refine the path +';
+    });
+  }
+
+  function patchPdp(){
+    const host=document.querySelector('.v4-pdp');
+    if(!host || host.querySelector('.explore-pdp-intro')) return;
+    const media=host.querySelector(':scope > .v4-pdp-media');
+    const desk=host.querySelector(':scope > .v4-buying-desk');
+    if(!media || !desk) return;
+    const intro=document.createElement('div');
+    intro.className='explore-pdp-intro';
+    host.insertBefore(intro,media);
+    intro.append(media,desk);
   }
 
   function markUtilities(){
@@ -130,7 +162,7 @@
   function installEditorialMotion(){
     const targets = [
       '.v4-home-hero','.maison-manifesto','.v4-shelf-section','.maison-ritual','.v4-route-index','.v4-houses-section','.v4-discovery-callout',
-      '.v4-library-masthead','.v4-object-grid','.v4-pdp','.v4-pdp-story','.v4-related','.v4-discovery-hero','.v4-discovery-workspace','.v4-sample-list-section','.v5-after-wear','.v4-wardrobe',
+      '.v4-library-masthead','.v4-object-grid','.explore-pdp-intro','.v4-pdp-story','.v4-related','.v4-discovery-hero','.v4-discovery-workspace','.v4-sample-list-section','.v5-after-wear','.v4-wardrobe',
       '.v4-houses-hero','.v4-house-hero','.v4-house-collection','.portrait-shell','.v4-finder-handoff','.v4-utility-hero','.checkout-layout','.cart-layout','.v5-success-hero'
     ];
     const nodes = [...document.querySelectorAll(targets.join(','))];
@@ -150,6 +182,8 @@
   renderHousesIndex();
   renderHouseDetail();
   patchFinder();
+  patchLibrary();
+  patchPdp();
   markUtilities();
   requestAnimationFrame(installEditorialMotion);
 })();

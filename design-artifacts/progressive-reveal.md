@@ -1,0 +1,1 @@
+Prices remain secondary on Library cards and appear on hover/focus. Refinements stay closed until requested. PDP story begins after bounded sticky media. Houses reveal through horizontal movement. Discovery is paced in viewport-scale steps.
