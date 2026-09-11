@@ -70,13 +70,13 @@ body.violet-maison .v4-utility-hero.maison-reveal{
   transform:none!important;
 }
 
-/* app.js composes the shared chrome at runtime. Reserve the final chrome block
-   before that composition runs so static editorial content never jumps down.
-   Desktop = topbar 30 + header 84 + nav 44. The compact chrome is 89px. */
-body.violet-maison > [data-site-header]{
+/* app.js composes the shared chrome at runtime. Reserve its final height only
+   while the mount is empty. Once mounted, the selector stops matching so the
+   existing display/sticky contract owns the header again. */
+body.violet-maison > [data-site-header]:empty{
   display:block;
   min-height:158px;
 }
 @media (max-width:900px){
-  body.violet-maison > [data-site-header]{min-height:89px}
+  body.violet-maison > [data-site-header]:empty{min-height:89px}
 }
