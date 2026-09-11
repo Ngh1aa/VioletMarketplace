@@ -1,0 +1,52 @@
+name: Figma Media Guard
+
+on:
+  push:
+    branches:
+      - factory/violet-figma-safe-redesign
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  media-transport:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate capture helper syntax
+        run: |
+          node --check figma-capture.js
+          python -m py_compile scripts/sync_media_paths.py scripts/install_figma_capture.py
+
+      - name: Reject remote Pexels runtime references
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -R "images.pexels.com" . --include='*.html' --include='*.js' --include='*.css' --exclude-dir=.git; then
+            echo "Remote Pexels URL found in buyer-facing runtime source." >&2
+            exit 1
+          fi
+
+      - name: Verify declared media inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -e 'length >= 18' assets/media-manifest.json >/dev/null
+          while IFS= read -r path; do
+            test -s "$path" || { echo "Missing or empty media: $path" >&2; exit 1; }
+          done < <(jq -r '.[].path' assets/media-manifest.json)
+
+      - name: Verify capture helper is installed on every HTML route
+        shell: bash
+        run: |
+          set -euo pipefail
+          for page in *.html; do
+            grep -q 'src="figma-capture.js"' "$page" || {
+              echo "Figma capture helper missing from $page" >&2
+              exit 1
+            }
+          done
