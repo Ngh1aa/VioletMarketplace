@@ -76,9 +76,19 @@
     const stage=document.querySelector('[data-portrait-stage]');
     if(!stage) return;
     const sync=()=>{
-      const action=stage.querySelector('.portrait-discovery a'); if(action){ action.setAttribute('href','discovery.html'); action.textContent='Build a trial trio'; }
+      const action=stage.querySelector('.portrait-discovery a');
+      if(action){
+        if(action.getAttribute('href')!=='discovery.html') action.setAttribute('href','discovery.html');
+        if(action.textContent!=='Build a trial trio') action.textContent='Build a trial trio';
+      }
       const step=document.querySelector('[data-step-label]');
-      if(step){ const text=step.textContent||''; const match=text.match(/(\d+)/); const n=match?Number(match[1]):1; step.textContent=`${String(n).padStart(2,'0')} / 04`; }
+      if(step){
+        const text=step.textContent||'';
+        if(/^Step\s+\d+\s+of\s+4$/i.test(text)){
+          const match=text.match(/(\d+)/); const n=match?Number(match[1]):1;
+          step.textContent=`${String(n).padStart(2,'0')} / 04`;
+        }
+      }
     };
     sync(); new MutationObserver(sync).observe(stage,{childList:true,subtree:true});
     stage.addEventListener('click',event=>{
