@@ -64,14 +64,21 @@ jobs:
           QA_TARGET_DIR: ${{ github.workspace }}
           QA_BASE_URL: http://127.0.0.1:4173
           QA_ROUTES: /index.html,/search.html,/product.html?id=violette-03,/discovery.html,/index.html?figma=1
+          QA_PRODUCTION_ROUTES: /index.html,/search.html,/product.html?id=violette-03,/discovery.html
         run: |
           set -euo pipefail
           node scripts/serve-target.mjs > /tmp/violet-factory-target.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
           node scripts/wait-ready.mjs
+
+          # Browser evidence, axe and media checks intentionally include ?figma=1.
+          # Figma capture mode forces eager media and disables non-essential motion,
+          # so it is verified for correctness/readiness but is not a production
+          # performance surface.
           npm test
-          node scripts/write-lighthouse-config.mjs
+
+          QA_ROUTES="$QA_PRODUCTION_ROUTES" node scripts/write-lighthouse-config.mjs
           npx lhci autorun --config=lighthouserc.runtime.json
 
       - name: Print server log on failure
