@@ -34,7 +34,7 @@ body.violet-v4 .nav-inner{min-height:38px}
 .v4-houses-note>span{align-self:start;padding-top:5px;color:var(--violet-aubergine);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .v4-houses-note h2{margin:0 0 10px;font-family:var(--violet-serif);font-size:34px;line-height:1.02;letter-spacing:-.035em;font-weight:400}
 .v4-houses-note p{max-width:760px;margin:0;color:var(--violet-muted);font-size:10px;line-height:1.7}
-.v4-houses-note::after{content:"";display:block;width:100%;height:178px;background:linear-gradient(rgba(32,25,31,.07),rgba(32,25,31,.07)),url("https://images.pexels.com/photos/7828507/pexels-photo-7828507.jpeg?auto=compress&cs=tinysrgb&w=1200") center/cover no-repeat;filter:saturate(.72) contrast(.96)}
+.v4-houses-note::after{content:"";display:block;width:100%;height:178px;background:linear-gradient(rgba(32,25,31,.07),rgba(32,25,31,.07)),url("assets/media/editorial-02.jpg") center/cover no-repeat;filter:saturate(.72) contrast(.96)}
 
 /* VS-05 — empty states should explain the next action, not reserve half a viewport. */
 .v4-discovery-workspace{min-height:0;align-items:stretch}
@@ -48,7 +48,7 @@ body.violet-v4 .nav-inner{min-height:38px}
 /* VS-06 — consultation questions need visual counterweight and safer line lengths. */
 @media (min-width:1024px){
   body.violet-v4 .portrait-question{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(230px,.52fr);column-gap:30px;align-items:start;padding-top:38px}
-  body.violet-v4 .portrait-question::after{content:"";grid-column:2;grid-row:1/4;display:block;min-height:190px;background:linear-gradient(rgba(52,35,56,.05),rgba(52,35,56,.05)),url("https://images.pexels.com/photos/16296816/pexels-photo-16296816.jpeg?auto=compress&cs=tinysrgb&w=1000") center/cover no-repeat;filter:saturate(.68) contrast(.96)}
+  body.violet-v4 .portrait-question::after{content:"";grid-column:2;grid-row:1/4;display:block;min-height:190px;background:linear-gradient(rgba(52,35,56,.05),rgba(52,35,56,.05)),url("assets/media/editorial-01.jpg") center/cover no-repeat;filter:saturate(.68) contrast(.96)}
   body.violet-v4 .portrait-question>.question-kicker,body.violet-v4 .portrait-question>h2,body.violet-v4 .portrait-question>p{grid-column:1}
   body.violet-v4 .portrait-question>h2{max-width:620px;font-size:clamp(36px,2.65vw,48px);line-height:1.03}
   body.violet-v4 .portrait-question>.portrait-options,body.violet-v4 .portrait-question>.portrait-nav{grid-column:1/-1}

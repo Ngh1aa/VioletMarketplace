@@ -1,0 +1,43 @@
+{
+  "schema_version": "factory-v6-violet-1.0",
+  "factory_source": "Ngh1aa/uiux-ai-workspace@7f4f4a61680f377d3d244c4f38a25b2eb79d7f9f",
+  "brain": "external",
+  "skills": [
+    {
+      "id": "visual-design-direction",
+      "stages": ["art_direction", "visual_composition"],
+      "application": ["page-role composition", "image-led hierarchy", "Object → Material → Atmosphere"]
+    },
+    {
+      "id": "brand-distinctiveness-and-visual-signature",
+      "stages": ["art_direction", "design_system", "visual_qa"],
+      "application": ["Violet Index", "white + pastel-violet field", "anti-generic composition rules"]
+    },
+    {
+      "id": "visual-taste-calibration",
+      "stages": ["visual_qa", "repair"],
+      "application": ["KEEP / REVISE / REMOVE", "protect editorial restraint", "reject interchangeable marketplace defaults"]
+    },
+    {
+      "id": "interaction-patterns-and-form-ux",
+      "stages": ["ux_ia", "implementation", "browser_qa"],
+      "application": ["progressive filters", "trial workflow", "familiar bag/checkout controls", "focus states"]
+    },
+    {
+      "id": "ui-craft-and-visual-qa",
+      "stages": ["browser_qa", "visual_qa", "repair"],
+      "application": ["rendered screenshot evidence", "broken-image checks", "macro hierarchy before micro polish", "visible-defect veto"]
+    },
+    {
+      "id": "responsive-and-adaptive-layouts",
+      "stages": ["visual_composition", "browser_qa"],
+      "application": ["desktop pressure-point safety", "no unsupported responsive claims"]
+    },
+    {
+      "id": "accessibility",
+      "stages": ["design_system", "browser_qa"],
+      "application": ["semantic landmarks", "focus visibility", "axe evidence"]
+    }
+  ],
+  "policy": "Use the smallest applicable skill graph; a skill is counted only where a concrete contract or evidence output traces to it."
+}

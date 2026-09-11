@@ -174,7 +174,17 @@
     const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{
       if(entry.isIntersecting){ entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
     }),{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-    nodes.forEach(node=>{ node.classList.add('maison-reveal'); observer.observe(node); });
+    nodes.forEach(node=>{
+      const rect = node.getBoundingClientRect();
+      const isInitialViewport = rect.top < innerHeight * 1.05 && rect.bottom > 0;
+      if(isInitialViewport){
+        node.classList.remove('maison-reveal');
+        node.classList.add('is-visible');
+        return;
+      }
+      node.classList.add('maison-reveal');
+      observer.observe(node);
+    });
   }
 
   installBrandContract();

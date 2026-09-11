@@ -1,0 +1,150 @@
+/* UIUX Factory V6 accessibility corrections.
+   This is the final buyer-facing color layer. It repairs measured WCAG contrast
+   defects without changing Violet's composition, hierarchy or brand surfaces. */
+
+body.violet-maison .topbar{
+  background:#e8dcf2!important;
+  color:#382c42!important;
+}
+body.violet-maison .topbar-inner>span,
+body.violet-maison .top-links a{
+  color:#382c42!important;
+  opacity:1!important;
+}
+
+body.violet-maison .site-header .brand small{
+  color:#5b4f61!important;
+}
+
+body.violet-maison .site-footer{
+  background:#17131b!important;
+  color:#f6f1f9!important;
+}
+body.violet-maison .site-footer .footer-brand,
+body.violet-maison .site-footer .footer-brand small{
+  color:#f6f1f9!important;
+  opacity:1!important;
+}
+body.violet-maison .site-footer .footer-grid p,
+body.violet-maison .site-footer .footer-grid a,
+body.violet-maison .site-footer .footer-grid span,
+body.violet-maison .site-footer .footer-bottom{
+  color:#d8cedd!important;
+}
+
+body.violet-maison .v5-after-wear .v4-section-label,
+body.violet-maison .v5-after-wear .v4-section-label span,
+body.violet-maison .v5-after-wear p,
+body.violet-maison .v5-after-wear small{
+  color:#514858!important;
+}
+
+body.violet-maison .v4-wardrobe p,
+body.violet-maison .v4-wardrobe small,
+body.violet-maison .v4-wardrobe .v4-section-label,
+body.violet-maison .v4-wardrobe .v4-section-label span{
+  color:#514858!important;
+}
+
+/* Preserve semantic focus visibility on both pale and dark Violet surfaces. */
+body.violet-maison :where(a,button,input,select,textarea):focus-visible{
+  outline:2px solid #5b416f!important;
+  outline-offset:3px!important;
+}
+body.violet-maison .site-footer :where(a,button):focus-visible{
+  outline-color:#e8dcf2!important;
+}
+
+/* Core Web Vitals paint contract.
+   Above-the-fold route introductions must never wait for IntersectionObserver
+   before becoming visible. Below-the-fold editorial sections keep the reveal. */
+body.violet-maison .v4-home-hero.maison-reveal,
+body.violet-maison .v4-library-masthead.maison-reveal,
+body.violet-maison .explore-pdp-intro.maison-reveal,
+body.violet-maison .v4-discovery-hero.maison-reveal,
+body.violet-maison .v4-houses-hero.maison-reveal,
+body.violet-maison .v4-house-hero.maison-reveal,
+body.violet-maison .portrait-shell.maison-reveal,
+body.violet-maison .v4-utility-hero.maison-reveal{
+  opacity:1!important;
+  transform:none!important;
+}
+
+/* app.js composes the shared chrome at runtime. Reserve its final height only
+   while the mount is empty. Once mounted, the selector stops matching so the
+   existing display/sticky contract owns the header again. */
+body.violet-maison > [data-site-header]:empty{
+  display:block;
+  min-height:158px;
+}
+@media (max-width:900px){
+  body.violet-maison > [data-site-header]:empty{min-height:89px}
+}
+
+/* Mobile performance is a deliberate responsive transformation rather than a
+   squeezed desktop composition. Keep one critical image in the opening and
+   postpone supporting editorial media so the first viewport can paint without
+   competing with megabyte-scale decorative imagery. */
+@media (max-width:700px){
+  body.violet-maison .v4-home-hero{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    min-height:0!important;
+    width:calc(100% - 24px)!important;
+    margin-top:12px!important;
+  }
+  body.violet-maison .v4-feature-copy{
+    order:1!important;
+    padding:28px 22px 24px!important;
+    min-height:300px!important;
+  }
+  body.violet-maison .v4-feature-media{
+    order:2!important;
+    min-height:260px!important;
+  }
+  body.violet-maison .v5-hero-mosaic{
+    min-height:260px!important;
+    height:260px!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:1fr!important;
+  }
+  body.violet-maison .v5-hero-shot:not(:first-child){display:none!important}
+  body.violet-maison .v5-hero-shot:first-child{grid-row:1!important}
+  body.violet-maison .v5-hero-shot:first-child img{
+    transform:none!important;
+    transition:none!important;
+  }
+
+  body.violet-maison .explore-pdp-intro{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:0!important;
+  }
+  body.violet-maison .explore-pdp-intro>.v4-buying-desk{
+    order:1!important;
+    width:100%!important;
+    max-width:none!important;
+    padding:28px 0 34px!important;
+  }
+  body.violet-maison .explore-pdp-intro>.v4-pdp-media{
+    order:2!important;
+    position:static!important;
+    top:auto!important;
+    width:100%!important;
+    margin-top:10px!important;
+  }
+  body.violet-maison .v4-pdp-house{margin-top:22px!important}
+  body.violet-maison .v4-buying-desk h1{font-size:46px!important}
+  body.violet-maison .v5-gallery{
+    max-height:none!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:320px!important;
+    height:320px!important;
+  }
+  body.violet-maison .v5-gallery-main{
+    grid-row:1!important;
+    min-height:320px!important;
+  }
+  body.violet-maison .v5-gallery-tile:not(.v5-gallery-main){display:none!important}
+  body.violet-maison .v5-gallery-main img{transition:none!important}
+}

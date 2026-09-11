@@ -44,6 +44,7 @@ jobs:
           test -f desktop-experience-v3.css
           test -f desktop-experience-v4.css
           test -f desktop-experience-v4-rollout.css
+          test -f maison-redesign.css
           test -f scent-portrait.css
           test -f scent-portrait.js
           test -f storefront-v3.js
@@ -80,19 +81,24 @@ jobs:
           grep -q "Violet Parfumerie" index.html
           grep -q "Three ways into Violet" index.html
           grep -q "data-v4-house-index" index.html
+          grep -q "v4-shelf-grid" index.html
+          grep -q "v4-house-index" index.html
           grep -q "discovery.html" index.html
           grep -q "data-v4-houses-index" houses.html
           grep -q "data-v4-house-detail" house.html
           for f in index.html search.html product.html discovery.html houses.html house.html finder.html cart.html checkout.html order-success.html; do grep -q "desktop-experience-v4.css" "$f"; done
-          grep -q "desktop-experience-v4-rollout.css" search.html
+          grep -q 'href="maison-redesign.css"' search.html
+          ! grep -q 'href="desktop-experience-v4-rollout.css"' search.html
+          ! grep -q '<script src="app.js"' search.html
           grep -q "desktop-experience-v4-rollout.css" houses.html
           grep -q "desktop-experience-v4-rollout.css" house.html
           grep -q "desktop-experience-v4-rollout.css" finder.html
           grep -q "desktop-experience-v4-rollout.css" cart.html
           grep -q "desktop-experience-v4-rollout.css" checkout.html
-          grep -q "storefront-v4.js" index.html
+          ! grep -q '<script src="storefront-v4.js"' index.html
+          ! grep -q '<script src="storefront-v4-rollout.js"' index.html
           grep -q "storefront-v4.js" search.html
-          grep -q "storefront-v4.js" product.html
+          grep -q "load('storefront-v4.js')" product.html
           grep -q "storefront-v4.js" discovery.html
           grep -q "storefront-v4-rollout.js" houses.html
           grep -q "storefront-v4-rollout.js" house.html

@@ -8,10 +8,17 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="perfume-luxury.css">
   <link rel="stylesheet" href="desktop-experience-v4.css">
-  <link rel="stylesheet" href="desktop-experience-v4-rollout.css">
+  <link rel="stylesheet" href="maison-redesign.css">
+  <link rel="stylesheet" href="brand-contract.css" data-violet-brand-contract>
+  <link rel="stylesheet" href="exploration-layout.css" data-violet-exploration-layout>
+  <link rel="stylesheet" href="accessibility-v6.css" data-violet-accessibility-v6>
 </head>
-<body>
-  <div data-site-header></div>
+<body class="violet-maison violet-v4" data-maison-page="search">
+  <div data-site-header>
+    <div class="topbar"><div class="container topbar-inner"><span>Violet Parfumerie · enter slowly, follow what stays</span><div class="top-links"><a href="discovery.html">Discovery ritual</a><a href="finder.html">Scent Portrait</a><a href="seller.html">For fragrance houses</a></div></div></div>
+    <header class="site-header"><div class="container header-main"><a class="brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><div class="search-shell"><form class="search-form" data-search-form><input name="q" autocomplete="off" placeholder="Search fragrance, note, or maison…" aria-label="Search fragrances"><button>Search</button></form><div class="search-suggestions" data-suggestions></div></div><div class="header-actions"><a class="icon-link v5-trio-link" href="discovery.html">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">0</span></a></div></div><div class="nav-row"><nav class="container nav-inner"><a href="search.html" aria-current="page">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></nav></div></header>
+  </div>
+
   <main class="container v4-library-page">
     <header class="v4-library-masthead">
       <div><span class="v4-kicker">V.10 / FRAGRANCE LIBRARY</span><h1 data-result-title>Fragrance Library</h1></div>
@@ -26,10 +33,29 @@
       </div>
     </section>
   </main>
-  <div data-site-footer></div>
-  <script src="data.js"></script>
-  <script src="app.js"></script>
-  <script src="storefront-v4.js"></script>
-  <script src="storefront-v4-rollout.js"></script>
+
+  <div data-site-footer>
+    <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a><a href="about.html">About Violet</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div></div><div class="footer-bottom"><span>© 2026 Violet Parfumerie</span><span>International edit · EUR · Curated prototype</span></div></div></footer><nav class="mobile-nav"><a href="index.html">Home</a><a href="search.html">Scents</a><a href="cart.html">Bag</a><a href="discovery.html">Saved</a></nav>
+  </div>
+
+  <script>
+    (() => {
+      const CART_KEY = 'violet-marketplace-cart-v1';
+      let cart = [];
+      try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch {}
+      const count = cart.reduce((sum,row)=>sum+Number(row.qty||0),0);
+      document.querySelectorAll('.cart-count').forEach(node=>node.textContent=count);
+      document.querySelectorAll('[data-search-form]').forEach(form => form.addEventListener('submit', event => {
+        event.preventDefault();
+        const q = new FormData(form).get('q')?.toString().trim() || '';
+        location.href = `search.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
+      }));
+    })();
+  </script>
+  <script src="data.js" defer></script>
+  <script src="storefront-v4.js" defer></script>
+  <script src="storefront-v4-rollout.js" defer></script>
+  <script src="figma-capture.js" defer></script>
+  <script src="accessibility-v6.js" defer></script>
 </body>
 </html>
