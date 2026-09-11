@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Violet fragrance object — product media, scent character, notes, house context and discovery-before-bottle choices.">
-  <title>Fragrance · Violet Parfumerie</title>
+  <title>Violette 03 · Maison Aster · Violet Parfumerie</title>
   <link rel="preload" as="image" href="assets/media/product-violette-03.jpg" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="perfume-luxury.css">
@@ -14,14 +14,15 @@
   <link rel="stylesheet" href="exploration-layout.css" data-violet-exploration-layout>
   <link rel="stylesheet" href="accessibility-v6.css" data-violet-accessibility-v6>
 </head>
-<body class="violet-maison violet-v4">
-  <div data-site-header></div>
+<body class="violet-maison violet-v4" data-maison-page="product">
+  <div data-site-header>
+    <div class="topbar"><div class="container topbar-inner"><span>Violet Parfumerie · enter slowly, follow what stays</span><div class="top-links"><a href="discovery.html">Discovery ritual</a><a href="finder.html">Scent Portrait</a><a href="seller.html">For fragrance houses</a></div></div></div>
+    <header class="site-header"><div class="container header-main"><a class="brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><div class="search-shell"><form class="search-form" data-search-form><input name="q" autocomplete="off" placeholder="Search fragrance, note, or maison…" aria-label="Search fragrances"><button>Search</button></form><div class="search-suggestions" data-suggestions></div></div><div class="header-actions"><a class="icon-link v5-trio-link" href="discovery.html">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">0</span></a></div></div><div class="nav-row"><nav class="container nav-inner"><a href="search.html">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></nav></div></header>
+  </div>
+
   <main class="container v4-product-page">
     <div class="v4-breadcrumbs"><a href="index.html">Violet</a><span>/</span><a href="search.html">Fragrances</a><span>/</span><span>Object</span></div>
 
-    <!-- Representative route rendered in initial HTML for a stable, early LCP.
-         The tiny inline switch below restores the generic JS renderer for every
-         other product id, so catalogue navigation remains dynamic. -->
     <section class="v4-pdp" data-static-violette-pdp>
       <div class="explore-pdp-intro">
         <div class="v4-pdp-media">
@@ -67,35 +68,71 @@
         </div>
       </section>
     </section>
+  </main>
 
-    <script>
-      (() => {
-        const id = new URLSearchParams(location.search).get('id') || 'violette-03';
-        const staticPdp = document.querySelector('[data-static-violette-pdp]');
-        if (id !== 'violette-03') {
-          const dynamicPdp = document.createElement('section');
-          dynamicPdp.setAttribute('data-product-detail', '');
-          staticPdp.replaceWith(dynamicPdp);
-          return;
-        }
-        const CART_KEY = 'violet-marketplace-cart-v1';
-        const TRIO_KEY = 'violet-discovery-trio-v1';
-        const read = (key) => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
-        const syncCount = () => { const count = read(CART_KEY).reduce((sum,row)=>sum+Number(row.qty||0),0); document.querySelectorAll('.cart-count').forEach(node=>node.textContent=count); };
+  <div data-site-footer>
+    <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a><a href="about.html">About Violet</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div></div><div class="footer-bottom"><span>© 2026 Violet Parfumerie</span><span>International edit · EUR · Curated prototype</span></div></div></footer><nav class="mobile-nav"><a href="index.html">Home</a><a href="search.html">Scents</a><a href="cart.html">Bag</a><a href="discovery.html">Saved</a></nav>
+  </div>
+
+  <script>
+    (() => {
+      const id = new URLSearchParams(location.search).get('id') || 'violette-03';
+      const staticPdp = document.querySelector('[data-static-violette-pdp]');
+      const CART_KEY = 'violet-marketplace-cart-v1';
+      const TRIO_KEY = 'violet-discovery-trio-v1';
+      const read = key => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
+      const syncCount = () => {
+        const count = read(CART_KEY).reduce((sum,row)=>sum+Number(row.qty||0),0);
+        document.querySelectorAll('.cart-count').forEach(node=>node.textContent=count);
+      };
+      document.querySelectorAll('[data-search-form]').forEach(form => form.addEventListener('submit', event => {
+        event.preventDefault();
+        const q = new FormData(form).get('q')?.toString().trim() || '';
+        location.href = `search.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
+      }));
+      syncCount();
+
+      if (id === 'violette-03') {
         document.querySelector('[data-v4-add-bottle]')?.addEventListener('click', event => {
-          const cart = read(CART_KEY); const row = cart.find(item=>item.id==='violette-03'); if(row) row.qty += 1; else cart.push({id:'violette-03',qty:1}); localStorage.setItem(CART_KEY,JSON.stringify(cart)); syncCount(); event.currentTarget.textContent='Added to bag';
+          const cart = read(CART_KEY);
+          const row = cart.find(item=>item.id==='violette-03');
+          if(row) row.qty += 1; else cart.push({id:'violette-03',qty:1});
+          localStorage.setItem(CART_KEY,JSON.stringify(cart));
+          syncCount();
+          event.currentTarget.textContent='Added to bag';
         });
         document.querySelector('[data-v4-add-sample]')?.addEventListener('click', event => {
-          const trio = read(TRIO_KEY).filter(Boolean); if(!trio.includes('violette-03') && trio.length < 3) trio.push('violette-03'); localStorage.setItem(TRIO_KEY,JSON.stringify([...new Set(trio)].slice(0,3))); event.currentTarget.textContent='Added to trial trio';
+          const trio = read(TRIO_KEY).filter(Boolean);
+          if(!trio.includes('violette-03') && trio.length < 3) trio.push('violette-03');
+          localStorage.setItem(TRIO_KEY,JSON.stringify([...new Set(trio)].slice(0,3)));
+          event.currentTarget.textContent='Added to trial trio';
         });
+        return;
+      }
+
+      const dynamicPdp = document.createElement('section');
+      dynamicPdp.setAttribute('data-product-detail', '');
+      staticPdp.replaceWith(dynamicPdp);
+      const load = src => new Promise((resolve,reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = false;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.body.append(script);
+      });
+      (async () => {
+        try {
+          await load('data.js');
+          await load('app.js');
+          await load('storefront-v4.js');
+          await load('storefront-v4-rollout.js');
+        } catch (error) {
+          console.error('Violet dynamic product runtime failed to load', error);
+        }
       })();
-    </script>
-  </main>
-  <div data-site-footer></div>
-  <script src="data.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="storefront-v4.js" defer></script>
-  <script src="storefront-v4-rollout.js" defer></script>
+    })();
+  </script>
   <script src="figma-capture.js" defer></script>
   <script src="accessibility-v6.js" defer></script>
 </body>
