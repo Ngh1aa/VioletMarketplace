@@ -113,15 +113,8 @@
         location.href = `search.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
       }));
       syncCount();
-      if (new URLSearchParams(location.search).get('figma') === '1') {
-        const capture = document.createElement('script');
-        capture.src = 'figma-capture.js';
-        capture.async = false;
-        document.body.append(capture);
-      }
     })();
   </script>
-  <script src="accessibility-v6.js"></script>
-  <script src="figma-capture.js"></script>
+  <script src="figma-capture.js" defer></script>
 </body>
 </html>
