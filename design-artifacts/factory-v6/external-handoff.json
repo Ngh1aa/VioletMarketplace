@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "status": "handoff_ready",
+  "brain": "external",
+  "brain_owner": "ChatGPT",
+  "factory_source": {
+    "repository": "Ngh1aa/uiux-ai-workspace",
+    "commit": "7f4f4a61680f377d3d244c4f38a25b2eb79d7f9f"
+  },
+  "target": {
+    "repository": "Ngh1aa/VioletMarketplace",
+    "branch": "factory/violet-figma-safe-redesign",
+    "project_root": "/",
+    "stack": "vanilla-html-css-js",
+    "routes": [
+      "/index.html",
+      "/search.html",
+      "/product.html?id=violette-03",
+      "/discovery.html",
+      "/index.html?figma=1"
+    ]
+  },
+  "artifacts": [
+    "research.md",
+    "ux-ia.md",
+    "art-direction.md",
+    "design-contract.json",
+    "design-system.json",
+    "visual-composition.json",
+    "implementation-plan.md",
+    "skill-trace.json"
+  ],
+  "truth_boundary": "handoff_ready means the external brain produced the design/implementation contracts. It is not a claim that rendered QA passed. QA status is owned by GitHub Actions evidence."
+}
