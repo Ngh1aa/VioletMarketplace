@@ -44,6 +44,7 @@ jobs:
           test -f desktop-experience-v3.css
           test -f desktop-experience-v4.css
           test -f desktop-experience-v4-rollout.css
+          test -f maison-redesign.css
           test -f scent-portrait.css
           test -f scent-portrait.js
           test -f storefront-v3.js
@@ -86,7 +87,9 @@ jobs:
           grep -q "data-v4-houses-index" houses.html
           grep -q "data-v4-house-detail" house.html
           for f in index.html search.html product.html discovery.html houses.html house.html finder.html cart.html checkout.html order-success.html; do grep -q "desktop-experience-v4.css" "$f"; done
-          grep -q "desktop-experience-v4-rollout.css" search.html
+          grep -q 'href="maison-redesign.css"' search.html
+          ! grep -q 'href="desktop-experience-v4-rollout.css"' search.html
+          ! grep -q '<script src="app.js"' search.html
           grep -q "desktop-experience-v4-rollout.css" houses.html
           grep -q "desktop-experience-v4-rollout.css" house.html
           grep -q "desktop-experience-v4-rollout.css" finder.html
