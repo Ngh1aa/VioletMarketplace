@@ -1,0 +1,68 @@
+name: Vendor Figma-safe media
+
+on:
+  push:
+    paths:
+      - "assets/media-manifest.json"
+      - ".github/workflows/vendor-figma-media.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  vendor-media:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Download declared media to same-origin assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/media
+          while IFS=$'\t' read -r target url; do
+            echo "Fetching $target"
+            mkdir -p "$(dirname "$target")"
+            tmp="${target}.tmp"
+            curl -L --fail --retry 3 --retry-delay 2 \
+              -A "Mozilla/5.0 VioletPrototypeMediaVendor/1.0" \
+              "$url" -o "$tmp"
+            bytes=$(wc -c < "$tmp")
+            if [ "$bytes" -lt 10000 ]; then
+              echo "Downloaded asset is suspiciously small: $target ($bytes bytes)" >&2
+              exit 1
+            fi
+            mv "$tmp" "$target"
+          done < <(jq -r '.[] | [.path, .url] | @tsv' assets/media-manifest.json)
+
+      - name: Ensure every declared asset exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          while IFS= read -r target; do
+            if [ ! -s "$target" ]; then
+              echo "Missing asset: $target" >&2
+              missing=1
+            fi
+          done < <(jq -r '.[].path' assets/media-manifest.json)
+          exit "$missing"
+
+      - name: Commit vendored media
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/media
+          if git diff --cached --quiet; then
+            echo "No media changes to commit."
+            exit 0
+          fi
+          git commit -m "Vendor same-origin fragrance media for Figma capture"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
