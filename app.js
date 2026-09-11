@@ -4,7 +4,7 @@
   const ORDER_KEY = 'violet-marketplace-last-order';
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
-  const money = n => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(n || 0));
+  const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(Number(n || 0));
   const qs = new URLSearchParams(location.search);
   const productById = id => DATA.products.find(p => p.id === id);
   const discount = p => p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
@@ -26,7 +26,7 @@
   function addToCart(id, qty = 1){
     const cart = getCart(); const existing = cart.find(i => i.id === id);
     if(existing) existing.qty += qty; else cart.push({ id, qty });
-    setCart(cart); toast('Đã thêm fragrance vào giỏ');
+    setCart(cart); toast('Added fragrance to your bag.');
   }
   function updateQty(id, delta){
     const cart = getCart(); const item = cart.find(i => i.id === id); if(!item) return;
@@ -39,17 +39,17 @@
   function updateCartCount(){ const count = getCart().reduce((s,i)=>s+i.qty,0); $$('.cart-count').forEach(el => el.textContent = count); }
 
   function toast(text){
-    let el = $('.toast'); if(!el){ el = document.createElement('div'); el.className='toast'; document.body.append(el); }
+    let el = $('.toast'); if(!el){ el = document.createElement('div'); el.className='toast'; el.setAttribute('role','status'); document.body.append(el); }
     el.textContent=text; requestAnimationFrame(()=>el.classList.add('show')); clearTimeout(window.__toast);
     window.__toast=setTimeout(()=>el.classList.remove('show'),1800);
   }
 
   function header(){
-    return `<div class="topbar"><div class="container topbar-inner"><span>Complimentary samples · Gift wrap on Violet selections</span><div class="top-links"><a href="seller.html">For fragrance houses</a><a href="#">Scent concierge</a><a href="#">Order care</a></div></div></div>
-    <header class="site-header"><div class="container header-main"><a class="brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><div class="search-shell"><form class="search-form" data-search-form><input name="q" autocomplete="off" placeholder="Tìm mùi hương, note, maison..." aria-label="Tìm fragrance"><button>Tìm</button></form><div class="search-suggestions" data-suggestions></div></div><div class="header-actions"><a class="icon-link" href="admin.html" title="Marketplace Admin">V</a><a class="icon-link cart-link" href="cart.html" title="Giỏ hương">Bag<span class="cart-count">0</span></a></div></div><div class="nav-row"><nav class="container nav-inner"><a href="search.html">All Fragrance</a><a href="search.html?category=floral">Floral</a><a href="search.html?category=woody">Woods</a><a href="search.html?category=amber">Amber</a><a href="search.html?category=musk">Skin Musk</a><a href="search.html?category=discovery">Discovery Sets</a><a href="search.html?category=gifts">Gifts</a></nav></div></header>`;
+    return `<div class="topbar"><div class="container topbar-inner"><span>Violet Editions · objects, houses and slower discovery</span><div class="top-links"><a href="discovery.html">Discovery ritual</a><a href="finder.html">Scent Portrait</a><a href="seller.html">For fragrance houses</a></div></div></div>
+    <header class="site-header"><div class="container header-main"><a class="brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><div class="search-shell"><form class="search-form" data-search-form><input name="q" autocomplete="off" placeholder="Search fragrance, note, or maison…" aria-label="Search fragrances"><button>Search</button></form><div class="search-suggestions" data-suggestions></div></div><div class="header-actions"><a class="icon-link" href="discovery.html" title="Saved discovery trio">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">0</span></a></div></div><div class="nav-row"><nav class="container nav-inner"><a href="search.html">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></nav></div></header>`;
   }
   function footer(){
-    return `<footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A curated fragrance marketplace for niche houses, intimate scent stories and slower, more considered discovery.</p></div><div><h4>Explore</h4><div class="footer-links"><a href="search.html">All fragrance</a><a href="search.html?category=discovery">Discovery sets</a><a href="search.html?category=gifts">Gift edit</a></div></div><div><h4>Maisons</h4><div class="footer-links"><a href="seller.html">Fragrance House Center</a><a href="#">Join Violet Edit</a><a href="#">Curation standard</a></div></div><div><h4>Client Care</h4><div class="footer-links"><a href="#">Scent concierge</a><a href="#">Delivery & returns</a><a href="#">Authenticity policy</a></div></div></div><div class="footer-bottom"><span>© 2026 Violet Parfumerie</span><span>Vietnam · VND · Curated online</span></div></div></footer><nav class="mobile-nav"><a href="index.html">Home</a><a href="search.html">Scents</a><a href="cart.html">Bag</a><a href="seller.html">Account</a></nav>`;
+    return `<footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div></div><div class="footer-bottom"><span>© 2026 Violet Parfumerie</span><span>Vietnam · VND · Curated prototype</span></div></div></footer><nav class="mobile-nav"><a href="index.html">Home</a><a href="search.html">Scents</a><a href="cart.html">Bag</a><a href="discovery.html">Saved</a></nav>`;
   }
   $$('[data-site-header]').forEach(el => el.innerHTML = header());
   $$('[data-site-footer]').forEach(el => el.innerHTML = footer());
@@ -61,7 +61,7 @@
       input.addEventListener('input', () => {
         const q=input.value.trim().toLowerCase(); if(!q){box.classList.remove('open'); return;}
         const matches=DATA.products.filter(p => searchText(p).includes(q)).slice(0,5);
-        box.innerHTML=matches.map(p=>`<a class="suggestion" href="product.html?id=${p.id}"><span><b>${p.name}</b><small>${p.brand} · ${p.family}</small></span><small>${money(p.price)}</small></a>`).join('') || `<a class="suggestion" href="search.html?q=${encodeURIComponent(q)}">Xem fragrance phù hợp với “${input.value}”</a>`;
+        box.innerHTML=matches.map(p=>`<a class="suggestion" href="product.html?id=${p.id}"><span><b>${p.name}</b><small>${p.brand} · ${p.family}</small></span><small>${money(p.price)}</small></a>`).join('') || `<a class="suggestion" href="search.html?q=${encodeURIComponent(q)}">View results for “${input.value}”</a>`;
         box.classList.add('open');
       });
       input.addEventListener('blur',()=>setTimeout(()=>box.classList.remove('open'),150));
@@ -87,11 +87,11 @@
     const q=(qs.get('q')||'').toLowerCase(); const category=qs.get('category'); const official=qs.get('official'); const deal=qs.get('deal');
     let items=DATA.products.filter(p => !q || searchText(p).includes(q));
     if(category) items=items.filter(p=>p.category===category); if(official) items=items.filter(p=>p.official); if(deal) items=items.filter(p=>discount(p)>0);
-    const title=$('[data-result-title]'); if(title) title.textContent=q?`Kết quả cho “${qs.get('q')}”`:category?(DATA.categories.find(c=>c.id===category)?.name||'Fragrance'):official?'Curated Houses':deal?'Private Edit':'All Fragrance';
-    const counts=$$('[data-result-count]'); counts.forEach(count => count.textContent=`${items.length} fragrance`);
+    const title=$('[data-result-title]'); if(title) title.textContent=q?`Results for “${qs.get('q')}”`:category?(DATA.categories.find(c=>c.id===category)?.name||'Fragrance'):official?'Curated Houses':deal?'Private Edit':'All Fragrance';
+    const counts=$$('[data-result-count]'); counts.forEach(count => count.textContent=`${items.length} fragrance${items.length===1?'':'s'}`);
     const chips=$('[data-active-chips]'); if(chips){ const arr=[]; if(category) arr.push(DATA.categories.find(c=>c.id===category)?.name); if(official) arr.push('Curated house'); if(deal) arr.push('Private edit'); if(q) arr.push(`“${qs.get('q')}”`); chips.innerHTML=arr.filter(Boolean).map(x=>`<span class="chip">${x}</span>`).join(''); }
     const sort=$('[data-sort]');
-    function draw(){ let list=[...items]; if(sort?.value==='price-asc') list.sort((a,b)=>a.price-b.price); if(sort?.value==='price-desc') list.sort((a,b)=>b.price-a.price); if(sort?.value==='rating') list.sort((a,b)=>b.rating-a.rating); grid.innerHTML=list.length?list.map(productCard).join(''):'<div class="empty" style="grid-column:1/-1"><h3>Chưa tìm thấy mùi phù hợp.</h3><p>Thử một fragrance family hoặc note khác — ví dụ iris, amber, sandalwood hoặc musk.</p></div>'; }
+    function draw(){ let list=[...items]; if(sort?.value==='price-asc') list.sort((a,b)=>a.price-b.price); if(sort?.value==='price-desc') list.sort((a,b)=>b.price-a.price); if(sort?.value==='rating') list.sort((a,b)=>b.rating-a.rating); grid.innerHTML=list.length?list.map(productCard).join(''):'<div class="empty" style="grid-column:1/-1"><h3>No fragrance matches yet.</h3><p>Try another family or note, such as iris, amber, sandalwood or musk.</p></div>'; }
     sort?.addEventListener('change',draw); draw();
   }
 
@@ -106,9 +106,9 @@
 
   function renderCart(){
     const host=$('[data-cart]'); if(!host) return; const items=cartDetailed();
-    if(!items.length){host.innerHTML='<div class="empty"><h3>Fragrance bag đang trống</h3><p>Khám phá một scent family hoặc bắt đầu bằng discovery set.</p><a class="btn btn-primary" href="search.html">Explore fragrance</a></div>'; updateSummary(); return;}
+    if(!items.length){host.innerHTML='<div class="empty"><h3>Your fragrance bag is empty.</h3><p>Explore a scent family or begin with a discovery trio.</p><a class="btn btn-primary" href="search.html">Explore fragrances</a></div>'; updateSummary(); return;}
     const groups=Object.groupBy?Object.groupBy(items,i=>i.product.seller):items.reduce((a,i)=>((a[i.product.seller]??=[]).push(i),a),{});
-    host.innerHTML=Object.entries(groups).map(([seller,rows])=>`<section class="cart-shop"><div class="shop-head">${seller}</div>${rows.map(i=>`<div class="cart-item"><img src="${i.product.image}" alt="${i.product.name}"><div><div class="cart-name">${i.product.name}</div><div class="cart-sub">${i.product.brand} · ${i.product.concentration || ''} · ${i.product.size || ''}</div><div class="qty-row"><button class="qty-btn" data-qty="-1" data-id="${i.product.id}" aria-label="Giảm số lượng">−</button><b>${i.qty}</b><button class="qty-btn" data-qty="1" data-id="${i.product.id}" aria-label="Tăng số lượng">+</button><button class="btn" style="padding:5px 8px" data-remove="${i.product.id}">Xoá</button></div></div><div><b>${money(i.product.price*i.qty)}</b></div></div>`).join('')}</section>`).join('');
+    host.innerHTML=Object.entries(groups).map(([seller,rows])=>`<section class="cart-shop"><div class="shop-head">${seller}</div>${rows.map(i=>`<div class="cart-item"><img src="${i.product.image}" alt="${i.product.name}"><div><div class="cart-name">${i.product.name}</div><div class="cart-sub">${i.product.brand} · ${i.product.concentration || ''} · ${i.product.size || ''}</div><div class="qty-row"><button class="qty-btn" data-qty="-1" data-id="${i.product.id}" aria-label="Decrease quantity">−</button><b>${i.qty}</b><button class="qty-btn" data-qty="1" data-id="${i.product.id}" aria-label="Increase quantity">+</button><button class="btn" style="padding:5px 8px" data-remove="${i.product.id}">Remove</button></div></div><div><b>${money(i.product.price*i.qty)}</b></div></div>`).join('')}</section>`).join('');
     $$('[data-qty]',host).forEach(b=>b.addEventListener('click',()=>updateQty(b.dataset.id,Number(b.dataset.qty))));
     $$('[data-remove]',host).forEach(b=>b.addEventListener('click',()=>removeItem(b.dataset.remove))); updateSummary();
   }
@@ -119,8 +119,8 @@
 
   function renderCheckout(){
     const host=$('[data-checkout-items]'); if(!host) return; const items=cartDetailed();
-    host.innerHTML=items.length?items.map(i=>`<div class="summary-row"><span>${i.product.name} × ${i.qty}</span><b>${money(i.product.price*i.qty)}</b></div>`).join(''):'<p>Chưa có fragrance trong bag.</p>'; updateSummary();
-    const form=$('[data-checkout-form]'); form?.addEventListener('submit',e=>{e.preventDefault(); if(!items.length){toast('Fragrance bag đang trống');return;} const order='VL'+Date.now().toString().slice(-8); localStorage.setItem(ORDER_KEY,JSON.stringify({order,total:cartSubtotal(),date:new Date().toISOString()})); setCart([]); location.href=`order-success.html?order=${order}`;});
+    host.innerHTML=items.length?items.map(i=>`<div class="summary-row"><span>${i.product.name} × ${i.qty}</span><b>${money(i.product.price*i.qty)}</b></div>`).join(''):'<p>Your fragrance bag is empty.</p>'; updateSummary();
+    const form=$('[data-checkout-form]'); form?.addEventListener('submit',e=>{e.preventDefault(); if(!items.length){toast('Your fragrance bag is empty.');return;} const order='VL'+Date.now().toString().slice(-8); localStorage.setItem(ORDER_KEY,JSON.stringify({order,total:cartSubtotal(),date:new Date().toISOString()})); setCart([]); location.href=`order-success.html?order=${order}`;});
   }
 
   function renderSuccess(){ const el=$('[data-order-code]'); if(el) el.textContent=qs.get('order')||'VL20260908'; }
