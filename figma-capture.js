@@ -1,4 +1,21 @@
 (() => {
+  /* Performance contract: never hide above-the-fold LCP candidates behind the
+     editorial IntersectionObserver reveal. The reveal remains available for
+     below-the-fold sections, but primary route content must paint immediately. */
+  const criticalStyle = document.createElement('style');
+  criticalStyle.id = 'violet-critical-paint-style';
+  criticalStyle.textContent = `
+    body.violet-maison .v4-home-hero.maison-reveal,
+    body.violet-maison .v4-library-masthead.maison-reveal,
+    body.violet-maison .explore-pdp-intro.maison-reveal,
+    body.violet-maison .v4-discovery-hero.maison-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  `;
+  document.head.append(criticalStyle);
+
   const params = new URLSearchParams(location.search);
   if (params.get('figma') !== '1') return;
 
