@@ -17,7 +17,25 @@
 <body class="violet-maison violet-v4">
   <div data-site-header></div>
   <main class="v4-main">
-    <section class="container v4-home-hero" data-v4-feature></section>
+    <!-- The visible LCP composition is authored in initial HTML so Chromium's
+         preload scanner and first paint do not wait for storefront JavaScript.
+         renderHome still targets the inert template below to populate the
+         library shelf and house index without replacing this critical hero. -->
+    <section class="container v4-home-hero">
+      <div class="v4-feature-copy">
+        <div class="v4-section-label"><span>V.01 / FEATURED OBJECT</span><span>Paris</span></div>
+        <div><span class="v4-kicker">Maison Aster</span><h1>Violette 03</h1><p class="v4-feature-sensory">Powdered violet, cool iris and sandalwood worn close to skin.</p></div>
+        <div class="v4-feature-commerce"><span>Eau de Parfum · 50 ml</span><strong>160 €</strong><div><a class="btn btn-primary" href="product.html?id=violette-03">View object</a><a class="v4-text-link" href="discovery.html?focus=violette-03">Try first →</a></div></div>
+      </div>
+      <a class="v4-feature-media" href="product.html?id=violette-03" aria-label="Explore Violette 03">
+        <div class="v5-hero-mosaic">
+          <div class="v5-hero-shot"><img src="assets/media/product-violette-03.jpg" width="681" height="800" fetchpriority="high" alt="Violette 03 by Maison Aster"><span>Object / Powdery Floral</span></div>
+          <div class="v5-hero-shot"><img src="assets/media/editorial-01.jpg" width="1600" height="1920" alt="Editorial fragrance material study"><span>Material study</span></div>
+          <div class="v5-hero-shot"><img src="assets/media/editorial-04.jpg" width="1600" height="2623" alt="Editorial fragrance atmosphere"><span>Atmosphere</span></div>
+        </div>
+      </a>
+    </section>
+    <template data-v4-feature aria-hidden="true"></template>
 
     <section class="container maison-manifesto" aria-label="Violet point of view">
       <span>Violet / Parfumerie</span>
