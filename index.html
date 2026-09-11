@@ -14,13 +14,13 @@
   <link rel="stylesheet" href="exploration-layout.css" data-violet-exploration-layout>
   <link rel="stylesheet" href="accessibility-v6.css" data-violet-accessibility-v6>
 </head>
-<body class="violet-maison violet-v4">
-  <div data-site-header></div>
+<body class="violet-maison violet-v4" data-maison-page="index">
+  <div data-site-header>
+    <div class="topbar"><div class="container topbar-inner"><span>Violet Parfumerie · enter slowly, follow what stays</span><div class="top-links"><a href="discovery.html">Discovery ritual</a><a href="finder.html">Scent Portrait</a><a href="seller.html">For fragrance houses</a></div></div></div>
+    <header class="site-header"><div class="container header-main"><a class="brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><div class="search-shell"><form class="search-form" data-search-form><input name="q" autocomplete="off" placeholder="Search fragrance, note, or maison…" aria-label="Search fragrances"><button>Search</button></form><div class="search-suggestions" data-suggestions></div></div><div class="header-actions"><a class="icon-link v5-trio-link" href="discovery.html">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">0</span></a></div></div><div class="nav-row"><nav class="container nav-inner"><a href="search.html">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></nav></div></header>
+  </div>
+
   <main class="v4-main">
-    <!-- The visible LCP composition is authored in initial HTML so Chromium's
-         preload scanner and first paint do not wait for storefront JavaScript.
-         renderHome still targets the inert template below to populate the
-         library shelf and house index without replacing this critical hero. -->
     <section class="container v4-home-hero">
       <div class="v4-feature-copy">
         <div class="v4-section-label"><span>V.01 / FEATURED OBJECT</span><span>Paris</span></div>
@@ -35,7 +35,6 @@
         </div>
       </a>
     </section>
-    <template data-v4-feature aria-hidden="true"></template>
 
     <section class="container maison-manifesto" aria-label="Violet point of view">
       <span>Violet / Parfumerie</span>
@@ -46,7 +45,13 @@
     <section class="container v4-shelf-section" aria-labelledby="v4-shelf-title">
       <div class="v4-section-label"><span>01 / THE VIOLET EDIT</span><a href="search.html">View all fragrances →</a></div>
       <div class="v4-shelf-heading"><h2 id="v4-shelf-title">Objects selected for the way they unfold, not the noise they make.</h2><p>A restrained edit across skin musk, amber warmth, green brightness and softened woods. Product imagery leads; metadata stays secondary.</p></div>
-      <div class="v4-shelf-grid" data-v4-shelf></div>
+      <div class="v4-shelf-grid" data-v4-shelf>
+        <article class="v4-object-card"><a class="v4-object-link" href="product.html?id=peau-de-lune"><div class="v4-object-media"><img src="assets/media/product-peau-de-lune.jpg" alt="Peau de Lune by Nacre" loading="lazy"><img class="v5-card-image--alt" src="assets/media/editorial-03.jpg" alt="Editorial material study for Peau de Lune" loading="lazy"><span class="v5-card-badge">Try first</span></div><div class="v4-object-index"><span>Tokyo</span><span>Skin Musk</span></div><div class="v4-object-heading"><span>Nacre</span><h3>Peau de Lune</h3></div><div class="v4-object-meta"><span>Eau de Parfum · 50 ml</span><strong>150 €</strong></div></a></article>
+        <article class="v4-object-card"><a class="v4-object-link" href="product.html?id=velours-ambre"><div class="v4-object-media"><img src="assets/media/product-velours-ambre.jpg" alt="Velours Ambre by Atelier Nocturne" loading="lazy"><img class="v5-card-image--alt" src="assets/media/editorial-03.jpg" alt="Editorial material study for Velours Ambre" loading="lazy"><span class="v5-card-badge">Try first</span></div><div class="v4-object-index"><span>Grasse</span><span>Warm Amber</span></div><div class="v4-object-heading"><span>Atelier Nocturne</span><h3>Velours Ambre</h3></div><div class="v4-object-meta"><span>Extrait de Parfum · 50 ml</span><strong>195 €</strong></div></a></article>
+        <aside class="v5-shelf-story"><img src="assets/media/editorial-08.jpg" alt="Violet editorial scent atmosphere" loading="lazy"><div><span>VIOLET EDIT / SKIN & SHADOW</span><strong>Quiet can still leave a trace.</strong><a href="search.html?mood=intimate">Open the intimate edit →</a></div></aside>
+        <article class="v4-object-card"><a class="v4-object-link" href="product.html?id=neroli-rain"><div class="v4-object-media"><img src="assets/media/product-neroli-rain.jpg" alt="Neroli Rain by Lumière 17" loading="lazy"><img class="v5-card-image--alt" src="assets/media/editorial-01.jpg" alt="Editorial material study for Neroli Rain" loading="lazy"><span class="v5-card-badge">Try first</span></div><div class="v4-object-index"><span>Côte d’Azur</span><span>Citrus Aromatic</span></div><div class="v4-object-heading"><span>Lumière 17</span><h3>Neroli Rain</h3></div><div class="v4-object-meta"><span>Eau de Parfum · 50 ml</span><strong>135 €</strong></div></a></article>
+        <article class="v4-object-card"><a class="v4-object-link" href="product.html?id=santal-veil"><div class="v4-object-media"><img src="assets/media/product-santal-veil.jpg" alt="Santal Veil by Orphée" loading="lazy"><img class="v5-card-image--alt" src="assets/media/editorial-07.jpg" alt="Editorial material study for Santal Veil" loading="lazy"><span class="v5-card-badge">Try first</span></div><div class="v4-object-index"><span>Independent house</span><span>Creamy Woods</span></div><div class="v4-object-heading"><span>Orphée</span><h3>Santal Veil</h3></div><div class="v4-object-meta"><span>Eau de Parfum · 75 ml</span><strong>170 €</strong></div></a></article>
+      </div>
     </section>
 
     <section class="container maison-ritual" aria-labelledby="maison-ritual-title">
@@ -56,10 +61,7 @@
 
     <section class="container v4-route-index" aria-labelledby="v4-route-title">
       <div class="v4-section-label"><span>03 / Three ways into Violet</span><span>Choose by object, trial or feeling.</span></div>
-      <div class="v5-route-heading">
-        <h2 id="v4-route-title">Enter the maison from wherever your instinct begins.</h2>
-        <p>Browse the library when you know the language. Build a trio when you want less risk. Begin with Scent Portrait when the feeling comes first.</p>
-      </div>
+      <div class="v5-route-heading"><h2 id="v4-route-title">Enter the maison from wherever your instinct begins.</h2><p>Browse the library when you know the language. Build a trio when you want less risk. Begin with Scent Portrait when the feeling comes first.</p></div>
       <div class="v4-route-grid">
         <a class="v4-route v5-route-feature" href="search.html"><span>01 / LIBRARY</span><strong>Fragrances</strong><p>Move through family, mood, house and presence without losing sight of the object.</p><i>Open the library →</i></a>
         <a class="v4-route" href="discovery.html"><span>02 / TRY FIRST</span><strong>Discovery</strong><p>Build a representative trio and live with each direction before committing to a bottle.</p><i>Build a trio →</i></a>
@@ -70,7 +72,13 @@
     <section class="container v4-houses-section" aria-labelledby="v4-houses-title">
       <div class="v4-section-label"><span>04 / CURATED HOUSES</span><a href="houses.html">All houses →</a></div>
       <div class="v4-houses-heading"><h2 id="v4-houses-title">Know the hand behind the scent territory.</h2><p>Each fictional maison in the Violet prototype carries a distinct olfactive point of view, so discovery can begin with a house as naturally as a note.</p></div>
-      <div data-v4-house-index></div>
+      <div data-v4-house-index><div class="v4-house-index">
+        <a href="house.html?id=maison-aster"><span>01</span><img class="v5-house-thumb" src="assets/media/product-violette-03.jpg" alt="Maison Aster edit" loading="lazy"><strong>Maison Aster</strong><em>Paris</em><small>powdered violet · green fig · quiet woods</small><i>↗</i></a>
+        <a href="house.html?id=atelier-nocturne"><span>02</span><img class="v5-house-thumb" src="assets/media/product-velours-ambre.jpg" alt="Atelier Nocturne edit" loading="lazy"><strong>Atelier Nocturne</strong><em>Grasse</em><small>amber · saffron · tobacco shadow</small><i>↗</i></a>
+        <a href="house.html?id=elan-studio"><span>03</span><img class="v5-house-thumb" src="assets/media/product-iris-haze.jpg" alt="Élan Studio edit" loading="lazy"><strong>Élan Studio</strong><em>Seoul</em><small>iris · tea · translucent woods</small><i>↗</i></a>
+        <a href="house.html?id=orphee"><span>04</span><img class="v5-house-thumb" src="assets/media/product-santal-veil.jpg" alt="Orphée edit" loading="lazy"><strong>Orphée</strong><em>Independent house</em><small>sandalwood · fig leaf · musk</small><i>↗</i></a>
+        <a href="house.html?id=lumiere-17"><span>05</span><img class="v5-house-thumb" src="assets/media/product-neroli-rain.jpg" alt="Lumière 17 edit" loading="lazy"><strong>Lumière 17</strong><em>Côte d’Azur</em><small>neroli · petitgrain · mineral light</small><i>↗</i></a>
+      </div></div>
     </section>
 
     <section class="container v4-discovery-callout" aria-labelledby="v4-discovery-title">
@@ -83,11 +91,28 @@
       <span>Fictional curated maisons</span><span>Try-first prototype</span><span>Browser-local checkout</span><span>No fake AI or fulfilment claim</span>
     </section>
   </main>
-  <div data-site-footer></div>
-  <script src="data.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="storefront-v4.js" defer></script>
-  <script src="storefront-v4-rollout.js" defer></script>
+
+  <div data-site-footer>
+    <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a><a href="about.html">About Violet</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div></div><div class="footer-bottom"><span>© 2026 Violet Parfumerie</span><span>International edit · EUR · Curated prototype</span></div></div></footer><nav class="mobile-nav"><a href="index.html">Home</a><a href="search.html">Scents</a><a href="cart.html">Bag</a><a href="discovery.html">Saved</a></nav>
+  </div>
+
+  <script>
+    (() => {
+      const CART_KEY = 'violet-marketplace-cart-v1';
+      const syncCount = () => {
+        let cart = [];
+        try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch {}
+        const count = cart.reduce((sum,row)=>sum+Number(row.qty||0),0);
+        document.querySelectorAll('.cart-count').forEach(node=>node.textContent=count);
+      };
+      document.querySelectorAll('[data-search-form]').forEach(form => form.addEventListener('submit', event => {
+        event.preventDefault();
+        const q = new FormData(form).get('q')?.toString().trim() || '';
+        location.href = `search.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
+      }));
+      syncCount();
+    })();
+  </script>
   <script src="figma-capture.js" defer></script>
   <script src="accessibility-v6.js" defer></script>
 </body>
