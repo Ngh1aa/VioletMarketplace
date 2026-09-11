@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Violet fragrance object — product media, scent character, notes, house context and discovery-before-bottle choices.">
   <title>Fragrance · Violet Parfumerie</title>
+  <link rel="preload" as="image" href="assets/media/product-violette-03.jpg" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="perfume-luxury.css">
   <link rel="stylesheet" href="desktop-experience-v4.css">
@@ -17,13 +18,84 @@
   <div data-site-header></div>
   <main class="container v4-product-page">
     <div class="v4-breadcrumbs"><a href="index.html">Violet</a><span>/</span><a href="search.html">Fragrances</a><span>/</span><span>Object</span></div>
-    <section data-product-detail></section>
+
+    <!-- Representative route rendered in initial HTML for a stable, early LCP.
+         The tiny inline switch below restores the generic JS renderer for every
+         other product id, so catalogue navigation remains dynamic. -->
+    <section class="v4-pdp" data-static-violette-pdp>
+      <div class="explore-pdp-intro">
+        <div class="v4-pdp-media">
+          <div class="v4-pdp-media-index"><span>V.11 / OBJECT STUDY</span><span>Powdery Floral</span></div>
+          <div class="v5-gallery">
+            <figure class="v5-gallery-tile v5-gallery-main"><img src="assets/media/product-violette-03.jpg" width="681" height="800" fetchpriority="high" alt="Violette 03 by Maison Aster"><figcaption class="v5-media-caption">Object view</figcaption></figure>
+            <figure class="v5-gallery-tile"><img src="assets/media/editorial-01.jpg" width="1600" height="1920" alt="Editorial fragrance material study"><figcaption class="v5-media-caption">Material study</figcaption></figure>
+            <figure class="v5-gallery-tile"><img src="assets/media/editorial-04.jpg" width="1600" height="2623" alt="Editorial fragrance atmosphere"><figcaption class="v5-media-caption">Atmosphere</figcaption></figure>
+            <figure class="v5-gallery-tile v5-gallery-wide"><img src="assets/media/editorial-06.jpg" width="1600" height="949" alt="Editorial fragrance texture study" loading="lazy"><figcaption class="v5-media-caption">Texture / editorial study</figcaption></figure>
+          </div>
+          <div class="v4-pdp-media-foot"><span>Maison Aster</span><span>Eau de Parfum · 50 ml</span></div>
+        </div>
+
+        <aside class="v4-buying-desk">
+          <div class="v4-buying-index"><span>VIOLET OBJECT / 01</span><span>TRY FIRST</span></div>
+          <a class="v4-pdp-house" href="house.html?id=maison-aster">Maison Aster</a>
+          <h1>Violette 03</h1>
+          <p class="v4-pdp-character">Powdered violet, cool iris and sandalwood worn close to skin.</p>
+          <div class="v4-pdp-format">Eau de Parfum · 50 ml · Powdery Floral</div>
+          <div class="v4-pdp-price"><strong>160 €</strong><span>18 in prototype inventory</span></div>
+          <div class="v4-size-row"><span>Size</span><button type="button" aria-pressed="true">50 ml</button></div>
+          <div class="v4-pdp-actions"><button class="btn btn-primary" type="button" data-v4-add-bottle="violette-03">Add full bottle</button><button class="btn btn-secondary" type="button" data-v4-add-sample="violette-03">Add to trial trio</button></div>
+          <p class="v4-reality-note">Prototype commerce is browser-local. Editorial support images communicate mood/material and are not extra packshots of the fictional bottle.</p>
+          <div class="v4-pdp-quick"><div><span>Presence</span><strong>Close to skin</strong></div><div><span>Wear</span><strong>quiet day · close evening</strong></div></div>
+        </aside>
+      </div>
+
+      <section class="v4-pdp-story">
+        <figure class="v5-story-media"><img src="assets/media/editorial-04.jpg" width="1600" height="2623" alt="Editorial scent atmosphere for Violette 03" loading="lazy"><figcaption class="v5-media-caption">Scent atmosphere / editorial reference</figcaption></figure>
+        <div class="v5-story-copy">
+          <div class="v4-pdp-story-lead"><span class="v4-kicker">01 / THE SCENT</span><h2>Powdered violet meets cool iris, creamy sandalwood and a trace of dry vanilla. Polished, close to skin and deliberately quiet.</h2></div>
+          <div class="v4-note-table"><div><span>Top</span><strong>Bergamot · Violet leaf</strong></div><div><span>Heart</span><strong>Iris · Violet petals</strong></div><div><span>Base</span><strong>Sandalwood · Vanilla skin musk</strong></div></div>
+          <div class="v4-house-proof"><span class="v4-kicker">02 / THE HOUSE</span><h3>Maison Aster</h3><p>Soft structure, cool florals and contemplative green woods.</p><p class="v4-house-territory">powdered violet · green fig · quiet woods</p><a href="house.html?id=maison-aster">Open the maison →</a></div>
+        </div>
+      </section>
+
+      <section class="v4-related">
+        <div class="v4-section-label"><span>03 / NEARBY DIRECTIONS</span><span>Shared family, mood or presence</span></div>
+        <div class="v4-related-grid">
+          <article class="v4-object-card"><a class="v4-object-link" href="product.html?id=iris-haze"><div class="v4-object-media"><img src="assets/media/product-iris-haze.jpg" alt="Iris Haze by Élan Studio" loading="lazy"><img class="v5-card-image--alt" src="assets/media/editorial-05.jpg" alt="Editorial material study for Iris Haze" loading="lazy"><span class="v5-card-badge">Try first</span></div><div class="v4-object-index"><span>Seoul</span><span>Iris Floral</span></div><div class="v4-object-heading"><span>Élan Studio</span><h3>Iris Haze</h3></div><div class="v4-object-meta"><span>Eau de Parfum · 50 ml</span><strong>145 €</strong></div><p class="v4-object-reason">same Powdery Floral direction · shared soft / powdery mood</p></a></article>
+          <article class="v4-object-card"><a class="v4-object-link" href="product.html?id=peau-de-lune"><div class="v4-object-media"><img src="assets/media/product-peau-de-lune.jpg" alt="Peau de Lune by Nacre" loading="lazy"><img class="v5-card-image--alt" src="assets/media/editorial-03.jpg" alt="Editorial material study for Peau de Lune" loading="lazy"><span class="v5-card-badge">Try first</span></div><div class="v4-object-index"><span>Tokyo</span><span>Skin Musk</span></div><div class="v4-object-heading"><span>Nacre</span><h3>Peau de Lune</h3></div><div class="v4-object-meta"><span>Eau de Parfum · 50 ml</span><strong>150 €</strong></div><p class="v4-object-reason">shared intimate / skin mood · similar close to skin</p></a></article>
+          <article class="v4-object-card"><a class="v4-object-link" href="product.html?id=velours-ambre"><div class="v4-object-media"><img src="assets/media/product-velours-ambre.jpg" alt="Velours Ambre by Atelier Nocturne" loading="lazy"><img class="v5-card-image--alt" src="assets/media/editorial-03.jpg" alt="Editorial material study for Velours Ambre" loading="lazy"><span class="v5-card-badge">Try first</span></div><div class="v4-object-index"><span>Grasse</span><span>Warm Amber</span></div><div class="v4-object-heading"><span>Atelier Nocturne</span><h3>Velours Ambre</h3></div><div class="v4-object-meta"><span>Extrait de Parfum · 50 ml</span><strong>195 €</strong></div><p class="v4-object-reason">a contrasting route in the Violet edit</p></a></article>
+        </div>
+      </section>
+    </section>
+
+    <script>
+      (() => {
+        const id = new URLSearchParams(location.search).get('id') || 'violette-03';
+        const staticPdp = document.querySelector('[data-static-violette-pdp]');
+        if (id !== 'violette-03') {
+          const dynamicPdp = document.createElement('section');
+          dynamicPdp.setAttribute('data-product-detail', '');
+          staticPdp.replaceWith(dynamicPdp);
+          return;
+        }
+        const CART_KEY = 'violet-marketplace-cart-v1';
+        const TRIO_KEY = 'violet-discovery-trio-v1';
+        const read = (key) => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
+        const syncCount = () => { const count = read(CART_KEY).reduce((sum,row)=>sum+Number(row.qty||0),0); document.querySelectorAll('.cart-count').forEach(node=>node.textContent=count); };
+        document.querySelector('[data-v4-add-bottle]')?.addEventListener('click', event => {
+          const cart = read(CART_KEY); const row = cart.find(item=>item.id==='violette-03'); if(row) row.qty += 1; else cart.push({id:'violette-03',qty:1}); localStorage.setItem(CART_KEY,JSON.stringify(cart)); syncCount(); event.currentTarget.textContent='Added to bag';
+        });
+        document.querySelector('[data-v4-add-sample]')?.addEventListener('click', event => {
+          const trio = read(TRIO_KEY).filter(Boolean); if(!trio.includes('violette-03') && trio.length < 3) trio.push('violette-03'); localStorage.setItem(TRIO_KEY,JSON.stringify([...new Set(trio)].slice(0,3))); event.currentTarget.textContent='Added to trial trio';
+        });
+      })();
+    </script>
   </main>
   <div data-site-footer></div>
-  <script src="data.js"></script>
-  <script src="app.js"></script>
-  <script src="storefront-v4.js"></script>
-  <script src="storefront-v4-rollout.js"></script>
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="storefront-v4.js" defer></script>
+  <script src="storefront-v4-rollout.js" defer></script>
   <script src="figma-capture.js" defer></script>
   <script src="accessibility-v6.js" defer></script>
 </body>
