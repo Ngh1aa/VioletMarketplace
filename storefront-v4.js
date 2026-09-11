@@ -3,7 +3,7 @@
   const qs = new URLSearchParams(location.search);
   const CART_KEY = 'violet-marketplace-cart-v1';
   const TRIO_KEY = 'violet-discovery-trio-v1';
-  const money = n => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(n || 0));
+  const money = n => `${new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 }).format(Number(n || 0))} €`;
   const byId = id => DATA.products.find(product => product.id === id);
 
   const HOUSES = [
@@ -82,7 +82,7 @@
     if(nav) nav.innerHTML='<a href="search.html">Fragrances</a><a href="houses.html">Houses</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a>';
     const top=document.querySelector('.topbar-inner > span'); if(top) top.textContent='Violet Editions · objects, houses and slower discovery';
     const topLinks=document.querySelector('.top-links'); if(topLinks) topLinks.innerHTML='<a href="discovery.html">Discovery ritual</a><a href="finder.html">Scent portrait</a><a href="seller.html">For fragrance houses</a>';
-    const input=document.querySelector('[data-search-form] input'); if(input) input.placeholder='Tìm fragrance, note, maison...';
+    const input=document.querySelector('[data-search-form] input'); if(input) input.placeholder='Search fragrance, note, or maison…';
     const footer=document.querySelector('.footer-grid');
     if(footer) footer.innerHTML='<div><a class="brand footer-brand" href="index.html">Violet<span>.</span><small>Parfumerie</small></a><p>A fictional multi-house fragrance marketplace prototype shaped around objects, maisons and slower trial.</p></div><div><h4>Discover</h4><div class="footer-links"><a href="search.html">Fragrances</a><a href="discovery.html">Discovery</a><a href="finder.html">Scent Portrait</a></div></div><div><h4>Houses</h4><div class="footer-links"><a href="houses.html">Curated houses</a><a href="seller.html">Fragrance House Center</a><a href="search.html?sample=1">Try-first edit</a></div></div><div><h4>Prototype</h4><div class="footer-links"><span>Fictional maisons</span><span>Browser-local checkout</span><span>No fake AI claim</span></div></div>';
   }
