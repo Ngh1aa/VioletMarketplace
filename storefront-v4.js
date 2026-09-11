@@ -32,14 +32,14 @@
      unrelated branded perfume bottles. These images communicate ingredients, material
      and atmosphere; the catalogue image remains the only product-object source. */
   const EDITORIAL_MEDIA = [
-    'https://images.pexels.com/photos/16296816/pexels-photo-16296816.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/7828507/pexels-photo-7828507.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/34330514/pexels-photo-34330514.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/7232409/pexels-photo-7232409.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/37048236/pexels-photo-37048236.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/1261173/pexels-photo-1261173.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/3817638/pexels-photo-3817638.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    'https://images.pexels.com/photos/30618181/pexels-photo-30618181.jpeg?auto=compress&cs=tinysrgb&w=1600'
+    'assets/media/editorial-01.jpg',
+    'assets/media/editorial-02.jpg',
+    'assets/media/editorial-03.jpg',
+    'assets/media/editorial-04.jpg',
+    'assets/media/editorial-05.jpg',
+    'assets/media/editorial-06.jpg',
+    'assets/media/editorial-07.jpg',
+    'assets/media/editorial-08.jpg'
   ];
 
   const moodLabels = { clean:'Clean / lucid', intimate:'Intimate / skin', soft:'Soft / powdery', warm:'Warm / enveloping', luminous:'Luminous / bright', contemplative:'Contemplative', mysterious:'Mysterious / shadowed', explore:'Discovery', gift:'Giftable' };
