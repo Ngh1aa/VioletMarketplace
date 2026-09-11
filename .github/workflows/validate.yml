@@ -80,6 +80,8 @@ jobs:
           grep -q "Violet Parfumerie" index.html
           grep -q "Three ways into Violet" index.html
           grep -q "data-v4-house-index" index.html
+          grep -q "v4-shelf-grid" index.html
+          grep -q "v4-house-index" index.html
           grep -q "discovery.html" index.html
           grep -q "data-v4-houses-index" houses.html
           grep -q "data-v4-house-detail" house.html
@@ -90,9 +92,10 @@ jobs:
           grep -q "desktop-experience-v4-rollout.css" finder.html
           grep -q "desktop-experience-v4-rollout.css" cart.html
           grep -q "desktop-experience-v4-rollout.css" checkout.html
-          grep -q "storefront-v4.js" index.html
+          ! grep -q '<script src="storefront-v4.js"' index.html
+          ! grep -q '<script src="storefront-v4-rollout.js"' index.html
           grep -q "storefront-v4.js" search.html
-          grep -q "storefront-v4.js" product.html
+          grep -q "load('storefront-v4.js')" product.html
           grep -q "storefront-v4.js" discovery.html
           grep -q "storefront-v4-rollout.js" houses.html
           grep -q "storefront-v4-rollout.js" house.html
