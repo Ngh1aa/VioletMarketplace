@@ -1,1 +1,66 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checkout · Violet Parfumerie</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="perfume-luxury.css"><link rel="stylesheet" href="desktop-luxury-v2.css" media="(min-width:1024px)"><link rel="stylesheet" href="desktop-experience-v4.css"><link rel="stylesheet" href="desktop-experience-v4-rollout.css"></head><body><div data-site-header></div><main class="container"><section class="page-hero"><div class="breadcrumbs"><a href="cart.html">Fragrance Bag</a> / Checkout</div><span class="section-kicker">Quiet checkout</span><h1>Checkout</h1><p>Một bước cuối, không banner gây nhiễu — chỉ thông tin giao nhận, thanh toán và fragrance bạn đã chọn.</p></section><form class="checkout-layout" data-checkout-form><div><section class="checkout-block"><h3>1. Client details</h3><div class="form-grid"><div class="field"><label>Họ và tên</label><input required autocomplete="name" placeholder="Nguyễn Văn A"></div><div class="field"><label>Số điện thoại</label><input required inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"></div><div class="field full"><label>Địa chỉ</label><input required autocomplete="street-address" placeholder="Số nhà, tên đường, phường/xã"></div><div class="field"><label>Tỉnh / Thành phố</label><select required autocomplete="address-level1"><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Đà Nẵng</option></select></div><div class="field"><label>Quận / Huyện</label><input required autocomplete="address-level2" placeholder="Quận / Huyện"></div></div></section><section class="checkout-block"><h3>2. Delivery ritual</h3><label class="check"><input type="radio" checked name="shipping"> Giao tiêu chuẩn · dự kiến 2–4 ngày</label><br><label class="check"><input type="radio" name="shipping"> Priority delivery · dự kiến ngày mai</label></section><section class="checkout-block"><h3>3. Payment</h3><label class="check"><input type="radio" checked name="payment"> Thanh toán khi nhận hàng</label><br><label class="check"><input type="radio" name="payment"> Thẻ / ví điện tử (mô phỏng)</label></section></div><aside class="summary-card"><h3>Your selection</h3><div data-checkout-items></div><div class="summary-row"><span>Tạm tính</span><b data-subtotal></b></div><div class="summary-row"><span>Vận chuyển</span><b data-shipping></b></div><div class="summary-row"><span>Violet privilege</span><b data-saving></b></div><div class="summary-total"><span>Tổng cộng</span><span data-total></span></div><button class="btn btn-primary" type="submit">Place order</button><p class="v4-reality-note">Prototype checkout: payment methods shown here are simulated and do not process a real transaction.</p></aside></form></main><div data-site-footer></div><script src="data.js"></script><script src="app.js"></script><script src="storefront-v4.js"></script><script src="storefront-v4-rollout.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A calm, simulated Violet checkout for delivery details and prototype payment selection.">
+  <title>Checkout · Violet Parfumerie</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="perfume-luxury.css">
+  <link rel="stylesheet" href="desktop-luxury-v2.css" media="(min-width:1024px)">
+  <link rel="stylesheet" href="desktop-experience-v4.css">
+  <link rel="stylesheet" href="desktop-experience-v4-rollout.css">
+</head>
+<body>
+  <div data-site-header></div>
+  <main class="container">
+    <section class="page-hero v4-utility-hero">
+      <div class="breadcrumbs"><a href="cart.html">Fragrance Bag</a> / Checkout</div>
+      <span class="section-kicker">CHECKOUT / 02</span>
+      <h1>Checkout</h1>
+      <p>One quiet final step: delivery details, a simulated payment choice, and the fragrances you selected.</p>
+      <ol class="v5-checkout-progress" aria-label="Checkout progress"><li class="done">Bag</li><li class="current" aria-current="step">Delivery & payment</li><li>Complete</li></ol>
+    </section>
+    <form class="checkout-layout" data-checkout-form>
+      <div>
+        <section class="checkout-block">
+          <h3>1. Client details</h3>
+          <div class="form-grid">
+            <div class="field"><label for="checkout-name">Full name</label><input id="checkout-name" required autocomplete="name" placeholder="Your full name"></div>
+            <div class="field"><label for="checkout-phone">Phone number</label><input id="checkout-phone" required inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"></div>
+            <div class="field full"><label for="checkout-address">Street address</label><input id="checkout-address" required autocomplete="street-address" placeholder="Street, ward or commune"></div>
+            <div class="field"><label for="checkout-city">City</label><select id="checkout-city" required autocomplete="address-level1"><option>Ho Chi Minh City</option><option>Hanoi</option><option>Da Nang</option></select></div>
+            <div class="field"><label for="checkout-district">District</label><input id="checkout-district" required autocomplete="address-level2" placeholder="District"></div>
+          </div>
+        </section>
+        <section class="checkout-block">
+          <h3>2. Delivery</h3>
+          <label class="check"><input type="radio" checked name="shipping"> Standard delivery · estimated 2–4 days</label><br>
+          <label class="check"><input type="radio" name="shipping"> Priority delivery · estimated next day</label>
+        </section>
+        <section class="checkout-block">
+          <h3>3. Payment</h3>
+          <label class="check"><input type="radio" checked name="payment"> Pay on delivery</label><br>
+          <label class="check"><input type="radio" name="payment"> Card / digital wallet (simulated)</label>
+        </section>
+      </div>
+      <aside class="summary-card v4-summary-card">
+        <span class="v4-kicker">YOUR SELECTION</span>
+        <h3>Order summary</h3>
+        <div data-checkout-items></div>
+        <div class="summary-row"><span>Subtotal</span><b data-subtotal></b></div>
+        <div class="summary-row"><span>Delivery</span><b data-shipping></b></div>
+        <div class="summary-row"><span>Violet privilege</span><b data-saving></b></div>
+        <div class="summary-total"><span>Total</span><span data-total></span></div>
+        <button class="btn btn-primary" type="submit">Place prototype order</button>
+        <p class="v4-reality-note">Prototype checkout: no real payment, inventory reservation or shipment is processed.</p>
+      </aside>
+    </form>
+  </main>
+  <div data-site-footer></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="storefront-v4.js"></script>
+  <script src="storefront-v4-rollout.js"></script>
+</body>
+</html>
