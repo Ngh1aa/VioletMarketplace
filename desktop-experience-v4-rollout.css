@@ -1,3 +1,11 @@
 /* Violet V4 rollout compatibility layer.
-   Page-family styling was consolidated into image-first-redesign.css on 2026-09-10
-   so search / houses / utility pages no longer override the shared visual system. */
+   Page-family styling was consolidated into image-first-redesign.css on 2026-09-10.
+   The current storefront direction is now composed by maison-redesign.css. */
+@import url('./maison-redesign.css');
+
+/* Maison PDP guard: the purchase panel belongs to the opening product composition.
+   Keeping it in normal flow prevents it from covering the Story section while scrolling. */
+body.violet-maison .v4-buying-desk{
+  position:relative!important;
+  top:auto!important;
+}

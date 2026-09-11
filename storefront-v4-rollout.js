@@ -24,6 +24,13 @@
 
   function normalizeBuyerChrome(){
     document.documentElement.lang = 'en';
+    document.body.classList.add('violet-maison');
+    const path = location.pathname.split('/').pop() || 'index.html';
+    document.body.dataset.maisonPage = path.replace('.html','') || 'home';
+
+    const topMessage = document.querySelector('.topbar-inner > span');
+    if(topMessage) topMessage.textContent = 'Violet Parfumerie · scent objects, fictional houses, slower discovery';
+
     const input = document.querySelector('[data-search-form] input');
     if(input){
       input.placeholder = 'Search fragrance, note, or maison…';
@@ -43,6 +50,13 @@
     if(actions){
       actions.innerHTML = `<a class="icon-link v5-trio-link" href="discovery.html">Saved trio</a><a class="icon-link cart-link" href="cart.html" title="Fragrance bag">Bag<span class="cart-count">${cartCount()}</span></a>`;
     }
+
+    document.querySelectorAll('.nav-inner a').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const active = (path==='index.html' && href==='index.html') || (path==='search.html' && href.startsWith('search.html')) || (path==='houses.html' && href.startsWith('houses.html')) || (path==='house.html' && href.startsWith('houses.html')) || (path==='discovery.html' && href.startsWith('discovery.html')) || (path==='finder.html' && href.startsWith('finder.html'));
+      if(active) link.setAttribute('aria-current','page');
+      else link.removeAttribute('aria-current');
+    });
 
     const footerMeta = document.querySelector('.footer-bottom span:last-child');
     if(footerMeta) footerMeta.textContent = 'Vietnam · VND · Curated prototype';
@@ -104,9 +118,28 @@
     const note = document.querySelector('.v3-reality-note'); if(note) note.classList.replace('v3-reality-note','v4-reality-note');
   }
 
+  function installEditorialMotion(){
+    const targets = [
+      '.v4-home-hero','.maison-manifesto','.v4-shelf-section','.maison-ritual','.v4-route-index','.v4-houses-section','.v4-discovery-callout',
+      '.v4-library-masthead','.v4-object-grid','.v4-pdp','.v4-pdp-story','.v4-related','.v4-discovery-hero','.v4-discovery-workspace','.v4-sample-list-section','.v5-after-wear','.v4-wardrobe',
+      '.v4-houses-hero','.v4-house-hero','.v4-house-collection','.portrait-shell','.v4-finder-handoff','.v4-utility-hero','.checkout-layout','.cart-layout','.v5-success-hero'
+    ];
+    const nodes = [...document.querySelectorAll(targets.join(','))];
+    if(!nodes.length) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
+      nodes.forEach(node=>node.classList.add('maison-reveal','is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+    }),{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+    nodes.forEach(node=>{ node.classList.add('maison-reveal'); observer.observe(node); });
+  }
+
   normalizeBuyerChrome();
   renderHousesIndex();
   renderHouseDetail();
   patchFinder();
   markUtilities();
+  requestAnimationFrame(installEditorialMotion);
 })();
