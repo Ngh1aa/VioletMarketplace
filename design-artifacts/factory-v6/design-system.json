@@ -1,0 +1,52 @@
+{
+  "schema_version": "factory-v6-violet-1.0",
+  "foundations": {
+    "colors": {
+      "canvas": "#FFFFFF",
+      "paper": "#F7F3EE",
+      "ink": "#17131B",
+      "aubergine": "#382C42",
+      "pastel_violet": "#E8DCF2",
+      "pastel_violet_strong": "#D8C3E8",
+      "pastel_violet_soft": "#F6F1F9",
+      "accent": "#8D6CA6",
+      "muted": "#6F6875",
+      "rule": "#E7E1EA"
+    },
+    "typography": {
+      "display": "editorial serif",
+      "ui": "neutral sans",
+      "body_measure": "55-70 characters",
+      "micro_label_role": "classification/indexing only"
+    },
+    "spacing": {
+      "principle": "large editorial whitespace + tight decision clusters",
+      "section_rhythm": "asymmetric; avoid repeated equal vertical blocks"
+    },
+    "motion": {
+      "normal": "150-300ms, selective editorial reveals",
+      "reduced_motion": "non-essential motion removed",
+      "figma_capture": "all animation, transition, transform and filter effects disabled"
+    },
+    "media": {
+      "homepage_feature": "~70/30 media-to-copy",
+      "pdp_primary": "~70/30 media-to-buying-info",
+      "product_card": "image occupies dominant visual area",
+      "transport": "same-origin repository assets"
+    }
+  },
+  "components": [
+    {"name":"SiteHeader","states":["default","focus","search-open"],"priority":"P0"},
+    {"name":"FragranceObjectCard","states":["default","hover","focus","try-first"],"priority":"P0"},
+    {"name":"BuyingDesk","states":["default","focus","added-to-bag","trial-eligible"],"priority":"P0"},
+    {"name":"FilterRefinement","states":["closed","open","selected","focus"],"priority":"P0"},
+    {"name":"DiscoveryTrio","states":["empty","partial","full","focus"],"priority":"P0"},
+    {"name":"MaisonLedger","states":["default","hover","focus"],"priority":"P1"}
+  ],
+  "gates": {
+    "semantic_tokens_defined": true,
+    "p0_component_states_defined": true,
+    "accessibility_contracts_defined": true,
+    "figma_transport_contract_defined": true
+  }
+}
