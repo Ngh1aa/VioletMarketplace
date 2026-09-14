@@ -1,0 +1,34 @@
+{
+  "brain": "external",
+  "target": {
+    "repository": "Ngh1aa/VioletMarketplace",
+    "branch": "factory/violet-mobile-discovery",
+    "project_root": "/",
+    "stack": "vanilla-html-css-js",
+    "commands": {"install": "", "build": "", "serve": "python3 -m http.server 4173 --bind 127.0.0.1"},
+    "routes": [
+      "/index.html",
+      "/finder.html",
+      "/search.html",
+      "/product.html?id=violette-03",
+      "/discovery.html",
+      "/cart.html",
+      "/checkout.html",
+      "/seller.html",
+      "/admin.html"
+    ]
+  },
+  "brand_name": "Violet Parfumerie",
+  "personality": ["editorial", "intimate", "material", "explainable", "quiet luxury", "mobile-first"],
+  "avoid": ["generic perfume shop", "black-box recommendations", "fake AI", "purple marketplace template", "card-grid-only discovery", "fictional redemption presented as real"],
+  "guideline": "Core problem: online fragrance buyers cannot smell directly. Discovery must reduce uncertainty with vocabulary, context, try-first samples, explainable rule-based recommendations and a feedback loop. Buyer surfaces are atmospheric and image-led; seller/admin are denser and utilitarian. Primary viewport 390x844 with touch-first interactions. Recommendation logic is deterministic prototype behavior and must be labelled as such.",
+  "reference_urls": [
+    "https://www.byredo.com/us_en/c/perfume/personal-fragrances/categories/discovery-set",
+    "https://www.lelabofragrances.com/discovery-sets/classic-collection/discovery-set/17-8.html",
+    "https://www.fredericmalle.com/discovery",
+    "https://www.luckyscent.com/collections/all-samples"
+  ],
+  "existing_website": "https://ngh1aa.github.io/VioletMarketplace/",
+  "auto_inspiration": false,
+  "inspiration_target": 4
+}
