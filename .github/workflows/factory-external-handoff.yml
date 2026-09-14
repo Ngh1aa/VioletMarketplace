@@ -1,0 +1,63 @@
+name: Factory External Handoff
+
+on:
+  push:
+    branches: [factory/violet-mobile-discovery]
+    paths:
+      - 'design-artifacts/factory-v7-mobile/**'
+      - '.github/workflows/factory-external-handoff.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'design-artifacts/factory-v7-mobile/**'
+      - '.github/workflows/factory-external-handoff.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  external-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Violet
+        uses: actions/checkout@v4
+      - name: Checkout pinned UIUX Factory workspace
+        uses: actions/checkout@v4
+        with:
+          repository: Ngh1aa/uiux-ai-workspace
+          ref: 221370ef294408f3f5a0c6a7fb0567c3db840c3e
+          path: .uiux-workspace
+          submodules: recursive
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Factory runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r .uiux-workspace/uiux-factory/requirements-metagpt-core.txt
+      - name: Run external-brain Factory handoff
+        working-directory: .uiux-workspace/uiux-factory
+        env:
+          PYTHONPATH: ${{ github.workspace }}/.uiux-workspace/MetaGPT:${{ github.workspace }}/.uiux-workspace/uiux-factory
+        run: |
+          python run.py \
+            "Redesign Violet as a mobile-first fragrance discovery product with explainable deterministic recommendations, a balanced discovery trio, post-wear feedback loop, and differentiated buyer/seller/admin surfaces." \
+            --context "${GITHUB_WORKSPACE}/design-artifacts/factory-v7-mobile/context.json" \
+            --run-id violet-mobile-discovery-v7 \
+            --engine external \
+            --runtime-preset visual-first
+      - name: Verify external handoff state
+        working-directory: .uiux-workspace/uiux-factory
+        run: |
+          test -f runs/violet-mobile-discovery-v7/run-state.json
+          grep -q 'handoff_ready' runs/violet-mobile-discovery-v7/run-state.json
+          find runs/violet-mobile-discovery-v7 -maxdepth 3 -type f | sort
+      - name: Upload Factory run evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-factory-external-handoff
+          path: .uiux-workspace/uiux-factory/runs/violet-mobile-discovery-v7/
+          if-no-files-found: warn
+          retention-days: 14
