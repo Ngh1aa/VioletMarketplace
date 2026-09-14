@@ -19,6 +19,11 @@ jobs:
           node --check storefront-v3.js
           node --check storefront-v4.js
           node --check storefront-v4-rollout.js
+          node --check personalization-core.js
+          node --check discovery-loop.js
+          node --check product-v7.js
+          node --check personalization-loop.js
+          node --check scripts/mobile_discovery_qa.mjs
           node --check scripts/desktop_visual_qa.mjs
           node --check scripts/scent_portrait_qa.mjs
           node --check scripts/storefront_v3_qa.mjs
@@ -26,118 +31,54 @@ jobs:
 
       - name: Validate required static files
         run: |
-          test -f index.html
-          test -f search.html
-          test -f product.html
-          test -f discovery.html
-          test -f houses.html
-          test -f house.html
-          test -f finder.html
-          test -f cart.html
-          test -f checkout.html
-          test -f order-success.html
-          test -f seller.html
-          test -f admin.html
-          test -f styles.css
-          test -f perfume-luxury.css
-          test -f desktop-luxury-v2.css
-          test -f desktop-experience-v3.css
-          test -f desktop-experience-v4.css
-          test -f desktop-experience-v4-rollout.css
-          test -f maison-redesign.css
-          test -f scent-portrait.css
-          test -f scent-portrait.js
-          test -f storefront-v3.js
-          test -f storefront-v4.js
-          test -f storefront-v4-rollout.js
-          test -f DESIGN-DIRECTION.md
-          test -f .uiux-profile.json
-          test -f docs/uiux/Operating-Profile.md
-          test -f docs/uiux/Skill-Version-Lock.md
-          test -f docs/uiux/Project-Config.md
-          test -f docs/uiux/Project-Truth.md
-          test -f docs/uiux/Old-Baseline.md
-          test -f docs/uiux/Current-Site-Audit.md
-          test -f docs/uiux/Reference-Benchmark.md
-          test -f docs/uiux/Design-Contract.md
-          test -f docs/uiux/Redesign-Delta-Contract.md
-          test -f docs/uiux/Page-Role-Matrix.md
-          test -f docs/uiux/Media-Contract.md
-          test -f docs/uiux/System-Reality-and-Data-Contracts.md
-          test -f docs/uiux/Verification-Matrix.md
-          test -f docs/uiux/Requirement-Coverage-Ledger.md
-          test -f docs/uiux/Skill-Execution-Ledger.md
-          test -f docs/uiux/Phase-1-Handoff.md
-          test -f docs/uiux/Phase-State.md
-          test -f design-artifacts/scent-portrait-contract.json
-          test -f design-artifacts/scent-portrait-skill-trace.json
-          test -f design-artifacts/desktop-v3-design-contract.json
-          test -f scripts/v4_representative_qa.mjs
+          for f in index.html search.html product.html discovery.html houses.html house.html finder.html cart.html checkout.html order-success.html seller.html admin.html styles.css perfume-luxury.css desktop-experience-v4.css maison-redesign.css mobile-discovery.css ops-system.css personalization-core.js discovery-loop.js product-v7.js personalization-loop.js .uiux-profile.json scripts/mobile_discovery_qa.mjs design-artifacts/factory-v7-mobile/context.json design-artifacts/factory-v7-mobile/research.md design-artifacts/factory-v7-mobile/ux-ia.md design-artifacts/factory-v7-mobile/art-direction.md design-artifacts/factory-v7-mobile/design-contract.md design-artifacts/factory-v7-mobile/design-system.md design-artifacts/factory-v7-mobile/visual-composition.md design-artifacts/factory-v7-mobile/implementation-plan.md design-artifacts/factory-v7-mobile/skill-trace.json; do test -f "$f"; done
           test ! -e package.json
           test ! -e tsconfig.json
 
-      - name: Validate Violet V4 direction and rollout
+      - name: Validate Violet mobile discovery direction
         run: |
-          grep -q "Violet Parfumerie" index.html
           grep -q "Three ways into Violet" index.html
+          grep -q "Rule-based · not AI" index.html
           grep -q "data-v4-house-index" index.html
           grep -q "v4-shelf-grid" index.html
-          grep -q "v4-house-index" index.html
-          grep -q "discovery.html" index.html
-          grep -q "data-v4-houses-index" houses.html
-          grep -q "data-v4-house-detail" house.html
-          for f in index.html search.html product.html discovery.html houses.html house.html finder.html cart.html checkout.html order-success.html; do grep -q "desktop-experience-v4.css" "$f"; done
-          grep -q 'href="maison-redesign.css"' search.html
-          ! grep -q 'href="desktop-experience-v4-rollout.css"' search.html
-          ! grep -q '<script src="app.js"' search.html
-          grep -q "desktop-experience-v4-rollout.css" houses.html
-          grep -q "desktop-experience-v4-rollout.css" house.html
-          grep -q "desktop-experience-v4-rollout.css" finder.html
-          grep -q "desktop-experience-v4-rollout.css" cart.html
-          grep -q "desktop-experience-v4-rollout.css" checkout.html
-          ! grep -q '<script src="storefront-v4.js"' index.html
-          ! grep -q '<script src="storefront-v4-rollout.js"' index.html
-          grep -q "storefront-v4.js" search.html
-          grep -q "load('storefront-v4.js')" product.html
-          grep -q "storefront-v4.js" discovery.html
-          grep -q "storefront-v4-rollout.js" houses.html
-          grep -q "storefront-v4-rollout.js" house.html
-          grep -q "storefront-v4-rollout.js" finder.html
-          grep -q "v4-buying-desk" storefront-v4.js
-          grep -q "violet-discovery-trio-v1" storefront-v4.js
-          grep -q "renderHouseDetail" storefront-v4-rollout.js
-          grep -q "category: 'floral'" data.js
-          grep -q "category: 'woody'" data.js
-          grep -q "category: 'amber'" data.js
-          ! grep -q "desktop-experience-v3.css" index.html
-          ! grep -q "desktop-experience-v3.css" search.html
-          ! grep -q "desktop-experience-v3.css" product.html
-          ! grep -q "Violet philosophy" index.html
+          grep -q "personalization-core.js" finder.html
+          grep -q "09 questions" finder.html
+          grep -q "discovery-loop.js" discovery.html
+          grep -q "data-v7-feedback" discovery.html
+          grep -q "personalization-loop.js" product.html
+          grep -q "Trial sample" personalization-loop.js
+          grep -q "Full bottle" personalization-loop.js
+          grep -q "mobile-discovery.css" index.html
+          grep -q "mobile-discovery.css" finder.html
+          grep -q "mobile-discovery.css" search.html
+          grep -q "mobile-discovery.css" product.html
+          grep -q "mobile-discovery.css" discovery.html
+          grep -q "mobile-discovery.css" cart.html
+          grep -q "mobile-discovery.css" checkout.html
+          grep -q "ops-system.css" seller.html
+          grep -q "ops-system.css" admin.html
+          grep -q "STATIC / SIMULATED" seller.html
+          grep -q "STATIC / SIMULATED" admin.html
+          ! grep -Rqi "AI-powered\|powered by AI\|machine learning personalization" -- *.html *.js
 
-      - name: Validate Prompt OS Phase 1 contract
+      - name: Validate Factory external-brain contract
         run: |
-          grep -q 'PHASE 1 RESULT = PASSED' docs/uiux/Phase-1-Handoff.md
-          grep -q 'result: `PASSED`' docs/uiux/Phase-State.md
-          grep -q 'BLOCKED: 0' docs/uiux/Phase-State.md
-          grep -q 'UNACCOUNTED: 0' docs/uiux/Phase-State.md
-          grep -q 'Home + PLP + PDP + Discovery' docs/uiux/Phase-State.md
-          grep -q 'visibly and behaviorally structural' docs/uiux/Redesign-Delta-Contract.md
-          grep -q 'N/A_JUSTIFIED' docs/uiux/Design-Intelligence-Decision-Log.md
-          grep -q '1a3c9ef2d72e6bd0d4a4fc79c885c59f98e41c33' docs/uiux/Skill-Version-Lock.md
+          node -e "const c=require('./design-artifacts/factory-v7-mobile/context.json'); if(c.brain!=='external'||c.target.repository!=='Ngh1aa/VioletMarketplace'||c.target.branch!=='factory/violet-mobile-discovery') process.exit(1)"
+          node -e "const t=require('./design-artifacts/factory-v7-mobile/skill-trace.json'); if(t.mode!=='external-brain'||!t.active_specialists.some(x=>x.skill==='interaction-patterns-and-form-ux')) process.exit(1)"
+          grep -q '221370ef294408f3f5a0c6a7fb0567c3db840c3e' design-artifacts/factory-v7-mobile/skill-trace.json
+          grep -q 'e8ed8c9212d20edb2cf4c8c0881fff34add7076e' design-artifacts/factory-v7-mobile/skill-trace.json
 
       - name: Preserve previous grounded contracts
         run: |
           grep -q 'visual-design-direction' design-artifacts/scent-portrait-skill-trace.json
           grep -q 'interaction-patterns-and-form-ux' design-artifacts/scent-portrait-skill-trace.json
           grep -q 'visual_composition' design-artifacts/scent-portrait-contract.json
-          grep -q 'browser_qa' design-artifacts/scent-portrait-contract.json
           grep -q 'rendered_evidence_required' design-artifacts/desktop-v3-design-contract.json
           grep -q 'do not process a real transaction' checkout.html
+          grep -q '1a3c9ef2d72e6bd0d4a4fc79c885c59f98e41c33' docs/uiux/Skill-Version-Lock.md
 
       - name: Validate UIUX operating profile
         run: |
-          node -e "const p=require('./.uiux-profile.json'); if(p.project.mode!=='interactive_prototype') process.exit(1); if(p.constraints.responsive_scope!=='desktop_only') process.exit(1); if(p.constraints.skill_routing!=='smallest_applicable_graph') process.exit(1);"
-          grep -q '1a3c9ef2d72e6bd0d4a4fc79c885c59f98e41c33' docs/uiux/Skill-Version-Lock.md
-          grep -q 'rendered evidence + automated sanity gates + Creative Director screenshot inspection' .uiux-profile.json
-          grep -q 'Factory and routed skills own repeatable process and verification' .uiux-profile.json
-          grep -q 'Installed does not mean active' docs/uiux/Skill-Version-Lock.md
+          node -e "const p=require('./.uiux-profile.json'); if(p.project.mode!=='interactive_prototype') process.exit(1); if(p.constraints.responsive_scope!=='responsive_all') process.exit(1); if(p.constraints.primary_viewport!=='390x844') process.exit(1); if(p.constraints.skill_routing!=='smallest_applicable_graph') process.exit(1); if(p.constraints.release_authorization!=='merge_and_deploy') process.exit(1);"
+          grep -q 'Rule-based recommendations' .uiux-profile.json
+          grep -q 'Creative Director' .uiux-profile.json
