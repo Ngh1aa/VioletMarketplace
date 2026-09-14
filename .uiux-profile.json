@@ -1,35 +1,42 @@
 {
   "project": {
     "name": "Violet Parfumerie",
-    "type": "luxury fragrance marketplace",
+    "type": "luxury fragrance discovery marketplace",
     "mode": "interactive_prototype",
-    "primary_goal": "Create a distinctive, calm, luxury fragrance discovery and commerce experience that feels curated rather than crowded."
+    "primary_goal": "Reduce online fragrance uncertainty through explainable discovery, try-first sampling, feedback loops and a mobile-first buyer journey without pretending the prototype is AI or a live marketplace."
   },
   "source_of_truth": [
     "DESIGN-DIRECTION.md",
     "docs/uiux/Operating-Profile.md",
     "docs/uiux/Skill-Version-Lock.md",
-    "design-artifacts/scent-portrait-contract.json",
-    "design-artifacts/scent-portrait-skill-trace.json"
+    "design-artifacts/factory-v7-mobile/context.json",
+    "design-artifacts/factory-v7-mobile/research.md",
+    "design-artifacts/factory-v7-mobile/design-contract.md",
+    "design-artifacts/factory-v7-mobile/skill-trace.json"
   ],
   "constraints": {
-    "responsive_scope": "desktop_only",
-    "primary_viewport": "1440x1000",
-    "desktop_pressure_points": ["1280x900", "1600x1000"],
-    "tablet_mobile_status": "N/A_JUSTIFIED for current visual phase; preserve existing behavior and do not claim fully responsive",
-    "release_authorization": "merge_only",
-    "implementation_style": "vanilla HTML/CSS/JavaScript; preserve existing architecture unless a material problem requires change",
+    "responsive_scope": "responsive_all",
+    "primary_viewport": "390x844",
+    "mobile_pressure_points": ["360x800", "390x844", "430x932"],
+    "desktop_pressure_points": ["1280x900", "1440x1000"],
+    "release_authorization": "merge_and_deploy",
+    "implementation_style": "vanilla HTML/CSS/JavaScript; static-first where possible; localStorage may simulate prototype preference, trio and feedback state",
     "skill_routing": "smallest_applicable_graph",
-    "visual_completion_requires": "rendered evidence + automated sanity gates + Creative Director screenshot inspection",
-    "system_reality": "Do not describe static, simulated, deterministic, mock or partial behavior as real AI/production integration.",
-    "creative_direction": "Factory and routed skills own repeatable process and verification; ChatGPT acts as Creative Director for taste, hierarchy, brand fit and final visual judgment.",
+    "visual_completion_requires": "rendered mobile and desktop evidence + automated sanity gates + Creative Director screenshot inspection",
+    "system_reality": "Recommendation and preference refinement are deterministic rule-based prototype behavior. Do not claim AI, ML, personalization accuracy, real customers, real maisons, fulfilment or conversion impact.",
+    "creative_direction": "ChatGPT is the external design brain and Creative Director; UIUX Factory and routed skills own contracts, evidence, repeatable process and QA.",
+    "buyer_surface": "atmospheric, image-led, editorial, touch-first",
+    "seller_admin_surface": "denser, clearer, utilitarian, explicitly fictional operations",
     "anti_patterns": [
+      "generic perfume shop",
       "purple marketplace template",
-      "gradient or glass effects without a brand or hierarchy role",
-      "repeated centered-heading-plus-three-cards sections",
-      "universal hero shells across materially different page roles",
-      "fake AI claims",
-      "merging substantial visual changes without opened rendered screenshots"
+      "bottle-card grid as the entire discovery model",
+      "black-box recommendation claims",
+      "fake AI or ML claims",
+      "fictional redemption presented as a real commercial benefit",
+      "desktop layout merely shrunk to 390px",
+      "seller or admin dashboards styled with the same atmospheric density as buyer discovery",
+      "merging substantial visual changes without opened 390px screenshots"
     ]
   }
 }
