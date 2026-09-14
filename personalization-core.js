@@ -43,8 +43,8 @@
       const otherMeta=metaFor(id);
       const positive=row.sentiment==='love'||row.sentiment==='like';
       const negative=row.sentiment==='dislike';
-      if(other.category===product.category) score += positive?1.4:negative?-1.8:0;
-      if(otherMeta.moods.some(m=>meta.moods.includes(m))) score += positive?.7:negative?-.8:0;
+      if(other.category===product.category) score += positive ? 1.4 : negative ? -1.8 : 0;
+      if(otherMeta.moods.some(m=>meta.moods.includes(m))) score += positive ? .7 : negative ? -.8 : 0;
       if((row.tags||[]).includes('too-sweet') && meta.sweetness>=2) score -= 2.5;
       if((row.tags||[]).includes('too-heavy') && meta.projection==='expressive') score -= 2.5;
       if((row.tags||[]).includes('too-light') && meta.projection==='quiet') score -= 1.8;
@@ -77,10 +77,9 @@
     const meta=metaFor(product.id); const evidence=[];
     Object.entries(feedback).forEach(([id,row])=>{
       const other=productById(id); if(!other) return;
-      const otherMeta=metaFor(id);
       if((row.sentiment==='love'||row.sentiment==='like') && other.category===product.category) evidence.push(`you ${row.sentiment}d ${other.name}, another ${other.family} direction`);
-      if((row.tags||[]).includes('too-sweet') && meta.sweetness<=1) evidence.push(`your feedback asked for less sweetness`);
-      if((row.tags||[]).includes('too-heavy') && meta.projection!=='expressive') evidence.push(`your feedback asked for a lighter presence`);
+      if((row.tags||[]).includes('too-sweet') && meta.sweetness<=1) evidence.push('your feedback asked for less sweetness');
+      if((row.tags||[]).includes('too-heavy') && meta.projection!=='expressive') evidence.push('your feedback asked for a lighter presence');
     });
     return evidence;
   }
@@ -92,10 +91,10 @@
     if(profile.projection && meta.projection===profile.projection) reasons.push(`${profile.projection} presence matches your projection preference`);
     if(profile.occasion && meta.occasions.includes(profile.occasion)) reasons.push(`suited to your ${profile.occasion} intent`);
     if(profile.weather && meta.weather.includes(profile.weather)) reasons.push(`fits the ${profile.weather} context you selected`);
-    const sweetness=Number(profile.sweetness); if(Number.isFinite(sweetness) && Math.abs(meta.sweetness-sweetness)<=1) reasons.push(`sweetness level stays close to your preference`);
-    const freshness=Number(profile.freshness); if(Number.isFinite(freshness) && Math.abs(meta.freshness-freshness)<=1) reasons.push(`freshness level stays close to your preference`);
+    const sweetness=Number(profile.sweetness); if(Number.isFinite(sweetness) && Math.abs(meta.sweetness-sweetness)<=1) reasons.push('sweetness level stays close to your preference');
+    const freshness=Number(profile.freshness); if(Number.isFinite(freshness) && Math.abs(meta.freshness-freshness)<=1) reasons.push('freshness level stays close to your preference');
     const disliked=(profile.dislikedNotes||[]).map(v=>v.toLowerCase());
-    if(disliked.length && !disliked.some(note=>textFor(product).includes(note))) reasons.push(`avoids the disliked notes saved in this portrait`);
+    if(disliked.length && !disliked.some(note=>textFor(product).includes(note))) reasons.push('avoids the disliked notes saved in this portrait');
     reasons.push(...feedbackEvidence(product,feedback));
     return [...new Set(reasons)].slice(0,4);
   }
