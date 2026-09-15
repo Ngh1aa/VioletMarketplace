@@ -1,0 +1,52 @@
+name: Mobile Discovery QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '*.html'
+      - '*.css'
+      - '*.js'
+      - 'scripts/mobile_discovery_qa.mjs'
+      - 'design-artifacts/factory-v7-mobile/**'
+      - '.github/workflows/mobile-discovery-qa.yml'
+  push:
+    branches: [factory/violet-mobile-discovery]
+    paths:
+      - '*.html'
+      - '*.css'
+      - '*.js'
+      - 'scripts/mobile_discovery_qa.mjs'
+      - 'design-artifacts/factory-v7-mobile/**'
+      - '.github/workflows/mobile-discovery-qa.yml'
+
+jobs:
+  mobile-discovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate new runtime syntax
+        run: |
+          node --check personalization-core.js
+          node --check scent-portrait.js
+          node --check discovery-loop.js
+          node --check product-v7.js
+          node --check personalization-loop.js
+          node --check scripts/mobile_discovery_qa.mjs
+      - name: Install Chromium runner
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: Run 390px journey and touch gates
+        run: node scripts/mobile_discovery_qa.mjs artifacts/mobile-discovery-qa
+      - name: Upload mobile evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-mobile-discovery-qa
+          path: artifacts/mobile-discovery-qa
+          retention-days: 14

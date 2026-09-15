@@ -1,0 +1,26 @@
+{
+  "factory_repository": "Ngh1aa/uiux-ai-workspace",
+  "factory_ref": "221370ef294408f3f5a0c6a7fb0567c3db840c3e",
+  "skills_repository": "Ngh1aa/skills_UIUX",
+  "skills_ref": "e8ed8c9212d20edb2cf4c8c0881fff34add7076e",
+  "mode": "external-brain",
+  "routing_policy": "smallest_applicable_graph",
+  "core_documents": [
+    "AGENTS.md",
+    "skills_UIUX/DEFAULT-WEBSITE-DELIVERY-POLICY.md",
+    "skills_UIUX/MASTER-PRE-DESIGN-RESEARCH-PROMPT-V4.2.md",
+    "skills_UIUX/MASTER-PROMPT-V7.2.md",
+    "skills_UIUX/PHASE-AWARE-GATING.md"
+  ],
+  "active_specialists": [
+    {"skill":"interaction-patterns-and-form-ux","reason":"Nine-step Scent Portrait, filters, trio replacement and feedback states."},
+    {"skill":"accessibility","reason":"Semantic multi-step form, touch targets, focus and a11y release gates."},
+    {"skill":"brand-distinctiveness-and-visual-signature","reason":"Keep Violet recognizable and avoid generic perfume ecommerce grammar."},
+    {"skill":"visual-design-direction","reason":"Editorial perfumery art direction and mobile composition."},
+    {"skill":"asset-media-and-art-direction","reason":"Image-led buyer surfaces using same-origin fragrance/material media."},
+    {"skill":"ui-craft-and-visual-qa","reason":"Rendered mobile/desktop visual inspection and repair."},
+    {"skill":"responsive-and-device-strategy","reason":"390px primary viewport, touch-first transformation and desktop preservation."},
+    {"skill":"testing-strategy","reason":"Task-based cloud QA and regression evidence."}
+  ],
+  "truth_boundary": "Recommendations and feedback refinement are deterministic browser-local prototype rules. No AI, ML, accuracy, real-customer, fulfilment or conversion claim is permitted."
+}

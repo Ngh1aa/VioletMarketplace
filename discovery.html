@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Violet Discovery — build a representative trial trio, explore the Discovery Wardrobe, and wear before committing to a full bottle.">
-  <title>Discovery · Violet Parfumerie</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="Violet Discovery — build a balanced three-scent trial, understand overlap, save wear feedback and return to refined rule-based recommendations.">
+  <title>Discovery Trio · Violet Parfumerie</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="perfume-luxury.css">
   <link rel="stylesheet" href="desktop-experience-v4.css">
@@ -12,51 +12,55 @@
   <link rel="stylesheet" href="brand-contract.css" data-violet-brand-contract>
   <link rel="stylesheet" href="exploration-layout.css" data-violet-exploration-layout>
   <link rel="stylesheet" href="accessibility-v6.css" data-violet-accessibility-v6>
+  <link rel="stylesheet" href="mobile-discovery.css">
 </head>
-<body class="violet-maison violet-v4">
+<body class="violet-maison violet-v4" data-maison-page="discovery">
   <div data-site-header></div>
   <main class="container v4-discovery-page">
     <header class="v4-discovery-hero">
       <div class="v4-discovery-number">V.20</div>
       <div><span class="v4-kicker">DISCOVERY / TRIAL RITUAL</span><h1>Try three before one bottle.</h1></div>
-      <p>Choose three representative directions, wear them on separate days, then return only to the scents that still feel right after the drydown.</p>
+      <p>Choose three directions with enough contrast to teach you something. Violet flags close neighbours, shows the olfactive balance, then saves what you learn after wearing.</p>
     </header>
 
     <section class="v4-discovery-workspace" aria-labelledby="v4-trio-title">
       <div class="v4-discovery-guide">
         <span class="v4-kicker">01 / BUILD A TRIO</span>
         <h2 id="v4-trio-title">Three directions. No blind commitment.</h2>
-        <ol><li>Choose up to three fragrance directions.</li><li>Wear one at a time on skin.</li><li>Use the saved trio to return to each full bottle.</li></ol>
-        <p class="v4-reality-note">Interactive prototype: this tray is stored only in your browser. Violet does not ship or charge for these sample selections.</p>
+        <ol><li>Choose up to three sample-eligible directions.</li><li>Check overlap before finalising the set.</li><li>Wear one at a time, then save what survived the drydown.</li></ol>
+        <p class="v4-reality-note">Interactive prototype: selections, bag state and feedback are stored only in this browser. No sample shipment, fulfilment or redemption credit is real.</p>
         <a class="v4-text-link" href="finder.html">Not sure what to choose? Create Scent Portrait →</a>
       </div>
-      <div class="v4-trio-panel" data-v4-trio-panel></div>
+      <div class="v4-trio-panel" data-v4-trio-panel aria-live="polite"></div>
     </section>
 
     <section class="v4-sample-list-section" aria-labelledby="v4-samples-title">
       <div class="v4-section-label"><span>02 / REPRESENTATIVE VIALS</span><span>Prototype trial directions</span></div>
-      <div class="v4-sample-list-heading"><h2 id="v4-samples-title">Build from the Violet edit.</h2><p>These selections represent fragrance directions in the prototype catalogue. They are not evidence of real sample inventory.</p></div>
+      <div class="v4-sample-list-heading"><h2 id="v4-samples-title">Build from the Violet edit.</h2><p>When your tray is full, selecting another scent starts a replacement decision instead of silently blocking the choice.</p></div>
       <div class="v4-sample-list" data-v4-sample-list></div>
     </section>
 
     <section class="v5-after-wear" aria-labelledby="v5-after-wear-title">
-      <div class="v4-section-label"><span>03 / AFTER WEARING</span><span>The drydown is part of the decision.</span></div>
+      <div class="v4-section-label"><span>03 / WEAR FIRST</span><span>The drydown is part of the decision.</span></div>
       <div class="v5-after-wear-grid">
-        <div class="v5-after-wear-copy"><span class="v4-kicker">RETURN WITH CONTEXT</span><h2 id="v5-after-wear-title">Do not judge the bottle from the opening alone.</h2><p>Use the trio as a slower loop: notice the opening, live with the drydown, then return to the object that still feels like you.</p></div>
+        <div class="v5-after-wear-copy"><span class="v4-kicker">RETURN WITH CONTEXT</span><h2 id="v5-after-wear-title">The first minute is not the whole perfume.</h2><p>Wear one direction at a time. Notice what becomes sweeter, heavier, lighter or simply wrong for you before returning to the bottle.</p></div>
         <ol class="v5-drydown-trace">
-          <li><span>01</span><strong>Opening</strong><small>First impression · brightness · texture</small></li>
+          <li><span>01</span><strong>Opening</strong><small>First impression · lift · texture</small></li>
           <li><span>02</span><strong>Drydown</strong><small>What remains after the first hour</small></li>
-          <li><span>03</span><strong>Return</strong><small>Open the full bottle only when the direction still fits</small></li>
+          <li><span>03</span><strong>Feedback</strong><small>Love, like, neutral, dislike + what felt off</small></li>
         </ol>
       </div>
     </section>
 
+    <section id="after-try" class="v7-feedback-section" data-v7-feedback aria-label="After-try fragrance feedback"></section>
     <section class="v4-wardrobe" data-v4-wardrobe></section>
   </main>
   <div data-site-footer></div>
   <script src="data.js"></script>
   <script src="app.js"></script>
   <script src="storefront-v4.js"></script>
+  <script src="personalization-core.js"></script>
+  <script src="discovery-loop.js"></script>
   <script src="storefront-v4-rollout.js"></script>
   <script src="figma-capture.js" defer></script>
   <script src="accessibility-v6.js" defer></script>
