@@ -22,6 +22,27 @@ jobs:
           node --check figma-capture.js
           python -m py_compile scripts/sync_media_paths.py scripts/install_figma_capture.py
 
+      - name: Guard plain-URL Figma transport contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -Fq "if (params.get('figma') !== '1') return;" figma-capture.js; then
+            echo "Figma media transport is still gated behind ?figma=1." >&2
+            exit 1
+          fi
+          grep -Fq "img.loading = 'eager'" figma-capture.js || {
+            echo "Figma helper must eagerly request image media." >&2
+            exit 1
+          }
+          grep -Fq "new URL(value, document.baseURI).href" figma-capture.js || {
+            echo "Figma helper must resolve image URLs against the live document URL." >&2
+            exit 1
+          }
+          grep -Fq "root.dataset.figmaTransport" figma-capture.js || {
+            echo "Figma transport readiness marker is missing." >&2
+            exit 1
+          }
+
       - name: Reject remote Pexels runtime references
         shell: bash
         run: |
