@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Violet Parfumerie component states — interaction and commerce-state evidence.">
+  <title>Violet · Component States</title>
+  <link rel="preload" as="image" href="assets/media/editorial-08.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="evidence-luxury.css">
+</head>
+<body class="evidence-body">
+  <header class="evidence-header">
+    <div class="container evidence-header__row">
+      <a class="evidence-brand" href="index.html">Violet<span>.</span><small>Design dossier</small></a>
+      <nav class="evidence-nav" aria-label="Portfolio evidence">
+        <a href="design-system.html">Design system</a>
+        <a aria-current="page" href="component-states.html">Component states</a>
+        <a href="sitemap.html">Sitemap</a>
+        <a href="user-flows.html">User flows</a>
+        <a href="prototype.html">Prototype</a>
+      </nav>
+      <a class="evidence-live" href="index.html">Live marketplace ↗</a>
+    </div>
+  </header>
+
+  <main class="evidence-main">
+    <section class="container evidence-hero">
+      <div class="evidence-hero__copy">
+        <div class="index-line"><span>V.02 / STATES</span><span>Interaction evidence</span></div>
+        <div><p class="section-kicker">Idle · hover · focus · selected · disabled · recovery</p><h1>Every state keeps the scent decision legible.</h1><p class="evidence-hero__lead">Violet avoids invisible interaction magic. Selection, errors, capacity and saved state are expressed through structure, text and contrast — never color alone.</p></div>
+        <div class="evidence-hero__note"><span>Primary rule<br><strong>State change must remain obvious without motion.</strong></span><span>Accessibility rule<br><strong>Focus is visible and selection is not color-only.</strong></span></div>
+      </div>
+      <div class="evidence-hero__media">
+        <figure class="media-frame"><img src="assets/media/editorial-08.jpg" fetchpriority="high" decoding="sync" alt="Dark editorial perfume atmosphere"><figcaption class="media-frame__label">State contrast / ink field</figcaption></figure>
+        <figure class="media-frame"><img src="assets/media/product-velours-ambre.jpg" alt="Velours Ambre fragrance object" loading="lazy"><figcaption class="media-frame__label">Saved object / product state</figcaption></figure>
+        <figure class="media-frame"><img src="assets/media/product-discovery-set.jpg" alt="Discovery set fragrance objects" loading="lazy"><figcaption class="media-frame__label">Capacity / discovery state</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">01 / Buttons</span><div><h2>Action hierarchy survives every interaction state.</h2><p>Primary actions use filled aubergine, secondary actions use line treatment, and disabled actions lose emphasis without disappearing.</p></div><span class="section-index">01</span></div>
+      <div class="state-grid">
+        <article class="state-card"><span class="micro">Default</span><strong>Add full bottle</strong><button class="btn-demo btn-demo--primary">Add full bottle</button><small>Highest commitment action.</small></article>
+        <article class="state-card"><span class="micro">Hover</span><strong>Try first</strong><button class="btn-demo" style="background:#efe8e1">Try first</button><small>Contrast increases without layout shift.</small></article>
+        <article class="state-card is-focus"><span class="micro">Focus</span><strong>Open fragrance</strong><button class="btn-demo" style="outline:2px solid #75458a;outline-offset:3px">Open fragrance</button><small>Electric violet is reserved for keyboard wayfinding.</small></article>
+        <article class="state-card is-disabled"><span class="micro">Disabled</span><strong>Unavailable</strong><button class="btn-demo btn-demo--primary" disabled>Add full bottle</button><small>Control stays readable but clearly inactive.</small></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">02 / Inputs</span><div><h2>Utility states stay conventional and calm.</h2><p>Fields prioritize comprehension over novelty. Error and success states add direct language alongside border changes.</p></div><span class="section-index">02</span></div>
+      <div class="state-grid">
+        <article class="state-card"><span class="micro">Default</span><strong>Search</strong><input class="field-demo" aria-label="Default search state" placeholder="Search fragrance, note, or maison…"><small>Visible field boundary on paper.</small></article>
+        <article class="state-card is-focus"><span class="micro">Focus</span><strong>Search active</strong><input class="field-demo" aria-label="Focused search state" value="iris" style="outline:2px solid #75458a;outline-offset:2px"><small>Keyboard focus is independent of hover.</small></article>
+        <article class="state-card is-error"><span class="micro">Error</span><strong>Delivery email</strong><input class="field-demo is-error" aria-label="Error input example" value="nghia@"><small style="color:#8a3047">Enter a complete email address.</small></article>
+        <article class="state-card is-success"><span class="micro">Success</span><strong>Delivery email</strong><input class="field-demo is-success" aria-label="Success input example" value="nghia@example.com"><small style="color:#356649">Email ready for prototype checkout.</small></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">03 / Refinement</span><div><h2>Filters expose both current state and recovery.</h2><p>Selection persists visibly, can be removed individually, and always provides a clear path back to an unfiltered library.</p></div><span class="section-index">03</span></div>
+      <div class="three-col">
+        <article class="archive-panel"><span class="micro">Idle</span><h3>Available filters</h3><div class="chip-row"><span class="chip">Floral</span><span class="chip">Woody</span><span class="chip">Amber</span><span class="chip">Fresh</span></div></article>
+        <article class="archive-panel"><span class="micro">Selected</span><h3>Active scent language</h3><div class="chip-row"><span class="chip is-active">Powdery ×</span><span class="chip is-active">Intimate ×</span><span class="chip">Iris</span></div></article>
+        <article class="archive-panel"><span class="micro">Recovery</span><h3>No matching objects</h3><p>Remove one filter or begin with Scent Portrait.</p><div class="action-row"><button class="btn-demo">Clear all</button></div></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">04 / Product object</span><div><h2>Saved state never turns the product card into app chrome.</h2><p>The object-study frame remains the visual owner. Saved state is annotation, not a decorative badge stack.</p></div><span class="section-index">04</span></div>
+      <div class="state-grid">
+        <article class="state-card"><span class="micro">Default</span><strong>Peau de Lune</strong><small>Nacre · Tokyo<br>Skin Musk · 150 €</small></article>
+        <article class="state-card" style="border-color:#55364f;background:#fffdf9"><span class="micro">Hover</span><strong>Peau de Lune</strong><small>Object image receives restrained crop feedback; metadata stays fixed.</small></article>
+        <article class="state-card is-saved"><span class="micro">Saved</span><strong>Peau de Lune</strong><small>Persistent textual state supports later return.</small></article>
+        <article class="state-card is-selected"><span class="micro">Selected for trio</span><strong>Peau de Lune</strong><small>Discovery choice includes explicit selected language and lilac field.</small></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">05 / Discovery tray</span><div><h2>Capacity is a system state, not a hidden rule.</h2><p>The trio communicates empty, partial and full capacity. At 3/3, remaining unselected sample controls disable until the user removes or replaces one.</p></div><span class="section-index">05</span></div>
+      <div class="three-col">
+        <article class="archive-panel"><span class="micro">0 / 3 · Empty</span><h3>Begin a trio</h3><div class="tray"><div class="tray__slots"><div class="tray__slot">01</div><div class="tray__slot">02</div><div class="tray__slot">03</div></div><small>Select three distinct scent directions.</small></div></article>
+        <article class="archive-panel"><span class="micro">2 / 3 · Partial</span><h3>One place remains</h3><div class="tray"><div class="tray__slots"><div class="tray__slot is-filled">Iris</div><div class="tray__slot is-filled">Neroli</div><div class="tray__slot">03</div></div><small>Replace or continue browsing.</small></div></article>
+        <article class="archive-panel"><span class="micro">3 / 3 · Full</span><h3>Trio complete</h3><div class="tray"><div class="tray__slots"><div class="tray__slot is-filled">Iris</div><div class="tray__slot is-filled">Neroli</div><div class="tray__slot is-filled">Santal</div></div><small>Unselected choices now disable until a slot is freed.</small></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="evidence-footer"><div class="container evidence-footer__row"><p><strong>Violet Parfumerie</strong><br>States are documented as interaction evidence for the prototype, including focus, recovery, selected and capacity behavior.</p><small>Component States / V4<br>No color-only selection · reduced-motion safe</small></div></footer>
+  <script src="figma-capture.js"></script>
+</body>
+</html>
