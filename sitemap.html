@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Violet Parfumerie sitemap and information architecture.">
+  <title>Violet · Sitemap</title>
+  <link rel="preload" as="image" href="assets/media/editorial-06.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="evidence-luxury.css">
+</head>
+<body class="evidence-body">
+  <header class="evidence-header">
+    <div class="container evidence-header__row">
+      <a class="evidence-brand" href="index.html">Violet<span>.</span><small>Design dossier</small></a>
+      <nav class="evidence-nav" aria-label="Portfolio evidence">
+        <a href="design-system.html">Design system</a>
+        <a href="component-states.html">Component states</a>
+        <a aria-current="page" href="sitemap.html">Sitemap</a>
+        <a href="user-flows.html">User flows</a>
+        <a href="prototype.html">Prototype</a>
+      </nav>
+      <a class="evidence-live" href="index.html">Live marketplace ↗</a>
+    </div>
+  </header>
+
+  <main class="evidence-main">
+    <section class="container evidence-hero">
+      <div class="evidence-hero__copy">
+        <div class="index-line"><span>V.03 / IA</span><span>Buyer architecture</span></div>
+        <div><p class="section-kicker">Object · house · trial · guided discovery</p><h1>An information architecture with more than one way into scent.</h1><p class="evidence-hero__lead">Violet does not assume fragrance vocabulary. Buyers can enter through objects, maisons, trial ritual or a guided Scent Portrait, while utility commerce stays conventional and easy to recover.</p></div>
+        <div class="evidence-hero__note"><span>Primary chain<br><strong>Home → Library → PDP → Bag → Checkout</strong></span><span>Assisted chain<br><strong>Scent Portrait → shortlist → PDP</strong></span></div>
+      </div>
+      <div class="evidence-hero__media">
+        <figure class="media-frame"><img src="assets/media/editorial-06.jpg" fetchpriority="high" decoding="sync" alt="Editorial object and botanical study"><figcaption class="media-frame__label">Entry context / feeling first</figcaption></figure>
+        <figure class="media-frame"><img src="assets/media/product-nuit-de-figue.jpg" alt="Nuit de Figue fragrance object" loading="lazy"><figcaption class="media-frame__label">Object route / product detail</figcaption></figure>
+        <figure class="media-frame"><img src="assets/media/product-discovery-set.jpg" alt="Discovery set" loading="lazy"><figcaption class="media-frame__label">Trial route / lower commitment</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">01 / Global navigation</span><div><h2>Four discovery models, one quiet utility layer.</h2><p>Search remains utility rather than a primary category. Bag is always reachable, while Fragrances, Houses, Discovery and Scent Portrait represent distinct user mental models.</p></div><span class="section-index">01</span></div>
+      <div class="four-col">
+        <article class="archive-panel"><span class="micro">01</span><h3>Fragrances</h3><p>Browse and refine by family, mood, presence, concentration and house.</p></article>
+        <article class="archive-panel"><span class="micro">02</span><h3>Houses</h3><p>Begin with a maison, origin and olfactive territory.</p></article>
+        <article class="archive-panel"><span class="micro">03</span><h3>Discovery</h3><p>Reduce commitment through a trio, set or try-first route.</p></article>
+        <article class="archive-panel"><span class="micro">04</span><h3>Scent Portrait</h3><p>Begin with feeling and presence when perfume language is unfamiliar.</p></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">02 / Buyer sitemap</span><div><h2>The storefront separates discovery from transaction.</h2><p>Primary buyer routes orient independently. No route requires the user to return to the homepage manifesto to understand where they are or what to do next.</p></div><span class="section-index">02</span></div>
+      <div class="sitemap-shell">
+        <aside class="sitemap-legend">
+          <p class="rule-title">Legend</p>
+          <p><strong>Primary</strong><br>Main discovery and commerce route.</p>
+          <p><strong>Guided</strong><br>Assisted discovery or trial behavior.</p>
+          <p><strong>Utility</strong><br>Conventional transaction support.</p>
+          <p><strong>Secondary</strong><br>Operational surfaces outside the buyer visual-completion claim.</p>
+        </aside>
+        <div class="tree" aria-label="Violet buyer sitemap">
+          <div class="tree-level">
+            <div class="tree-node tree-node--primary"><span class="micro">ROOT</span><strong>Home</strong><small>Editorial marketplace index · route chooser</small></div>
+          </div>
+          <div class="tree-level">
+            <div class="tree-node tree-node--primary"><span class="micro">01</span><strong>Fragrance Library</strong><small>search.html · refinement and object field</small></div>
+            <div class="tree-node tree-node--primary"><span class="micro">02</span><strong>Houses</strong><small>houses.html · curated maison index</small></div>
+            <div class="tree-node tree-node--guided"><span class="micro">03</span><strong>Discovery</strong><small>discovery.html · trio and trial ritual</small></div>
+            <div class="tree-node tree-node--guided"><span class="micro">04</span><strong>Scent Portrait</strong><small>finder.html · four-step guided consultation</small></div>
+          </div>
+          <div class="tree-level">
+            <div class="tree-node tree-node--primary"><span class="micro">DETAIL</span><strong>Product Detail</strong><small>product.html?id=… · buying desk</small></div>
+            <div class="tree-node tree-node--primary"><span class="micro">DETAIL</span><strong>House Detail</strong><small>house.html?id=… · maison collection</small></div>
+            <div class="tree-node tree-node--guided"><span class="micro">STATE</span><strong>Sample Trio</strong><small>3-choice local prototype state</small></div>
+            <div class="tree-node tree-node--guided"><span class="micro">RESULT</span><strong>Recommendations</strong><small>Why-it-fits shortlist → PDP</small></div>
+          </div>
+          <div class="tree-level">
+            <div class="tree-node tree-node--utility"><span class="micro">BAG</span><strong>Bag</strong><small>cart.html · quantity, summary, next step</small></div>
+            <div class="tree-node tree-node--utility"><span class="micro">CHECKOUT</span><strong>Checkout</strong><small>checkout.html · simulated transaction</small></div>
+            <div class="tree-node tree-node--utility"><span class="micro">SUCCESS</span><strong>Confirmation</strong><small>order-success.html · prototype completion</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">03 / Route taxonomy</span><div><h2>Each route owns one question and one next-best action.</h2><p>This reduces homepage dependency and keeps the information architecture understandable from deep links such as a product, house or discovery page.</p></div><span class="section-index">03</span></div>
+      <div class="route-list">
+        <div class="route-item"><span>01</span><div><strong>Home</strong><small>What kind of fragrance world is Violet?</small></div><a href="index.html">Open ↗</a></div>
+        <div class="route-item"><span>02</span><div><strong>Fragrance Library</strong><small>How do I narrow to scents that fit me?</small></div><a href="search.html">Open ↗</a></div>
+        <div class="route-item"><span>03</span><div><strong>Product Detail</strong><small>What does this smell like, and should I commit?</small></div><a href="product.html?id=violette-03">Open ↗</a></div>
+        <div class="route-item"><span>04</span><div><strong>Houses</strong><small>Which maison language feels closest to me?</small></div><a href="houses.html">Open ↗</a></div>
+        <div class="route-item"><span>05</span><div><strong>Discovery</strong><small>How can I lower the risk before buying a bottle?</small></div><a href="discovery.html">Open ↗</a></div>
+        <div class="route-item"><span>06</span><div><strong>Scent Portrait</strong><small>What suits my instinct if I do not know fragrance vocabulary?</small></div><a href="finder.html">Open ↗</a></div>
+        <div class="route-item"><span>07</span><div><strong>Bag → Checkout → Success</strong><small>Can I complete this prototype transaction confidently?</small></div><a href="cart.html">Open ↗</a></div>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">04 / Secondary system</span><div><h2>Operational routes stay outside the buyer story.</h2><p>Seller and admin surfaces exist for prototype breadth, but they are intentionally not positioned as primary buyer navigation.</p></div><span class="section-index">04</span></div>
+      <div class="two-col">
+        <article class="tree-node tree-node--secondary"><span class="micro">SECONDARY / HOUSE OPERATIONS</span><strong>Fragrance House Center</strong><small>seller.html · seller-facing prototype surface</small></article>
+        <article class="tree-node tree-node--secondary"><span class="micro">SECONDARY / OPERATIONS</span><strong>Admin</strong><small>admin.html · prototype administration surface</small></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="callout"><span class="section-kicker">Entry-context rule</span><strong>Every deep-linked page must orient independently.</strong><p>A PDP, house or discovery page exposes its next-best action without requiring users to read brand narrative first.</p></div>
+    </section>
+  </main>
+
+  <footer class="evidence-footer"><div class="container evidence-footer__row"><p><strong>Violet Parfumerie</strong><br>Information architecture favors multiple discovery mental models while preserving a conventional commerce chain.</p><small>Sitemap / V4<br>Buyer routes · guided routes · utility routes</small></div></footer>
+  <script src="figma-capture.js"></script>
+</body>
+</html>

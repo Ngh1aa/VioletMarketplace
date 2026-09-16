@@ -1,0 +1,41 @@
+name: Violet Evidence QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'design-system.html'
+      - 'component-states.html'
+      - 'sitemap.html'
+      - 'user-flows.html'
+      - 'prototype.html'
+      - 'evidence-luxury.css'
+      - 'figma-capture.js'
+      - 'scripts/evidence_qa.mjs'
+      - '.github/workflows/evidence-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  evidence-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Render evidence pages
+        run: node scripts/evidence_qa.mjs artifacts/evidence-qa
+      - name: Upload evidence screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: violet-evidence-qa
+          path: artifacts/evidence-qa
+          if-no-files-found: error
+          retention-days: 14

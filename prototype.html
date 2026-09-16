@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Violet Parfumerie live prototype overview and route entry points.">
+  <title>Violet · Prototype</title>
+  <link rel="preload" as="image" href="assets/media/editorial-04.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="evidence-luxury.css">
+</head>
+<body class="evidence-body">
+  <header class="evidence-header">
+    <div class="container evidence-header__row">
+      <a class="evidence-brand" href="index.html">Violet<span>.</span><small>Design dossier</small></a>
+      <nav class="evidence-nav" aria-label="Portfolio evidence">
+        <a href="design-system.html">Design system</a>
+        <a href="component-states.html">Component states</a>
+        <a href="sitemap.html">Sitemap</a>
+        <a href="user-flows.html">User flows</a>
+        <a aria-current="page" href="prototype.html">Prototype</a>
+      </nav>
+      <a class="evidence-live" href="index.html">Live marketplace ↗</a>
+    </div>
+  </header>
+
+  <main class="evidence-main">
+    <section class="container evidence-hero">
+      <div class="evidence-hero__copy">
+        <div class="index-line"><span>V.05 / PROTOTYPE</span><span>Interactive storefront</span></div>
+        <div><p class="section-kicker">Explore the live Violet system</p><h1>A working perfume marketplace built around slower discovery.</h1><p class="evidence-hero__lead">The prototype connects editorial brand discovery, a fragrance library, house-led browsing, try-first selection, Scent Portrait guidance and a transparent simulated checkout into one navigable system.</p><div class="action-row"><a class="evidence-cta" href="index.html">Enter live prototype ↗</a><a class="evidence-cta evidence-cta--secondary" href="user-flows.html">See flows first</a></div></div>
+        <div class="evidence-hero__note"><span>Prototype mode<br><strong>Interactive · browser-local state</strong></span><span>Reality boundary<br><strong>No real fulfilment or payment processing</strong></span></div>
+      </div>
+      <div class="evidence-hero__media">
+        <figure class="media-frame"><img src="assets/media/editorial-04.jpg" fetchpriority="high" decoding="sync" alt="Soft evening fragrance atmosphere"><figcaption class="media-frame__label">Home / sensorial orientation</figcaption></figure>
+        <figure class="media-frame"><img src="assets/media/product-violette-03.jpg" alt="Violette 03 fragrance object" loading="lazy"><figcaption class="media-frame__label">PDP / commitment decision</figcaption></figure>
+        <figure class="media-frame"><img src="assets/media/product-discovery-set.jpg" alt="Discovery set" loading="lazy"><figcaption class="media-frame__label">Discovery / try-first workspace</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">01 / Main entry points</span><div><h2>Start from the user’s confidence level, not the homepage alone.</h2><p>Each entry point is a complete route into the system: direct browsing, house-led curation, lower-risk trial or guided discovery.</p></div><span class="section-index">01</span></div>
+      <div class="route-list">
+        <div class="route-item"><span>01</span><div><strong>Editorial Home</strong><small>Route chooser, featured object, Violet edit and house index.</small></div><a href="index.html">Open ↗</a></div>
+        <div class="route-item"><span>02</span><div><strong>Fragrance Library</strong><small>Progressive refinement and object-led browse experience.</small></div><a href="search.html">Open ↗</a></div>
+        <div class="route-item"><span>03</span><div><strong>Product Detail</strong><small>Buying desk, scent character, provenance and try-first path.</small></div><a href="product.html?id=violette-03">Open ↗</a></div>
+        <div class="route-item"><span>04</span><div><strong>Houses</strong><small>Curated maison index and individual house collections.</small></div><a href="houses.html">Open ↗</a></div>
+        <div class="route-item"><span>05</span><div><strong>Discovery</strong><small>Three-slot sample trio and lower-commitment trial ritual.</small></div><a href="discovery.html">Open ↗</a></div>
+        <div class="route-item"><span>06</span><div><strong>Scent Portrait</strong><small>Four-step guided consultation with explainable recommendations.</small></div><a href="finder.html">Open ↗</a></div>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">02 / Prototype surfaces</span><div><h2>Representative screens show different composition roles.</h2><p>Violet avoids universal hero/card repetition. Discovery, browse, evaluate and utility surfaces each use a different density and composition logic while sharing the same visual grammar.</p></div><span class="section-index">02</span></div>
+      <div class="prototype-grid">
+        <article class="prototype-stage"><div class="prototype-frame"><img src="assets/media/editorial-01.jpg" alt="Editorial fragrance material study" loading="lazy"></div><div class="prototype-frame__caption"><span>HOME / BRAND DISCOVERY</span><a href="index.html">Explore home ↗</a></div></article>
+        <article class="prototype-stage"><div class="prototype-frame"><img src="assets/media/product-iris-haze.jpg" alt="Iris Haze fragrance object" loading="lazy"></div><div class="prototype-frame__caption"><span>LIBRARY / OBJECT BROWSE</span><a href="search.html?sample=1">Explore library ↗</a></div></article>
+        <article class="prototype-stage"><div class="prototype-frame"><img src="assets/media/product-violette-03.jpg" alt="Violette 03 fragrance object" loading="lazy"></div><div class="prototype-frame__caption"><span>PDP / EVALUATE & COMMIT</span><a href="product.html?id=violette-03">Explore PDP ↗</a></div></article>
+        <article class="prototype-stage"><div class="prototype-frame"><img src="assets/media/product-discovery-set.jpg" alt="Discovery set" loading="lazy"></div><div class="prototype-frame__caption"><span>DISCOVERY / TRIAL WORKSPACE</span><a href="discovery.html">Explore discovery ↗</a></div></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">03 / Main flows</span><div><h2>The prototype is built to demonstrate behavior, not static screens.</h2><p>State persists locally where useful, filters support back/share behavior, and the discovery trio visibly communicates capacity.</p></div><span class="section-index">03</span></div>
+      <div class="three-col">
+        <article class="archive-panel"><span class="micro">FLOW A</span><h3>Browse & buy</h3><p>Home → Library → PDP → Bag → Checkout → Success.</p><div class="action-row"><a class="btn-demo" href="search.html">Start flow ↗</a></div></article>
+        <article class="archive-panel"><span class="micro">FLOW B</span><h3>Try before bottle</h3><p>PDP or Discovery → build trio → review → Bag.</p><div class="action-row"><a class="btn-demo" href="discovery.html">Start flow ↗</a></div></article>
+        <article class="archive-panel"><span class="micro">FLOW C</span><h3>Guided shortlist</h3><p>Scent Portrait → answers → recommendation → PDP.</p><div class="action-row"><a class="btn-demo" href="finder.html">Start flow ↗</a></div></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="section-head"><span class="section-kicker">04 / Prototype contract</span><div><h2>What is real, simulated and intentionally constrained.</h2><p>Clear system boundaries make the prototype credible. Violet demonstrates interaction architecture without pretending to operate fulfilment, real payments or opaque AI personalization.</p></div><span class="section-index">04</span></div>
+      <div class="four-col">
+        <article class="archive-panel"><span class="micro">REAL</span><h3>Navigation</h3><p>Routes, filtering, state transitions and local persistence are implemented.</p></article>
+        <article class="archive-panel"><span class="micro">REAL</span><h3>Discovery state</h3><p>Three-slot selection, disable-at-capacity and recovery behavior are interactive.</p></article>
+        <article class="archive-panel"><span class="micro">SIMULATED</span><h3>Checkout</h3><p>Forms and confirmation demonstrate a transaction flow but do not process payment.</p></article>
+        <article class="archive-panel"><span class="micro">FICTIONAL</span><h3>Maisons</h3><p>Brand names, products and provenance are representative prototype content.</p></article>
+      </div>
+    </section>
+
+    <section class="container evidence-section">
+      <div class="callout"><span class="section-kicker">Explore live</span><strong>Enter from the route that best matches your intent.</strong><div><p>For a fast recruiter walkthrough: Home → Library → Violette 03 → Discovery → Scent Portrait.</p><div class="action-row"><a class="evidence-cta" href="index.html">Open Violet ↗</a></div></div></div>
+    </section>
+  </main>
+
+  <footer class="evidence-footer"><div class="container evidence-footer__row"><p><strong>Violet Parfumerie</strong><br>Interactive prototype evidence for a fictional multi-house fragrance marketplace focused on objects, maisons and slower trial.</p><small>Prototype / V4<br>Working routes · local state · truthful system boundaries</small></div></footer>
+  <script src="figma-capture.js"></script>
+</body>
+</html>
