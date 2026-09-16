@@ -12,6 +12,7 @@ on:
       - 'storefront-v4.js'
       - 'app.js'
       - 'data.js'
+      - 'figma-capture.js'
       - 'scripts/v4_representative_qa.mjs'
       - '.github/workflows/v4-representative-qa.yml'
       - 'docs/uiux/**'
