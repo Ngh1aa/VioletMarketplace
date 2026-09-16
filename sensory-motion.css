@@ -1,158 +1,70 @@
-/* VIOLET — Sensory Discovery Motion
-   Direction: sensory / collectible / discovery-led
-   Signature: fragrance-object reveal + scent-trail interaction. */
-
+/* VIOLET — Visible Sensory Discovery Motion
+   Sensory / collectible / discovery-led with obvious image-led movement. */
 :root{
-  --violet-motion-fast:180ms;
-  --violet-motion-base:320ms;
-  --violet-motion-image:680ms;
+  --violet-motion-fast:190ms;
+  --violet-motion-base:380ms;
+  --violet-motion-image:980ms;
   --violet-motion-ease:cubic-bezier(.16,1,.3,1);
 }
 
-/* Hero feels like entering a scent object, not a generic ecommerce banner. */
 @media (prefers-reduced-motion:no-preference){
-  .v4-feature-copy > *{
-    animation:violet-copy-in 520ms var(--violet-motion-ease) both;
-  }
-  .v4-feature-copy > :nth-child(2){animation-delay:70ms}
-  .v4-feature-copy > :nth-child(3){animation-delay:135ms}
-  .v5-hero-shot{
-    animation:violet-object-in var(--violet-motion-image) var(--violet-motion-ease) both;
-  }
-  .v5-hero-shot:nth-child(2){animation-delay:90ms}
-  .v5-hero-shot:nth-child(3){animation-delay:150ms}
+  .v4-feature-copy>*{animation:violet-copy-in 720ms var(--violet-motion-ease) both}
+  .v4-feature-copy>:nth-child(2){animation-delay:120ms}
+  .v4-feature-copy>:nth-child(3){animation-delay:240ms}
+  .v5-hero-shot{animation:violet-object-in var(--violet-motion-image) var(--violet-motion-ease) both}
+  .v5-hero-shot:nth-child(2){animation-delay:150ms}.v5-hero-shot:nth-child(3){animation-delay:280ms}
+  .v5-hero-shot img{animation:violet-image-settle 1600ms var(--violet-motion-ease) both;transform-origin:center}
+  .maison-manifesto{animation:violet-manifesto-in 760ms var(--violet-motion-ease) 340ms both}
 }
-@keyframes violet-copy-in{
-  from{opacity:0;transform:translate3d(0,12px,0)}
-  to{opacity:1;transform:none}
-}
-@keyframes violet-object-in{
-  from{opacity:0;transform:scale(.985);clip-path:inset(0 0 7% 0)}
-  to{opacity:1;transform:none;clip-path:inset(0)}
-}
+@keyframes violet-copy-in{from{opacity:0;transform:translate3d(0,28px,0)}to{opacity:1;transform:none}}
+@keyframes violet-object-in{from{opacity:0;transform:translate3d(0,24px,0) scale(.965);clip-path:inset(0 0 16% 0)}to{opacity:1;transform:none;clip-path:inset(0)}}
+@keyframes violet-image-settle{from{transform:scale(1.07);filter:saturate(.82)}to{transform:scale(1);filter:none}}
+@keyframes violet-manifesto-in{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:none}}
 
-/* Product objects reveal the alternate atmosphere rather than simply zooming. */
-.v4-object-media,
-.v5-shelf-story,
-.maison-ritual-media,
-.detail-media{
-  overflow:hidden;
+.v4-object-card,.v5-shelf-story,.v4-route,.maison-ritual,.detail-media,.summary-card,.checkout-block{
+  transition:transform var(--violet-motion-base) var(--violet-motion-ease),box-shadow var(--violet-motion-base) ease,border-color var(--violet-motion-fast) ease,opacity var(--violet-motion-base) ease;
 }
-.v4-object-media img,
-.v5-shelf-story img,
-.maison-ritual-media img,
-.detail-media img{
+.v4-object-media,.v5-shelf-story,.maison-ritual-media,.detail-media{overflow:hidden}
+.v4-object-media img,.v5-shelf-story img,.maison-ritual-media img,.detail-media img{
   transition:transform var(--violet-motion-image) var(--violet-motion-ease),opacity var(--violet-motion-base) ease,filter var(--violet-motion-base) ease;
   transform-origin:center;
 }
-.v5-card-image--alt{
-  opacity:0;
-}
+
 @media (hover:hover) and (pointer:fine){
-  .v4-object-card:hover .v4-object-media>img:first-child{transform:scale(1.018);opacity:.24}
-  .v4-object-card:hover .v5-card-image--alt{opacity:1;transform:scale(1.018)}
-  .v5-shelf-story:hover img,
-  .maison-ritual:hover .maison-ritual-media img{transform:scale(1.022)}
+  .v4-object-card:hover{transform:translate3d(0,-8px,0);box-shadow:0 24px 54px rgba(48,31,55,.13)}
+  .v4-object-card:hover .v4-object-media img:first-child{transform:scale(1.055)}
+  .v5-shelf-story:hover,.maison-ritual:hover,.v4-route:hover{transform:translate3d(0,-6px,0)}
+  .v5-shelf-story:hover img,.maison-ritual:hover img{transform:scale(1.045)}
+  .btn:hover,.icon-link:hover,.v4-text-link:hover,.nav-inner a:hover{transform:translate3d(0,-4px,0)}
 }
 
-/* Cards respond through trace and metadata, not large vertical lift. */
-.v4-object-card,
-.v4-route,
-.product-card,
-.house-card,
-.discovery-card{
-  transition:border-color var(--violet-motion-fast) ease,box-shadow var(--violet-motion-base) ease,background-color var(--violet-motion-fast) ease;
-}
-.v4-object-heading h3,
-.v4-object-meta strong,
-.v4-object-index,
-.v4-route i{
-  transition:transform var(--violet-motion-fast) var(--violet-motion-ease),color var(--violet-motion-fast) ease,opacity var(--violet-motion-fast) ease;
-}
+.v5-card-image--alt{opacity:0;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @media (hover:hover) and (pointer:fine){
-  .v4-object-card:hover .v4-object-heading h3{transform:translate3d(3px,0,0)}
-  .v4-object-card:hover .v4-object-index{opacity:.72}
-  .v4-route:hover i{transform:translate3d(4px,0,0)}
+  .v4-object-card:hover .v5-card-image--alt{opacity:.38;transform:scale(1.02)}
 }
 
-/* Discovery routes unfold sequentially like a scent trail. */
-.v4-route-grid > *,
-.v4-shelf-grid > *{
-  animation:violet-trail-in 440ms var(--violet-motion-ease) both;
+.btn,.icon-link,.v4-text-link,.nav-inner a,.search-form button,.qty-btn{
+  transition:transform var(--violet-motion-fast) var(--violet-motion-ease),background-color var(--violet-motion-fast) ease,color var(--violet-motion-fast) ease,border-color var(--violet-motion-fast) ease,box-shadow var(--violet-motion-base) ease;
 }
-.v4-route-grid > :nth-child(2),.v4-shelf-grid > :nth-child(2){animation-delay:55ms}
-.v4-route-grid > :nth-child(3),.v4-shelf-grid > :nth-child(3){animation-delay:105ms}
-.v4-shelf-grid > :nth-child(4){animation-delay:145ms}
-.v4-shelf-grid > :nth-child(n+5){animation-delay:175ms}
-@keyframes violet-trail-in{
-  from{opacity:.52;transform:translate3d(0,9px,0)}
-  to{opacity:1;transform:none}
-}
+.btn:active,.icon-link:active,.qty-btn:active{transform:translate3d(0,1px,0) scale(.975)}
 
-/* Saved/bag feedback is small and collectible. */
-.cart-count,
-.v5-card-badge,
-.badge,
-.chip{
-  transition:transform var(--violet-motion-fast) var(--violet-motion-ease),background-color var(--violet-motion-fast) ease,color var(--violet-motion-fast) ease;
-}
-.cart-count:not(:empty){animation:violet-count-ack 360ms var(--violet-motion-ease) both}
-@keyframes violet-count-ack{
-  0%{transform:scale(.78)}
-  65%{transform:scale(1.12)}
-  100%{transform:scale(1)}
-}
+.search-suggestions.open{animation:violet-search-tray 420ms var(--violet-motion-ease) both}
+@keyframes violet-search-tray{from{opacity:0;transform:translate3d(0,-16px,0) scale(.985)}to{opacity:1;transform:none}}
+.cart-count{transition:transform var(--violet-motion-base) var(--violet-motion-ease),background-color var(--violet-motion-fast) ease}
+.cart-link:hover .cart-count{transform:scale(1.18) rotate(4deg)}
 
-.btn,
-.icon-link,
-.nav-inner a,
-.v4-text-link,
-.text-link,
-.search-form button{
-  transition:transform var(--violet-motion-fast) var(--violet-motion-ease),background-color var(--violet-motion-fast) ease,color var(--violet-motion-fast) ease,border-color var(--violet-motion-fast) ease,box-shadow var(--violet-motion-fast) ease;
+@media (prefers-reduced-motion:no-preference){
+  .v4-shelf-grid>*{animation:violet-shelf-in 620ms var(--violet-motion-ease) both}
+  .v4-shelf-grid>*:nth-child(2){animation-delay:90ms}.v4-shelf-grid>*:nth-child(3){animation-delay:180ms}.v4-shelf-grid>*:nth-child(4){animation-delay:270ms}.v4-shelf-grid>*:nth-child(5){animation-delay:340ms}
 }
-@media (hover:hover) and (pointer:fine){
-  .btn:hover,.search-form button:hover{transform:translate3d(0,-1px,0)}
-  .v4-text-link:hover,.text-link:hover,.nav-inner a:hover{transform:translate3d(3px,0,0)}
-}
-.btn:active,.search-form button:active{transform:translate3d(0,1px,0);transition-duration:110ms}
-
-/* Search suggestions arrive as a curated tray. */
-.search-suggestions.open{
-  animation:violet-tray-in var(--violet-motion-base) var(--violet-motion-ease) both;
-}
-@keyframes violet-tray-in{
-  from{opacity:0;transform:translate3d(0,-7px,0)}
-  to{opacity:1;transform:none}
-}
-
-/* Checkout/forms remain calm and confidence-oriented. */
-:is(input,select,textarea,.search-form,.field input,.field select){
-  transition:border-color var(--violet-motion-fast) ease,box-shadow var(--violet-motion-fast) ease,background-color var(--violet-motion-fast) ease;
-}
+@keyframes violet-shelf-in{from{opacity:0;transform:translate3d(0,26px,0)}to{opacity:1;transform:none}}
 
 @media (max-width:768px){
-  :root{--violet-motion-image:500ms}
-  .v4-route-grid > *, .v4-shelf-grid > *{animation-duration:300ms}
+  .v4-object-card:hover,.v5-shelf-story:hover,.maison-ritual:hover,.v4-route:hover{transform:none}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .v4-feature-copy > *,
-  .v5-hero-shot,
-  .v4-route-grid > *,
-  .v4-shelf-grid > *,
-  .cart-count,
-  .v4-object-media img,
-  .v5-shelf-story img,
-  .maison-ritual-media img,
-  .btn,
-  .icon-link,
-  .v4-text-link,
-  .text-link,
-  .search-suggestions{
-    animation:none!important;
-    transition-duration:.01ms!important;
-    transform:none!important;
+  .v4-feature-copy>*,.v5-hero-shot,.v5-hero-shot img,.maison-manifesto,.v4-shelf-grid>*,.v4-object-card,.v5-shelf-story,.v4-route,.maison-ritual,.detail-media,.summary-card,.checkout-block,.v4-object-media img,.v5-shelf-story img,.maison-ritual-media img,.detail-media img,.btn,.icon-link,.v4-text-link,.nav-inner a,.search-form button,.qty-btn,.search-suggestions,.cart-count{
+    animation:none!important;transition-duration:.01ms!important;transform:none!important;opacity:1!important;filter:none!important;clip-path:none!important;
   }
-  .v5-card-image--alt{opacity:0!important}
 }
